@@ -1,0 +1,52 @@
+Classes Principais
+
+Classe Game
+    Responsável pelo loop principal do jogo.
+    Controla a inicialização e finalização do jogo.
+    Gerencia o tempo e a dificuldade do jogo.
+
+Classe Player
+    Representa o jogador (soldado).
+    Atributos:
+        health: vida do jogador (inicialmente 100).
+        ammo: quantidade de projéteis disponíveis.
+        position: posição atual no mapa.
+        destination: posição destino para onde o jogador deve se mover.
+    Métodos:
+        move(): move o jogador em direção ao destino.
+        shoot(): dispara um projétil.
+        collectAmmo(): coleta munição deixada pelos inimigos abatidos.
+
+Classe Enemy
+    Representa um inimigo.
+    Atributos:
+        health: vida do inimigo.
+        position: posição atual no mapa.
+    Métodos:
+        move(): move o inimigo em direção ao jogador ou à base.
+        shoot(): dispara um projétil em direção ao jogador.
+
+Classe Projectile
+    Representa um projétil disparado pelo jogador ou pelos inimigos.
+    Atributos:
+        position: posição atual.
+        direction: direção do projétil.
+        speed: velocidade do projétil.
+    Métodos:
+        move(): move o projétil na direção especificada.
+        checkCollision(): verifica colisão com jogadores, inimigos ou base.
+
+Classe Base
+    Representa a base que deve ser defendida.
+    Atributos:
+        health: vida da base.
+    Métodos:
+        repair(): repara a base com o tempo.
+
+Classe Ammo
+    Representa a munição deixada pelos inimigos abatidos.
+    Atributos:
+        position: posição onde a munição está no mapa.
+        amount: quantidade de munição.
+    Métodos:
+        expire(): remove a munição após um certo tempo se não for coletada.
