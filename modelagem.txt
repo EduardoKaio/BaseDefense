@@ -17,7 +17,7 @@ Classe Player
         shoot(): dispara um projétil.
         collectAmmo(): coleta munição deixada pelos inimigos abatidos.
 
-Classe Enemy
+Classe Inimigo
     Representa um inimigo.
     Atributos:
         health: vida do inimigo.
@@ -26,7 +26,7 @@ Classe Enemy
         move(): move o inimigo em direção ao jogador ou à base.
         shoot(): dispara um projétil em direção ao jogador.
 
-Classe Projectile
+Classe Projetil
     Representa um projétil disparado pelo jogador ou pelos inimigos.
     Atributos:
         position: posição atual.
@@ -43,7 +43,7 @@ Classe Base
     Métodos:
         repair(): repara a base com o tempo.
 
-Classe Ammo
+Classe Municao
     Representa a munição deixada pelos inimigos abatidos.
     Atributos:
         position: posição onde a munição está no mapa.
