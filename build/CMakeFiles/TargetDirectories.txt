@@ -1,0 +1,3 @@
+/home/kaio/Documentos/UFRN/lp/BaseDefense/build/CMakeFiles/meu_jogo.dir
+/home/kaio/Documentos/UFRN/lp/BaseDefense/build/CMakeFiles/edit_cache.dir
+/home/kaio/Documentos/UFRN/lp/BaseDefense/build/CMakeFiles/rebuild_cache.dir
