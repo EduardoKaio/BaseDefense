@@ -1,10 +1,15 @@
 # Base Defense
-Compilar:
+
+## Compilar:
+```sh
 cd build
 cmake ..
 cmake --build .
 make
+```
 
-Executar:
+## Executar:
+```sh
 ./meu_jogo
+```
 
