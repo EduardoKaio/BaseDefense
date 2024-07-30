@@ -1,7 +1,7 @@
 CMakeFiles/meu_jogo.dir/src/projetil.cpp.o: \
- /home/kaio/Documentos/UFRN/lp/BaseDefense/src/projetil.cpp \
+ /mnt/c/Users/felip/OneDrive/Desktop/BaseDefense-1/src/projetil.cpp \
  /usr/include/stdc-predef.h \
- /home/kaio/Documentos/UFRN/lp/BaseDefense/src/../include/projetil.h \
+ /mnt/c/Users/felip/OneDrive/Desktop/BaseDefense-1/src/../include/projetil.h \
  /usr/include/SFML/Graphics.hpp /usr/include/SFML/Window.hpp \
  /usr/include/SFML/System.hpp /usr/include/SFML/Config.hpp \
  /usr/include/SFML/System/Clock.hpp /usr/include/SFML/System/Export.hpp \

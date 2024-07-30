@@ -1,7 +1,7 @@
 CMakeFiles/meu_jogo.dir/src/player.cpp.o: \
- /home/kaio/Documentos/UFRN/lp/BaseDefense/src/player.cpp \
+ /mnt/c/Users/felip/OneDrive/Desktop/BaseDefense-1/src/player.cpp \
  /usr/include/stdc-predef.h \
- /home/kaio/Documentos/UFRN/lp/BaseDefense/src/../include/player.h \
+ /mnt/c/Users/felip/OneDrive/Desktop/BaseDefense-1/src/../include/player.h \
  /usr/include/SFML/Graphics.hpp /usr/include/SFML/Window.hpp \
  /usr/include/SFML/System.hpp /usr/include/SFML/Config.hpp \
  /usr/include/SFML/System/Clock.hpp /usr/include/SFML/System/Export.hpp \
@@ -232,4 +232,4 @@ CMakeFiles/meu_jogo.dir/src/player.cpp.o: \
  /usr/include/c++/11/bits/stl_list.h \
  /usr/include/c++/11/bits/allocated_ptr.h \
  /usr/include/c++/11/bits/list.tcc \
- /home/kaio/Documentos/UFRN/lp/BaseDefense/src/../include/projetil.h
+ /mnt/c/Users/felip/OneDrive/Desktop/BaseDefense-1/src/../include/projetil.h

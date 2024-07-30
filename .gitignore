@@ -1,0 +1,14 @@
+# Build files #
+build/CMakeFiles
+cmake_install.cmake
+CMakeCache.txt
+Makefile
+
+
+# Visual Studio Code # 
+.vscode/* 
+!.vscode/settings.json 
+!.vscode/tasks.json 
+!.vscode/launch.json 
+!.vscode/extensions.json 
+.history
