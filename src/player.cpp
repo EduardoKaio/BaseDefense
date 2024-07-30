@@ -1,49 +1,52 @@
 #include "../include/player.h"
+#include "../include/utils.h"
+#include <SFML/Window.hpp>
+#include <SFML/Graphics.hpp>
+#include <cmath>
 
+Player::Player(std::list<Projetil>& projeteis) 
+    : projeteis(projeteis), shooting(false), speed(300.0f), health(100) {
 
-
-Player::Player(list<Projetil>& projeteis) : projeteis(projeteis) {
-    texture.loadFromFile("path_to_player_texture.png"); // Substituir pelo caminho correto
-    sprite.setTexture(texture);
-    sprite.setPosition(400, 300); // Posição inicial
-    speed = 200.0f;
-    health = 100;
+    shape.setRadius(15);
+    shape.setFillColor(sf::Color::Red);
+    shape.setPosition(400, 300);
 }
 
-Player::Player() : projeteis(*(new list<Projetil>())) { // Inicialize com uma lista vazia ou configure de outra forma
-    // Configurações padrão, se necessário
-    texture.loadFromFile("path_to_player_texture.png");
-    sprite.setTexture(texture);
-    sprite.setPosition(400, 300);
-    speed = 200.0f;
-    health = 100;
-}
+void Player::handleInput(float deltaTime) {
+    sf::Vector2f direction(0, 0);
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) direction.y -= 1;
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) direction.y += 1;
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) direction.x -= 1;
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) direction.x += 1;
 
-void Player::handleInput() {
-    Vector2f direction(0, 0);
-    if (Keyboard::isKeyPressed(Keyboard::W)) direction.y -= 1;
-    if (Keyboard::isKeyPressed(Keyboard::S)) direction.y += 1;
-    if (Keyboard::isKeyPressed(Keyboard::A)) direction.x -= 1;
-    if (Keyboard::isKeyPressed(Keyboard::D)) direction.x += 1;
+    if (direction != sf::Vector2f(0, 0)) {
+        direction = normalize(direction);
+    }
 
-    sprite.move(direction * speed * sf::seconds(1.f).asSeconds());
+    shape.move(direction * speed * deltaTime);
 
-    if (Keyboard::isKeyPressed(Keyboard::Q)) {
-        shoot(sf::Vector2f(400, 300)); // Substituir pelo alvo real
+    if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
+        // Dispara um projétil apenas se não houver disparo em andamento
+        if (!shooting) {
+            // shoot(sf::Vector2f(sf::Mouse::getPosition(window).x, sf::Mouse::getPosition(window).y));
+            shooting = true;
+        }
+    } else {
+        shooting = false; // Permite disparar novamente quando o botão for solto
     }
 }
 
-void Player::update() {
-    // Atualizações do jogador
-}
-
-void Player::draw(RenderTarget& target, RenderStates states) const {
-    target.draw(sprite, states);
-}
-
-void Player::shoot(Vector2f target) {
-    Projetil newProjetil(sprite.getPosition(), target);
+void Player::shoot(sf::Vector2f target) {
+    Projetil newProjetil(shape.getPosition(), target);
     projeteis.push_back(newProjetil);
+}
+
+void Player::update(float deltaTime) {
+    handleInput(deltaTime);
+}
+
+void Player::draw(sf::RenderTarget& target, sf::RenderStates states) const {
+    target.draw(shape, states);
 }
 
 int Player::getHealth() const {

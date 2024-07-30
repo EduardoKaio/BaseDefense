@@ -15,6 +15,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/meu_jogo.dir/src/player.cpp.o.d"
   "CMakeFiles/meu_jogo.dir/src/projetil.cpp.o"
   "CMakeFiles/meu_jogo.dir/src/projetil.cpp.o.d"
+  "CMakeFiles/meu_jogo.dir/src/utils.cpp.o"
+  "CMakeFiles/meu_jogo.dir/src/utils.cpp.o.d"
   "meu_jogo"
   "meu_jogo.pdb"
 )

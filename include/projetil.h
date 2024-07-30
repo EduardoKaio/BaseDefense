@@ -9,15 +9,17 @@ using namespace sf;
 class Projetil : public Drawable{
     
     private:
-        CircleShape forma;
-        Vector2f velocidade;
-        virtual void draw(RenderTarget& target, RenderStates states) const override;
+        void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
+
+        CircleShape shape;
+        Vector2f direction;  // Direção do projétil
+        float speed;
+    
     public:
-        Projetil(); 
-        Projetil(Vector2f position, Vector2f direction);
-        void update();
-        void desenhar(RenderWindow& janela);
-        FloatRect getBounds() const;
+        Projetil(Vector2f position, Vector2f target);
+        void update(float deltaTime);
+        bool isOutOfWindow(const RenderWindow& window) const;
+        
     };
 
 #endif

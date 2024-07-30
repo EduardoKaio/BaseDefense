@@ -1,13 +1,28 @@
 #include "../include/game.h"
+#include <SFML/Graphics.hpp>
+#include <iostream>
 
-Game::Game() : window(sf::VideoMode(800, 600), "Base Defense") {
-    // Configuração inicial do jogo
-}
+Game::Game() 
+    : window(sf::VideoMode(800, 600), "Base Defense", sf::Style::Titlebar | sf::Style::Close), 
+    projeteis(),
+    player(projeteis), 
+    base() {
+        // Define o tamanho da janela como fixo
+        window.setSize(sf::Vector2u(800, 600));
+
+        // Define o modo de redimensionamento como fixo
+        window.setPosition(sf::Vector2i(100, 100));  // Posição inicial da janela
+
+        // Evento para garantir que a janela não seja redimensionada
+        window.setVerticalSyncEnabled(true);
+    }
 
 void Game::run() {
+    sf::Clock clock; // Mova o relógio para fora do loop
     while (window.isOpen()) {
+        sf::Time deltaTime = clock.restart(); // Calcula o deltaTime
         processEvents();
-        update();
+        update(deltaTime.asSeconds());
         render();
     }
 }
@@ -17,47 +32,40 @@ void Game::processEvents() {
     while (window.pollEvent(event)) {
         if (event.type == sf::Event::Closed)
             window.close();
+
+        if (event.type == sf::Event::MouseButtonPressed) {
+            if (event.mouseButton.button == sf::Mouse::Left) {
+                sf::Vector2i mousePos = sf::Mouse::getPosition(window);
+                sf::Vector2f mousePosF(static_cast<float>(mousePos.x), static_cast<float>(mousePos.y));
+                player.shoot(mousePosF);
+            }
+        }
     }
-    player.handleInput();
 }
 
-void Game::update() {
-    sf::Clock clock;
-    float deltaTime = clock.restart().asSeconds();
+void Game::update(float deltaTime) {
+    player.update(deltaTime);
 
-    player.update();
-    base.update();
-    sf::Vector2f targetPosition = base.getPosition();  // Posição da base como alvo
-
-    for (auto& inimigo : inimigos) {
-        inimigo.update(deltaTime, targetPosition);  // Passa o deltaTime e a posição alvo
+    for (auto it = projeteis.begin(); it != projeteis.end();) {
+        it->update(deltaTime);
+        if (it->isOutOfWindow(window)) {
+            it = projeteis.erase(it); // Remove projéteis fora da tela
+        } else {
+            ++it;
+        }
     }
-
-    for (auto& projetil : projeteis) {
-        projetil.update();  // Assumindo que update() existe em Projetil
-    }
-
-    handleCollisions();
 }
-
 
 void Game::render() {
-    window.clear();
-    window.draw(player);
-    window.draw(base);
-    
-    for (const auto& inimigo : inimigos)
-        window.draw(inimigo);
-    
-    for (const auto& projetil : projeteis)
-        window.draw(projetil);
+    sf::Color backgroundColor(200, 200, 200); // Cor de fundo cinza claro
+    window.clear(backgroundColor);
+    window.draw(base); // Desenha a base
+    window.draw(player); // Desenha o player
+
+    for (const auto& projetil : projeteis) {
+        window.draw(projetil); // Desenha os projéteis
+    }
+
     window.display();
 }
 
-void Game::spawnInimigos() {
-    // Lógica para spawn de inimigos
-}
-
-void Game::handleCollisions() {
-    // Lógica de colisão
-}

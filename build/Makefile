@@ -57,10 +57,10 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = ../BaseDefense-1
+CMAKE_SOURCE_DIR = /home/kaio/Documentos/UFRN/lp/BaseDefense
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = ../BaseDefense-1/build
+CMAKE_BINARY_DIR = /home/kaio/Documentos/UFRN/lp/BaseDefense/build
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -87,9 +87,9 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start ../BaseDefense-1/build/CMakeFiles ../BaseDefense-1/build//CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/kaio/Documentos/UFRN/lp/BaseDefense/build/CMakeFiles /home/kaio/Documentos/UFRN/lp/BaseDefense/build//CMakeFiles/progress.marks
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start ../BaseDefense-1/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/kaio/Documentos/UFRN/lp/BaseDefense/build/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -321,6 +321,30 @@ src/projetil.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/meu_jogo.dir/build.make CMakeFiles/meu_jogo.dir/src/projetil.cpp.s
 .PHONY : src/projetil.cpp.s
 
+src/utils.o: src/utils.cpp.o
+.PHONY : src/utils.o
+
+# target to build an object file
+src/utils.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/meu_jogo.dir/build.make CMakeFiles/meu_jogo.dir/src/utils.cpp.o
+.PHONY : src/utils.cpp.o
+
+src/utils.i: src/utils.cpp.i
+.PHONY : src/utils.i
+
+# target to preprocess a source file
+src/utils.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/meu_jogo.dir/build.make CMakeFiles/meu_jogo.dir/src/utils.cpp.i
+.PHONY : src/utils.cpp.i
+
+src/utils.s: src/utils.cpp.s
+.PHONY : src/utils.s
+
+# target to generate assembly for a file
+src/utils.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/meu_jogo.dir/build.make CMakeFiles/meu_jogo.dir/src/utils.cpp.s
+.PHONY : src/utils.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -354,6 +378,9 @@ help:
 	@echo "... src/projetil.o"
 	@echo "... src/projetil.i"
 	@echo "... src/projetil.s"
+	@echo "... src/utils.o"
+	@echo "... src/utils.i"
+	@echo "... src/utils.s"
 .PHONY : help
 
 

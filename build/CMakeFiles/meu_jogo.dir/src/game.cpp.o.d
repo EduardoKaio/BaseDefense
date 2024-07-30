@@ -1,7 +1,7 @@
 CMakeFiles/meu_jogo.dir/src/game.cpp.o: \
- /mnt/c/Users/felip/OneDrive/Desktop/BaseDefense-1/src/game.cpp \
+ /home/kaio/Documentos/UFRN/lp/BaseDefense/src/game.cpp \
  /usr/include/stdc-predef.h \
- /mnt/c/Users/felip/OneDrive/Desktop/BaseDefense-1/src/../include/game.h \
+ /home/kaio/Documentos/UFRN/lp/BaseDefense/src/../include/game.h \
  /usr/include/SFML/Graphics.hpp /usr/include/SFML/Window.hpp \
  /usr/include/SFML/System.hpp /usr/include/SFML/Config.hpp \
  /usr/include/SFML/System/Clock.hpp /usr/include/SFML/System/Export.hpp \
@@ -232,7 +232,9 @@ CMakeFiles/meu_jogo.dir/src/game.cpp.o: \
  /usr/include/c++/11/bits/stl_list.h \
  /usr/include/c++/11/bits/allocated_ptr.h \
  /usr/include/c++/11/bits/list.tcc \
- /mnt/c/Users/felip/OneDrive/Desktop/BaseDefense-1/src/../include/player.h \
- /mnt/c/Users/felip/OneDrive/Desktop/BaseDefense-1/src/../include/projetil.h \
- /mnt/c/Users/felip/OneDrive/Desktop/BaseDefense-1/src/../include/inimigo.h \
- /mnt/c/Users/felip/OneDrive/Desktop/BaseDefense-1/src/../include/base.h
+ /home/kaio/Documentos/UFRN/lp/BaseDefense/src/../include/player.h \
+ /home/kaio/Documentos/UFRN/lp/BaseDefense/src/../include/projetil.h \
+ /home/kaio/Documentos/UFRN/lp/BaseDefense/src/../include/inimigo.h \
+ /home/kaio/Documentos/UFRN/lp/BaseDefense/src/../include/base.h \
+ /usr/include/c++/11/iostream /usr/include/c++/11/istream \
+ /usr/include/c++/11/bits/istream.tcc

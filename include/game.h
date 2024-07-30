@@ -5,22 +5,22 @@
 #include "projetil.h"
 #include "base.h"
 
+
 using namespace std;
 using namespace sf;
 
 class Game {
     private:
-        RenderWindow window;
+        void processEvents();
+        void update(float deltaTime);
+        void render();
+        // void spawnInimigos();
+        // void handleCollisions();
+
+        sf::RenderWindow window;
         Player player;
         Base base;
-        list<Inimigo> inimigos;
         list<Projetil> projeteis;
-
-        void processEvents();
-        void update();
-        void render();
-        void spawnInimigos();
-        void handleCollisions();
 
     public:
         Game();

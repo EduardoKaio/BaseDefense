@@ -1,7 +1,7 @@
 CMakeFiles/meu_jogo.dir/src/projetil.cpp.o: \
- /mnt/c/Users/felip/OneDrive/Desktop/BaseDefense-1/src/projetil.cpp \
+ /home/kaio/Documentos/UFRN/lp/BaseDefense/src/projetil.cpp \
  /usr/include/stdc-predef.h \
- /mnt/c/Users/felip/OneDrive/Desktop/BaseDefense-1/src/../include/projetil.h \
+ /home/kaio/Documentos/UFRN/lp/BaseDefense/src/../include/projetil.h \
  /usr/include/SFML/Graphics.hpp /usr/include/SFML/Window.hpp \
  /usr/include/SFML/System.hpp /usr/include/SFML/Config.hpp \
  /usr/include/SFML/System/Clock.hpp /usr/include/SFML/System/Export.hpp \
@@ -228,4 +228,14 @@ CMakeFiles/meu_jogo.dir/src/projetil.cpp.o: \
  /usr/include/SFML/Graphics/Glsl.hpp /usr/include/SFML/Graphics/Glsl.inl \
  /usr/include/SFML/Graphics/Sprite.hpp \
  /usr/include/SFML/Graphics/Text.hpp \
- /usr/include/SFML/Graphics/VertexBuffer.hpp
+ /usr/include/SFML/Graphics/VertexBuffer.hpp /usr/include/c++/11/cmath \
+ /usr/include/math.h /usr/include/x86_64-linux-gnu/bits/math-vector.h \
+ /usr/include/x86_64-linux-gnu/bits/libm-simd-decl-stubs.h \
+ /usr/include/x86_64-linux-gnu/bits/flt-eval-method.h \
+ /usr/include/x86_64-linux-gnu/bits/fp-logb.h \
+ /usr/include/x86_64-linux-gnu/bits/fp-fast.h \
+ /usr/include/x86_64-linux-gnu/bits/mathcalls-helper-functions.h \
+ /usr/include/x86_64-linux-gnu/bits/mathcalls.h \
+ /usr/include/x86_64-linux-gnu/bits/mathcalls-narrow.h \
+ /usr/include/x86_64-linux-gnu/bits/iscanonical.h \
+ /home/kaio/Documentos/UFRN/lp/BaseDefense/src/../include/utils.h
