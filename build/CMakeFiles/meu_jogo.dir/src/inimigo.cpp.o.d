@@ -1,7 +1,7 @@
 CMakeFiles/meu_jogo.dir/src/inimigo.cpp.o: \
- /home/kaio/Documentos/UFRN/lp/BaseDefense/src/inimigo.cpp \
+ /mnt/c/Users/felip/OneDrive/Desktop/BaseDefense-1/src/inimigo.cpp \
  /usr/include/stdc-predef.h \
- /home/kaio/Documentos/UFRN/lp/BaseDefense/src/../include/inimigo.h \
+ /mnt/c/Users/felip/OneDrive/Desktop/BaseDefense-1/src/../include/inimigo.h \
  /usr/include/SFML/Graphics.hpp /usr/include/SFML/Window.hpp \
  /usr/include/SFML/System.hpp /usr/include/SFML/Config.hpp \
  /usr/include/SFML/System/Clock.hpp /usr/include/SFML/System/Export.hpp \

@@ -1,7 +1,7 @@
 CMakeFiles/meu_jogo.dir/src/municao.cpp.o: \
- /home/kaio/Documentos/UFRN/lp/BaseDefense/src/municao.cpp \
+ /mnt/c/Users/felip/OneDrive/Desktop/BaseDefense-1/src/municao.cpp \
  /usr/include/stdc-predef.h \
- /home/kaio/Documentos/UFRN/lp/BaseDefense/src/../include/municao.h \
+ /mnt/c/Users/felip/OneDrive/Desktop/BaseDefense-1/src/../include/municao.h \
  /usr/include/SFML/Graphics.hpp /usr/include/SFML/Window.hpp \
  /usr/include/SFML/System.hpp /usr/include/SFML/Config.hpp \
  /usr/include/SFML/System/Clock.hpp /usr/include/SFML/System/Export.hpp \
