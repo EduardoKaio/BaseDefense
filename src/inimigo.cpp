@@ -1,34 +1,70 @@
-// #include "../include/inimigo.h"
-// #include <cmath> // Necessário para std::sqrt
+#include "../include/inimigo.h"
+#include <cmath> // Necessário para std::sqrt
 
-// using namespace std;
-// using namespace sf;
+using namespace std;
+using namespace sf;
 
-// Inimigo::Inimigo(Texture& texture, float x, float y) {
-//     sprite.setTexture(texture);
-//     sprite.setPosition(x, y);
-// }
+Inimigo::Inimigo(const sf::Vector2f& startPosition, const sf::Vector2f& targetPosition, const sf::RenderWindow* win)
+: position(startPosition), direction(targetPosition - startPosition), speed(30.0f), fireRate(1.0f), fireTimer(0.0f), window(win) {
+    shape.setRadius(10);
+    shape.setFillColor(sf::Color::Blue);
+    shape.setPosition(startPosition);
+    shape.setOrigin(shape.getRadius(), shape.getRadius());
+}
 
-// void Inimigo::update(float deltaTime, const Vector2f& targetPosition) {
-//     // Calcula o vetor direção para o alvo subtraindo a posição atual do inimigo da posição do alvo
-//     Vector2f direction = targetPosition - sprite.getPosition();
+void Inimigo::updateDirection(const sf::Vector2f& playerPosition) {
+    sf::Vector2f newDirection = playerPosition - position;
+    float length = std::sqrt(newDirection.x * newDirection.x + newDirection.y * newDirection.y);
+    if (length != 0) {
+        newDirection /= length; // Normaliza o vetor
+    }
+    direction = newDirection;
+}
+
+void Inimigo::update(float deltaTime, const sf::Vector2f& playerPosition) {
+    // Atualiza a direção e move o inimigo
+    updateDirection(playerPosition);
+    shape.move(direction * speed * deltaTime);
     
-//     // Calcula o comprimento (distância) do vetor direção
-//     float length = sqrt(direction.x * direction.x + direction.y * direction.y);
-    
-//     // Normaliza o vetor direção (torna seu comprimento igual a 1) para obter apenas a direção
-//     if (length != 0) {
-//         direction /= length;
-//     }
-    
-//     // Move o inimigo na direção normalizada, multiplicando pela velocidade e pelo deltaTime
-//     sprite.move(direction * speed * deltaTime);
-// }
+    // Atualiza o temporizador de disparo
+    fireTimer += deltaTime;
+    if (fireTimer >= fireRate) {
+        fireTimer = 0.0f; // Reseta o temporizador
+        fire(playerPosition); // Dispara um projétil
+    }
 
-// void Inimigo::draw(RenderTarget& target, RenderStates states) const {
-//     target.draw(sprite, states);
-// }
+    // Atualiza projéteis
+    for (auto& projetil : projeteis) {
+        projetil.update(deltaTime);
+    }
+    
+    // Remove projéteis fora da tela
+    projeteis.erase(std::remove_if(projeteis.begin(), projeteis.end(),
+        [&](const ProjetilInimigo& projetil) {
+            return projetil.isOutOfWindow(*window);
+        }), projeteis.end());
+}
 
-// Vector2f Inimigo::getPosition() const {
-//     return sprite.getPosition();
-// }
+void Inimigo::fire(const sf::Vector2f& playerPosition) {
+    // Calcula a posição do projétil a partir da posição do inimigo
+    sf::Vector2f projecaoPos = shape.getPosition() + sf::Vector2f(shape.getRadius(), shape.getRadius());
+    ProjetilInimigo newProjetil(projecaoPos, playerPosition);
+    projeteis.push_back(newProjetil);
+}
+
+bool Inimigo::isOutOfWindow(const sf::RenderWindow& window) const {
+    sf::FloatRect bounds = shape.getGlobalBounds();
+    sf::FloatRect viewport(window.getViewport(window.getView()));
+    return !viewport.intersects(bounds);
+}
+
+void Inimigo::draw(sf::RenderTarget& target, sf::RenderStates states) const {
+    target.draw(shape, states);
+}
+std::vector<ProjetilInimigo>& Inimigo::getProjeteis() {
+    return projeteis;
+}
+
+const std::vector<ProjetilInimigo>& Inimigo::getProjeteis() const {
+    return projeteis;
+}

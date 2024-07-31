@@ -233,6 +233,7 @@ CMakeFiles/meu_jogo.dir/src/main.cpp.o: \
  /usr/include/c++/11/bits/list.tcc \
  /home/kaio/Documentos/UFRN/lp/BaseDefense/src/../include/projetil.h \
  /home/kaio/Documentos/UFRN/lp/BaseDefense/src/../include/inimigo.h \
+ /home/kaio/Documentos/UFRN/lp/BaseDefense/src/../include/projetil_inimigo.h \
  /home/kaio/Documentos/UFRN/lp/BaseDefense/src/../include/projetil.h \
  /home/kaio/Documentos/UFRN/lp/BaseDefense/src/../include/base.h \
  /home/kaio/Documentos/UFRN/lp/BaseDefense/src/../include/game.h \

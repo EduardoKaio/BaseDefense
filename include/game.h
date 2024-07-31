@@ -21,6 +21,9 @@ class Game {
         Player player;
         Base base;
         list<Projetil> projeteis;
+        std::vector<Inimigo> inimigos;
+        float spawnTimer; // Temporizador para o surgimento dos inimigos
+        const float spawnInterval;
 
     public:
         Game();

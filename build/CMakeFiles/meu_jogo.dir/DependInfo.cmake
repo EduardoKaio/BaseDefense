@@ -16,6 +16,7 @@ set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "/home/kaio/Documentos/UFRN/lp/BaseDefense/src/municao.cpp" "CMakeFiles/meu_jogo.dir/src/municao.cpp.o" "gcc" "CMakeFiles/meu_jogo.dir/src/municao.cpp.o.d"
   "/home/kaio/Documentos/UFRN/lp/BaseDefense/src/player.cpp" "CMakeFiles/meu_jogo.dir/src/player.cpp.o" "gcc" "CMakeFiles/meu_jogo.dir/src/player.cpp.o.d"
   "/home/kaio/Documentos/UFRN/lp/BaseDefense/src/projetil.cpp" "CMakeFiles/meu_jogo.dir/src/projetil.cpp.o" "gcc" "CMakeFiles/meu_jogo.dir/src/projetil.cpp.o.d"
+  "/home/kaio/Documentos/UFRN/lp/BaseDefense/src/projetil_inimigo.cpp" "CMakeFiles/meu_jogo.dir/src/projetil_inimigo.cpp.o" "gcc" "CMakeFiles/meu_jogo.dir/src/projetil_inimigo.cpp.o.d"
   "/home/kaio/Documentos/UFRN/lp/BaseDefense/src/utils.cpp" "CMakeFiles/meu_jogo.dir/src/utils.cpp.o" "gcc" "CMakeFiles/meu_jogo.dir/src/utils.cpp.o.d"
   )
 

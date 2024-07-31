@@ -19,6 +19,7 @@ class Player : public Drawable {
         bool shooting;
         float speed;
         int health;
+        int projeteisDisponiveis;
     
     public:
         Player(list<Projetil>& projeteis);
@@ -27,6 +28,8 @@ class Player : public Drawable {
         void shoot(sf::Vector2f target);
         int getHealth() const;
         void reduceHealth(int amount);
+        int getProjeteisDisponiveis();
+        CircleShape& getShape();
 
 };
 #endif

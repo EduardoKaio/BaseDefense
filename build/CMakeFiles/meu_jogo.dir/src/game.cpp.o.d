@@ -235,6 +235,21 @@ CMakeFiles/meu_jogo.dir/src/game.cpp.o: \
  /home/kaio/Documentos/UFRN/lp/BaseDefense/src/../include/player.h \
  /home/kaio/Documentos/UFRN/lp/BaseDefense/src/../include/projetil.h \
  /home/kaio/Documentos/UFRN/lp/BaseDefense/src/../include/inimigo.h \
+ /home/kaio/Documentos/UFRN/lp/BaseDefense/src/../include/projetil_inimigo.h \
  /home/kaio/Documentos/UFRN/lp/BaseDefense/src/../include/base.h \
  /usr/include/c++/11/iostream /usr/include/c++/11/istream \
- /usr/include/c++/11/bits/istream.tcc
+ /usr/include/c++/11/bits/istream.tcc /usr/include/c++/11/random \
+ /usr/include/c++/11/cmath /usr/include/math.h \
+ /usr/include/x86_64-linux-gnu/bits/math-vector.h \
+ /usr/include/x86_64-linux-gnu/bits/libm-simd-decl-stubs.h \
+ /usr/include/x86_64-linux-gnu/bits/flt-eval-method.h \
+ /usr/include/x86_64-linux-gnu/bits/fp-logb.h \
+ /usr/include/x86_64-linux-gnu/bits/fp-fast.h \
+ /usr/include/x86_64-linux-gnu/bits/mathcalls-helper-functions.h \
+ /usr/include/x86_64-linux-gnu/bits/mathcalls.h \
+ /usr/include/x86_64-linux-gnu/bits/mathcalls-narrow.h \
+ /usr/include/x86_64-linux-gnu/bits/iscanonical.h \
+ /usr/include/c++/11/limits /usr/include/c++/11/bits/random.h \
+ /usr/include/x86_64-linux-gnu/c++/11/bits/opt_random.h \
+ /usr/include/c++/11/bits/random.tcc /usr/include/c++/11/numeric \
+ /usr/include/c++/11/bits/stl_numeric.h /usr/include/c++/11/bit

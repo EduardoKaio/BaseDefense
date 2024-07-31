@@ -321,6 +321,30 @@ src/projetil.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/meu_jogo.dir/build.make CMakeFiles/meu_jogo.dir/src/projetil.cpp.s
 .PHONY : src/projetil.cpp.s
 
+src/projetil_inimigo.o: src/projetil_inimigo.cpp.o
+.PHONY : src/projetil_inimigo.o
+
+# target to build an object file
+src/projetil_inimigo.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/meu_jogo.dir/build.make CMakeFiles/meu_jogo.dir/src/projetil_inimigo.cpp.o
+.PHONY : src/projetil_inimigo.cpp.o
+
+src/projetil_inimigo.i: src/projetil_inimigo.cpp.i
+.PHONY : src/projetil_inimigo.i
+
+# target to preprocess a source file
+src/projetil_inimigo.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/meu_jogo.dir/build.make CMakeFiles/meu_jogo.dir/src/projetil_inimigo.cpp.i
+.PHONY : src/projetil_inimigo.cpp.i
+
+src/projetil_inimigo.s: src/projetil_inimigo.cpp.s
+.PHONY : src/projetil_inimigo.s
+
+# target to generate assembly for a file
+src/projetil_inimigo.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/meu_jogo.dir/build.make CMakeFiles/meu_jogo.dir/src/projetil_inimigo.cpp.s
+.PHONY : src/projetil_inimigo.cpp.s
+
 src/utils.o: src/utils.cpp.o
 .PHONY : src/utils.o
 
@@ -378,6 +402,9 @@ help:
 	@echo "... src/projetil.o"
 	@echo "... src/projetil.i"
 	@echo "... src/projetil.s"
+	@echo "... src/projetil_inimigo.o"
+	@echo "... src/projetil_inimigo.i"
+	@echo "... src/projetil_inimigo.s"
 	@echo "... src/utils.o"
 	@echo "... src/utils.i"
 	@echo "... src/utils.s"
