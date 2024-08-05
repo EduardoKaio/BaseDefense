@@ -903,7 +903,15 @@ CMakeFiles/meu_jogo.dir/src/inimigo.cpp.o: ../src/inimigo.cpp \
   /usr/include/x86_64-linux-gnu/bits/iscanonical.h \
   /usr/include/c++/11/iostream \
   /usr/include/c++/11/istream \
-  /usr/include/c++/11/bits/istream.tcc
+  /usr/include/c++/11/bits/istream.tcc \
+  /usr/include/c++/11/random \
+  /usr/include/c++/11/limits \
+  /usr/include/c++/11/bits/random.h \
+  /usr/include/x86_64-linux-gnu/c++/11/bits/opt_random.h \
+  /usr/include/c++/11/bits/random.tcc \
+  /usr/include/c++/11/numeric \
+  /usr/include/c++/11/bits/stl_numeric.h \
+  /usr/include/c++/11/bit
 
 CMakeFiles/meu_jogo.dir/src/main.cpp.o: ../src/main.cpp \
   /usr/include/stdc-predef.h \

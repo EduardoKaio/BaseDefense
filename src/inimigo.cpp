@@ -1,16 +1,24 @@
 #include "../include/inimigo.h"
-#include <cmath> // Necessário para std::sqrt
+#include <cmath>
 #include <iostream>
+#include <random>
 
 using namespace std;
 using namespace sf;
 
 Inimigo::Inimigo(const sf::Vector2f& startPosition, const sf::Vector2f& targetPosition, const sf::RenderWindow* win)
-: position(startPosition), direction(targetPosition - startPosition), health(2), isAlive(true), speed(30.0f), fireRate(1.0f), fireTimer(0.0f), window(win) {
+: position(startPosition), direction(targetPosition - startPosition), health(2), isAlive(true), speed(30.0f), window(win) {
     shape.setRadius(10);
-    shape.setFillColor(sf::Color::Blue);
+    shape.setFillColor(sf::Color(255, 111, 0));
     shape.setPosition(startPosition);
     shape.setOrigin(shape.getRadius(), shape.getRadius());
+
+    // Inicializa fireRate com uma variação aleatória
+    std::random_device rd;
+    std::mt19937 gen(rd());
+    std::uniform_real_distribution<> dist(0.5, 2.5); // Variação da taxa de disparo entre 0.5 e 2.5 segundos
+    fireRate = dist(gen);
+    fireTimer = 0.0f;
 }
 
 void Inimigo::updateDirection(const sf::Vector2f& playerPosition) {
@@ -62,6 +70,7 @@ bool Inimigo::isOutOfWindow(const sf::RenderWindow& window) const {
 void Inimigo::draw(sf::RenderTarget& target, sf::RenderStates states) const {
     target.draw(shape, states);
 }
+
 std::vector<ProjetilInimigo>& Inimigo::getProjeteis() {
     return projeteis;
 }
@@ -75,7 +84,7 @@ CircleShape& Inimigo::getShape() {
 }
 
 void Inimigo::reduceHealth() {
-    health = health-1;
+    health = health - 1;
     if (health <= 0) isAlive = false;
 }
 

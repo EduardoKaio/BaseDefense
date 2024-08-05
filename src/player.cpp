@@ -9,7 +9,7 @@ Player::Player(std::list<Projetil>& projeteis)
     : projeteis(projeteis), shooting(false), speed(300.0f), isAlive(true), health(100), projeteisDisponiveis(100) {
 
     shape.setRadius(15);
-    shape.setFillColor(sf::Color::Red);
+    shape.setFillColor(sf::Color(0, 191, 255)); 
     shape.setPosition(400, 300);
 }
 
@@ -53,7 +53,7 @@ void Player::handleInput(float deltaTime) {
 }
 
 void Player::shoot(sf::Vector2f target) {
-if (projeteisDisponiveis > 0) {
+    if (projeteisDisponiveis > 0) {
         // Obter a posição central do shape do jogador
         sf::Vector2f startPosition = shape.getPosition() + sf::Vector2f(shape.getRadius(), shape.getRadius());
         Projetil newProjetil(startPosition, target);

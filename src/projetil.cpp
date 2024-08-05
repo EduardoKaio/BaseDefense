@@ -8,7 +8,7 @@ using namespace sf;
 Projetil::Projetil(sf::Vector2f startPosition, sf::Vector2f targetPosition)
     : speed(500.0f), active(true) {
     shape.setRadius(5);
-    shape.setFillColor(sf::Color::Black); // Define a cor preta
+    shape.setFillColor(sf::Color(50, 205, 50)); // Define a cor preta
     shape.setPosition(startPosition);
 
     // Calcula a direção do projétil

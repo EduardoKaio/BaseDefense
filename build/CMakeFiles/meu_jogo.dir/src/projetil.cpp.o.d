@@ -1,7 +1,7 @@
 CMakeFiles/meu_jogo.dir/src/projetil.cpp.o: \
- /mnt/c/Users/felip/OneDrive/Desktop/BaseDefense/src/projetil.cpp \
+ /home/kaio/Documentos/UFRN/lp/BaseDefense/src/projetil.cpp \
  /usr/include/stdc-predef.h \
- /mnt/c/Users/felip/OneDrive/Desktop/BaseDefense/src/../include/projetil.h \
+ /home/kaio/Documentos/UFRN/lp/BaseDefense/src/../include/projetil.h \
  /usr/include/SFML/Graphics.hpp /usr/include/SFML/Window.hpp \
  /usr/include/SFML/System.hpp /usr/include/SFML/Config.hpp \
  /usr/include/SFML/System/Clock.hpp /usr/include/SFML/System/Export.hpp \
@@ -238,4 +238,4 @@ CMakeFiles/meu_jogo.dir/src/projetil.cpp.o: \
  /usr/include/x86_64-linux-gnu/bits/mathcalls.h \
  /usr/include/x86_64-linux-gnu/bits/mathcalls-narrow.h \
  /usr/include/x86_64-linux-gnu/bits/iscanonical.h \
- /mnt/c/Users/felip/OneDrive/Desktop/BaseDefense/src/../include/utils.h
+ /home/kaio/Documentos/UFRN/lp/BaseDefense/src/../include/utils.h

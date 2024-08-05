@@ -18,7 +18,7 @@ private:
 
 public:
     Base();
-    void setPosition(float x, float y);
+    void setPosition(const sf::Vector2f& position);
 
     // void update();
     // int getHealth() const;

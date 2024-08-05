@@ -26,7 +26,8 @@ class Game {
         std::vector<Inimigo> inimigos;
         float spawnTimer; // Temporizador para o surgimento dos inimigos
         const float spawnInterval;
-
+        bool gameOver;
+        
     public:
         Game();
         void run();

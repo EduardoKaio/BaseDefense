@@ -6,14 +6,14 @@ using namespace sf;
 Base::Base() {
     shape.setSize(sf::Vector2f(300, 150));  // Define o tamanho do retângulo
     shape.setOutlineThickness(8);  // Define a espessura das bordas
-    shape.setOutlineColor(sf::Color::Green);  // Define a cor das bordas
+    shape.setOutlineColor(sf::Color(34, 139, 34));  // Define a cor das bordas
     shape.setFillColor(sf::Color::Transparent);  // Define a cor de preenchimento como transparente
     shape.setOrigin(shape.getSize() / 2.0f);  // Define a origem no centro do retângulo
-    shape.setPosition(400, 300);  // Define a posição central da base
+    shape.setPosition(300, 150);  // Define a posição central da base
 }
 
-void Base::setPosition(float x, float y) {
-    shape.setPosition(x, y);  // Atualiza a posição do retângulo
+void Base::setPosition(const sf::Vector2f& position) {
+    shape.setPosition(position);  // Atualiza a posição do retângulo
 }
 
 void Base::draw(sf::RenderTarget& target, sf::RenderStates states) const {

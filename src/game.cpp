@@ -8,16 +8,26 @@ Game::Game()
     projeteis(),
     player(projeteis), 
     base(),
-    spawnInterval(3.0f) {
-        // Define o tamanho da janela como fixo
-        window.setSize(sf::Vector2u(800, 600));
+    spawnInterval(3.0f),
+    gameOver(false) {
 
-        // Define o modo de redimensionamento como fixo
-        window.setPosition(sf::Vector2i(100, 100));  // Posição inicial da janela
+    // Define o tamanho da janela como fixo
+    window.setSize(sf::Vector2u(800, 600));
 
-        // Evento para garantir que a janela não seja redimensionada
-        window.setVerticalSyncEnabled(true);
-    }
+    // Define o modo de redimensionamento como fixo
+    window.setPosition(sf::Vector2i(100, 100));  // Posição inicial da janela
+
+    // Evento para garantir que a janela não seja redimensionada
+    window.setVerticalSyncEnabled(true);
+
+    // Ajuste a posição do jogador para o centro da tela
+    sf::Vector2f center(window.getSize().x / 2.0f, window.getSize().y / 2.0f);
+    player.getShape().setPosition(center);
+
+    // Ajuste a posição da base para o centro da tela
+    sf::Vector2f baseCenter(window.getSize().x / 2.0f, window.getSize().y / 2.0f);
+    base.setPosition(baseCenter);
+}
 
 void Game::run() {
     sf::Clock clock; // Mova o relógio para fora do loop
@@ -36,7 +46,7 @@ void Game::processEvents() {
             window.close();
 
         if (event.type == sf::Event::MouseButtonPressed) {
-            if (event.mouseButton.button == sf::Mouse::Left) {
+            if (event.mouseButton.button == sf::Mouse::Left && !gameOver) {
                 sf::Vector2i mousePos = sf::Mouse::getPosition(window);
                 sf::Vector2f mousePosF(static_cast<float>(mousePos.x), static_cast<float>(mousePos.y));
                 player.shoot(mousePosF);
@@ -46,6 +56,8 @@ void Game::processEvents() {
 }
 
 void Game::update(float deltaTime) {
+    if (gameOver) return; // Não atualiza o jogo se estiver em game over
+
     spawnTimer += deltaTime;
 
     if (spawnTimer >= spawnInterval) {
@@ -74,39 +86,42 @@ void Game::update(float deltaTime) {
 
     player.update(deltaTime);
 
+    // Verifica se a vida do jogador chegou a 0
+    if (player.getHealth() <= 0) {
+        gameOver = true; // Define o estado do jogo como game over
+    }
+
     for (auto it = inimigos.begin(); it != inimigos.end();) {
         it->update(deltaTime, player.getShape().getPosition());
 
         if (!it->isAliveStatus()) {
             it = inimigos.erase(it);
         } else {
-            it++;
+            ++it;
         }
-        
     }
 
+    // Atualiza e verifica projéteis do jogador
     for (auto it = projeteis.begin(); it != projeteis.end();) {
         it->update(deltaTime);
 
-        for (Inimigo& enemy : inimigos) {  
-            sf::Vector2f projectilePosition = it->getShape().getPosition();            
-            sf::Vector2f enemyPosition = enemy.getShape().getPosition();           
+        bool removed = false;
 
-            if (enemy.isAliveStatus() && it->isActive() && it->iscolliding(projectilePosition.x, projectilePosition.y, it->getShape().getRadius(),
-                                                                           enemyPosition.x, enemyPosition.y, enemy.getShape().getRadius())) {
-                enemy.reduceHealth();
+        // Verifica colisões com inimigos
+        for (auto enemyIt = inimigos.begin(); enemyIt != inimigos.end(); ++enemyIt) {
+            if (enemyIt->isAliveStatus() && it->isActive() &&
+                it->iscolliding(it->getShape().getPosition().x, it->getShape().getPosition().y, it->getShape().getRadius(),
+                                enemyIt->getShape().getPosition().x, enemyIt->getShape().getPosition().y, enemyIt->getShape().getRadius())) {
+                enemyIt->reduceHealth();
                 it->setActive(false);
+                removed = true;
+                break; // Só precisa verificar a colisão com um inimigo
             }
         }
 
-        if (it->isActive()) {
-            ++it;
-        } else {
-            it = projeteis.erase(it);
-        }  
-
-        if (it->isOutOfWindow(window)) {
-            it = projeteis.erase(it); // Remove projéteis fora da tela
+        // Remove projéteis que saíram da tela
+        if (it->isOutOfWindow(window) || removed) {
+            it = projeteis.erase(it); // Remove projéteis fora da tela ou se colidiram com algo
         } else {
             ++it;
         }
@@ -116,27 +131,23 @@ void Game::update(float deltaTime) {
     for (auto it = inimigos.begin(); it != inimigos.end();) {
         for (auto projIt = it->getProjeteis().begin(); projIt != it->getProjeteis().end();) {
             projIt->update(deltaTime);
-            
-            sf::Vector2f projectilePosition = projIt->getShape().getPosition();            
-            sf::Vector2f playerPosition = player.getShape().getPosition();           
 
-            if (player.isAliveStatus() && projIt->isActive() && projIt->iscolliding(projectilePosition.x, projectilePosition.y, projIt->getShape().getRadius(),
-                                                                                    playerPosition.x, playerPosition.y, player.getShape().getRadius())) {
+            // Verifica colisões com o jogador
+            if (player.isAliveStatus() && projIt->isActive() &&
+                projIt->iscolliding(projIt->getShape().getPosition().x, projIt->getShape().getPosition().y, projIt->getShape().getRadius(),
+                                    player.getShape().getPosition().x, player.getShape().getPosition().y, player.getShape().getRadius())) {
                 player.reduceHealth(5);
                 projIt->setActive(false);
-            }
-            
-            
-            if (projIt->isOutOfWindow(window)) {
-                projIt = it->getProjeteis().erase(projIt); // Remove projéteis fora da tela
+                // O projétil deve ser removido da lista de projéteis do inimigo
+                projIt = it->getProjeteis().erase(projIt);
             } else {
                 ++projIt;
             }
         }
 
-        // Remover inimigo se necessário
+        // Remove inimigos que saíram da tela
         if (it->isOutOfWindow(window)) {
-            it = inimigos.erase(it); // Remove inimigo fora da tela
+            it = inimigos.erase(it);
         } else {
             ++it;
         }
@@ -146,8 +157,10 @@ void Game::update(float deltaTime) {
 void Game::render() {
     sf::Color backgroundColor(200, 200, 200); // Cor de fundo cinza claro
     window.clear(backgroundColor);
-    window.draw(base); // Desenha a base
-    window.draw(player); // Desenha o player
+
+    // Desenha a base e o player
+    window.draw(base); 
+    window.draw(player);
 
     for (const auto& projetil : projeteis) {
         window.draw(projetil); // Desenha os projéteis
@@ -164,22 +177,40 @@ void Game::render() {
     if (!font.loadFromFile("../assets/fonts/pixel.ttf")) { // Certifique-se de fornecer um caminho para a fonte
         std::cerr << "Não foi possível carregar a fonte!" << std::endl;
     }
-     sf::RectangleShape projeteisBox(sf::Vector2f(60, 50)); // Tamanho da caixa
-    projeteisBox.setFillColor(sf::Color::White); // Cor da caixa
-    projeteisBox.setOutlineColor(sf::Color::Black); // Cor da borda
-    projeteisBox.setOutlineThickness(2); // Espessura da borda
-    projeteisBox.setPosition(window.getSize().x - 80, 10); // Posição no canto superior direito
+    
+    sf::RectangleShape infoBox(sf::Vector2f(150, 80)); // Tamanho da caixa ajustado
+    infoBox.setFillColor(sf::Color::White); // Cor da caixa
+    infoBox.setOutlineColor(sf::Color::Black); // Cor da borda
+    infoBox.setOutlineThickness(2); // Espessura da borda
+    infoBox.setPosition(window.getSize().x - 160, 10); // Posição no canto superior direito
 
-    sf::Text projeteisText;
-    projeteisText.setFont(font); // Fonte carregada anteriormente
-    projeteisText.setString(to_string(player.getProjeteisDisponiveis()));
-    projeteisText.setCharacterSize(26);
-    projeteisText.setFillColor(sf::Color::Black);
-    projeteisText.setPosition(window.getSize().x - 70, 20); // Posição do texto na caixa
+    sf::Text infoText;
+    infoText.setFont(font); // Fonte carregada anteriormente
+    infoText.setString("Municao: " + std::to_string(player.getProjeteisDisponiveis()) + "\n" +
+                       "Vida: " + std::to_string(player.getHealth()));
+    infoText.setCharacterSize(20); // Tamanho da fonte menor
+    infoText.setFillColor(sf::Color::Black);
+    infoText.setPosition(window.getSize().x - 150, 20); // Posição do texto na caixa
+    
+    // Desenha a caixa e o texto
+    window.draw(infoBox); // Desenha a caixa de informações
+    window.draw(infoText); // Desenha o texto com munição e vida
 
-    window.draw(projeteisBox); // Desenha a caixa
-    window.draw(projeteisText);
+    // Desenha a mensagem de Game Over se o jogo estiver terminado
+   if (gameOver) {
+        sf::RectangleShape darkOverlay(sf::Vector2f(window.getSize().x, window.getSize().y));
+        darkOverlay.setFillColor(sf::Color(75, 75, 75, 150)); // Cinza escuro com opacidade
+        window.draw(darkOverlay);
+
+        sf::Text gameOverText;
+        gameOverText.setFont(font);
+        gameOverText.setString("GAME OVER");
+        gameOverText.setCharacterSize(50);
+        gameOverText.setFillColor(sf::Color::White);
+        gameOverText.setPosition((window.getSize().x - gameOverText.getLocalBounds().width) / 2,
+                                 (window.getSize().y - gameOverText.getLocalBounds().height) / 2);
+        window.draw(gameOverText);
+    }
 
     window.display();
 }
-

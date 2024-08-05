@@ -7,7 +7,7 @@ using namespace sf;
 ProjetilInimigo::ProjetilInimigo(const sf::Vector2f& startPosition, const sf::Vector2f& targetPosition)
     : position(startPosition), speed(50.0f), active(true) {
     shape.setRadius(5);
-    shape.setFillColor(sf::Color::Red);
+    shape.setFillColor(sf::Color(138, 43, 226));
     shape.setPosition(position);
 
     // Calcula a direção

@@ -1,0 +1,14 @@
+- tiros atravessando o inimigo e o heroi, tiro tem que sumir quando acerta (feito)
+- ajustar os inimigos atirando sincronizado (Feito)
+- adicionar uma tela de game over (Feito)
+- Mostrar na tela a vida do heroi (Feito)
+- Mudança de paleta de cores (Feito)
+
+- Adicionar vida e a logica da base
+- heroi ou a base está descentralizado
+- O heroi ganhar quando se passarem x quantidade de tempo
+- Adicionar dificuldade, surgimento de mais inimigos com o decorrer do tempo
+- O heroi perde ou quando sua vida acaba ou quando a base é destruida  
+- Adicionar start para iniciar e restart quando tiver sido um Game Over
+- quando o inimigo morre, os tiros que ele soltou antes de morrer estao sumindo
+- Adicionar os drops deixados ao matar um inimigo (vida ou munição)
