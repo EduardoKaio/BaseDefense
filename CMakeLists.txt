@@ -3,7 +3,7 @@ cmake_minimum_required(VERSION 3.10)
 set(CMAKE_CXX_COMPILER "/usr/bin/g++-11") 
 
 set(CMAKE_CXX_STANDARD 17)
-set(CMAKE_CXX_STANDARD_REQUIRED True)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 # Nome do projeto
 project(MeuJogoSFML)
@@ -26,4 +26,4 @@ set(SFML_DIR "${CMAKE_SOURCE_DIR}/SFML-linux/lib/cmake/SFML")
 # Encontra e linka as bibliotecas SFML necessárias
 find_package(SFML 2.5 COMPONENTS graphics window system REQUIRED)
 
-target_link_libraries(meu_jogo sfml-graphics sfml-window sfml-system)
+target_link_libraries(meu_jogo sfml-graphics sfml-window sfml-system sfml-audio)

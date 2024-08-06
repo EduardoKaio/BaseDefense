@@ -238,6 +238,7 @@ meu_jogo: CMakeFiles/meu_jogo.dir/src/utils.cpp.o
 meu_jogo: CMakeFiles/meu_jogo.dir/build.make
 meu_jogo: /usr/lib/x86_64-linux-gnu/libsfml-graphics.so.2.5.1
 meu_jogo: /usr/lib/x86_64-linux-gnu/libsfml-window.so.2.5.1
+meu_jogo: /usr/lib/x86_64-linux-gnu/libsfml-audio.so.2.5.1
 meu_jogo: /usr/lib/x86_64-linux-gnu/libsfml-system.so.2.5.1
 meu_jogo: CMakeFiles/meu_jogo.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/kaio/Documentos/UFRN/lp/BaseDefense/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Linking CXX executable meu_jogo"

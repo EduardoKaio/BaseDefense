@@ -284,7 +284,38 @@ CMakeFiles/meu_jogo.dir/src/base.cpp.o: ../src/base.cpp \
   /usr/include/SFML/Graphics/Glsl.inl \
   /usr/include/SFML/Graphics/Sprite.hpp \
   /usr/include/SFML/Graphics/Text.hpp \
-  /usr/include/SFML/Graphics/VertexBuffer.hpp
+  /usr/include/SFML/Graphics/VertexBuffer.hpp \
+  /usr/include/c++/11/list \
+  /usr/include/c++/11/bits/stl_list.h \
+  /usr/include/c++/11/bits/allocated_ptr.h \
+  /usr/include/c++/11/bits/list.tcc \
+  ../include/projetil_inimigo.h \
+  ../include/inimigo.h \
+  /usr/include/SFML/Audio.hpp \
+  /usr/include/SFML/Audio/InputSoundFile.hpp \
+  /usr/include/SFML/Audio/Export.hpp \
+  /usr/include/SFML/Audio/Listener.hpp \
+  /usr/include/SFML/Audio/Music.hpp \
+  /usr/include/SFML/Audio/SoundStream.hpp \
+  /usr/include/SFML/Audio/SoundSource.hpp \
+  /usr/include/SFML/Audio/AlResource.hpp \
+  /usr/include/SFML/Audio/OutputSoundFile.hpp \
+  /usr/include/SFML/Audio/Sound.hpp \
+  /usr/include/SFML/Audio/SoundBuffer.hpp \
+  /usr/include/c++/11/set \
+  /usr/include/c++/11/bits/stl_set.h \
+  /usr/include/c++/11/bits/stl_multiset.h \
+  /usr/include/SFML/Audio/SoundBufferRecorder.hpp \
+  /usr/include/SFML/Audio/SoundRecorder.hpp \
+  /usr/include/SFML/Audio/SoundFileFactory.hpp \
+  /usr/include/SFML/Audio/SoundFileFactory.inl \
+  /usr/include/SFML/Audio/SoundFileReader.hpp \
+  /usr/include/SFML/Audio/SoundFileWriter.hpp \
+  ../include/projetil_inimigo.h \
+  ../include/inimigo.h \
+  /usr/include/c++/11/iostream \
+  /usr/include/c++/11/istream \
+  /usr/include/c++/11/bits/istream.tcc
 
 CMakeFiles/meu_jogo.dir/src/config.cpp.o: ../src/config.cpp \
   /usr/include/stdc-predef.h
@@ -573,6 +604,26 @@ CMakeFiles/meu_jogo.dir/src/game.cpp.o: ../src/game.cpp \
   /usr/include/SFML/Graphics/Sprite.hpp \
   /usr/include/SFML/Graphics/Text.hpp \
   /usr/include/SFML/Graphics/VertexBuffer.hpp \
+  /usr/include/SFML/Audio.hpp \
+  /usr/include/SFML/Audio/InputSoundFile.hpp \
+  /usr/include/SFML/Audio/Export.hpp \
+  /usr/include/SFML/Audio/Listener.hpp \
+  /usr/include/SFML/Audio/Music.hpp \
+  /usr/include/SFML/Audio/SoundStream.hpp \
+  /usr/include/SFML/Audio/SoundSource.hpp \
+  /usr/include/SFML/Audio/AlResource.hpp \
+  /usr/include/SFML/Audio/OutputSoundFile.hpp \
+  /usr/include/SFML/Audio/Sound.hpp \
+  /usr/include/SFML/Audio/SoundBuffer.hpp \
+  /usr/include/c++/11/set \
+  /usr/include/c++/11/bits/stl_set.h \
+  /usr/include/c++/11/bits/stl_multiset.h \
+  /usr/include/SFML/Audio/SoundBufferRecorder.hpp \
+  /usr/include/SFML/Audio/SoundRecorder.hpp \
+  /usr/include/SFML/Audio/SoundFileFactory.hpp \
+  /usr/include/SFML/Audio/SoundFileFactory.inl \
+  /usr/include/SFML/Audio/SoundFileReader.hpp \
+  /usr/include/SFML/Audio/SoundFileWriter.hpp \
   /usr/include/c++/11/list \
   /usr/include/c++/11/bits/stl_list.h \
   /usr/include/c++/11/bits/allocated_ptr.h \
@@ -889,6 +940,26 @@ CMakeFiles/meu_jogo.dir/src/inimigo.cpp.o: ../src/inimigo.cpp \
   /usr/include/SFML/Graphics/Sprite.hpp \
   /usr/include/SFML/Graphics/Text.hpp \
   /usr/include/SFML/Graphics/VertexBuffer.hpp \
+  /usr/include/SFML/Audio.hpp \
+  /usr/include/SFML/Audio/InputSoundFile.hpp \
+  /usr/include/SFML/Audio/Export.hpp \
+  /usr/include/SFML/Audio/Listener.hpp \
+  /usr/include/SFML/Audio/Music.hpp \
+  /usr/include/SFML/Audio/SoundStream.hpp \
+  /usr/include/SFML/Audio/SoundSource.hpp \
+  /usr/include/SFML/Audio/AlResource.hpp \
+  /usr/include/SFML/Audio/OutputSoundFile.hpp \
+  /usr/include/SFML/Audio/Sound.hpp \
+  /usr/include/SFML/Audio/SoundBuffer.hpp \
+  /usr/include/c++/11/set \
+  /usr/include/c++/11/bits/stl_set.h \
+  /usr/include/c++/11/bits/stl_multiset.h \
+  /usr/include/SFML/Audio/SoundBufferRecorder.hpp \
+  /usr/include/SFML/Audio/SoundRecorder.hpp \
+  /usr/include/SFML/Audio/SoundFileFactory.hpp \
+  /usr/include/SFML/Audio/SoundFileFactory.inl \
+  /usr/include/SFML/Audio/SoundFileReader.hpp \
+  /usr/include/SFML/Audio/SoundFileWriter.hpp \
   ../include/projetil_inimigo.h \
   /usr/include/c++/11/cmath \
   /usr/include/math.h \
@@ -1203,12 +1274,32 @@ CMakeFiles/meu_jogo.dir/src/main.cpp.o: ../src/main.cpp \
   /usr/include/c++/11/bits/list.tcc \
   ../include/projetil.h \
   ../include/inimigo.h \
+  /usr/include/SFML/Audio.hpp \
+  /usr/include/SFML/Audio/InputSoundFile.hpp \
+  /usr/include/SFML/Audio/Export.hpp \
+  /usr/include/SFML/Audio/Listener.hpp \
+  /usr/include/SFML/Audio/Music.hpp \
+  /usr/include/SFML/Audio/SoundStream.hpp \
+  /usr/include/SFML/Audio/SoundSource.hpp \
+  /usr/include/SFML/Audio/AlResource.hpp \
+  /usr/include/SFML/Audio/OutputSoundFile.hpp \
+  /usr/include/SFML/Audio/Sound.hpp \
+  /usr/include/SFML/Audio/SoundBuffer.hpp \
+  /usr/include/c++/11/set \
+  /usr/include/c++/11/bits/stl_set.h \
+  /usr/include/c++/11/bits/stl_multiset.h \
+  /usr/include/SFML/Audio/SoundBufferRecorder.hpp \
+  /usr/include/SFML/Audio/SoundRecorder.hpp \
+  /usr/include/SFML/Audio/SoundFileFactory.hpp \
+  /usr/include/SFML/Audio/SoundFileFactory.inl \
+  /usr/include/SFML/Audio/SoundFileReader.hpp \
+  /usr/include/SFML/Audio/SoundFileWriter.hpp \
   ../include/projetil_inimigo.h \
   ../include/projetil.h \
   ../include/base.h \
+  ../include/inimigo.h \
   ../include/game.h \
   ../include/player.h \
-  ../include/inimigo.h \
   ../include/base.h
 
 CMakeFiles/meu_jogo.dir/src/municao.cpp.o: ../src/municao.cpp \
@@ -2423,8 +2514,6 @@ CMakeFiles/meu_jogo.dir/src/utils.cpp.o: ../src/utils.cpp \
 
 /usr/include/c++/11/limits:
 
-/usr/include/x86_64-linux-gnu/bits/mathcalls.h:
-
 /usr/include/x86_64-linux-gnu/bits/mathcalls-helper-functions.h:
 
 /usr/include/x86_64-linux-gnu/bits/fp-logb.h:
@@ -2435,19 +2524,47 @@ CMakeFiles/meu_jogo.dir/src/utils.cpp.o: ../src/utils.cpp \
 
 /usr/include/c++/11/random:
 
+../include/projetil.h:
+
+../include/player.h:
+
+../include/game.h:
+
 /usr/include/c++/11/bits/istream.tcc:
 
 /usr/include/c++/11/istream:
 
-../include/projetil_inimigo.h:
+/usr/include/x86_64-linux-gnu/bits/mathcalls.h:
+
+/usr/include/SFML/Audio/SoundFileReader.hpp:
+
+/usr/include/SFML/Audio/SoundRecorder.hpp:
+
+/usr/include/SFML/Audio/SoundBufferRecorder.hpp:
+
+/usr/include/c++/11/bits/stl_multiset.h:
+
+/usr/include/c++/11/set:
+
+/usr/include/SFML/Audio/SoundBuffer.hpp:
+
+/usr/include/SFML/Audio/Sound.hpp:
+
+/usr/include/SFML/Audio/OutputSoundFile.hpp:
+
+/usr/include/SFML/Audio/AlResource.hpp:
+
+/usr/include/SFML/Audio/SoundStream.hpp:
+
+/usr/include/SFML/Audio/Music.hpp:
 
 ../src/municao.cpp:
 
+/usr/include/SFML/Audio/Listener.hpp:
+
 ../include/inimigo.h:
 
-../include/projetil.h:
-
-../include/player.h:
+../include/projetil_inimigo.h:
 
 /usr/include/c++/11/bits/list.tcc:
 
@@ -2458,8 +2575,6 @@ CMakeFiles/meu_jogo.dir/src/utils.cpp.o: ../src/utils.cpp \
 /usr/include/c++/11/bits/stl_list.h:
 
 /usr/include/c++/11/list:
-
-../include/game.h:
 
 /usr/include/SFML/Graphics/VertexBuffer.hpp:
 
@@ -2525,6 +2640,8 @@ CMakeFiles/meu_jogo.dir/src/utils.cpp.o: ../src/utils.cpp \
 
 /usr/include/x86_64-linux-gnu/bits/types/timer_t.h:
 
+/usr/include/c++/11/bits/stl_set.h:
+
 /usr/include/SFML/Window/Window.hpp:
 
 /usr/include/x86_64-linux-gnu/bits/select.h:
@@ -2569,11 +2686,17 @@ CMakeFiles/meu_jogo.dir/src/utils.cpp.o: ../src/utils.cpp \
 
 /usr/include/SFML/Graphics/Export.hpp:
 
+/usr/include/SFML/Audio/Export.hpp:
+
 /usr/include/c++/11/bits/localefwd.h:
 
 /usr/include/x86_64-linux-gnu/sys/select.h:
 
+/usr/include/SFML/Audio/SoundFileFactory.hpp:
+
 /usr/include/c++/11/cctype:
+
+/usr/include/SFML/Audio/SoundSource.hpp:
 
 /usr/include/x86_64-linux-gnu/bits/stdint-intn.h:
 
@@ -2642,6 +2765,8 @@ CMakeFiles/meu_jogo.dir/src/utils.cpp.o: ../src/utils.cpp \
 /usr/include/ctype.h:
 
 /usr/include/c++/11/locale:
+
+/usr/include/SFML/Audio.hpp:
 
 /usr/include/SFML/System/ThreadLocalPtr.inl:
 
@@ -2833,6 +2958,8 @@ CMakeFiles/meu_jogo.dir/src/utils.cpp.o: ../src/utils.cpp \
 
 /usr/include/c++/11/bits/exception_defines.h:
 
+/usr/include/SFML/Audio/SoundFileWriter.hpp:
+
 /usr/include/x86_64-linux-gnu/bits/cpu-set.h:
 
 /usr/include/SFML/Graphics/CircleShape.hpp:
@@ -2856,6 +2983,8 @@ CMakeFiles/meu_jogo.dir/src/utils.cpp.o: ../src/utils.cpp \
 /usr/include/c++/11/bits/range_access.h:
 
 /usr/include/SFML/Graphics/Rect.inl:
+
+/usr/include/SFML/Audio/SoundFileFactory.inl:
 
 /usr/include/c++/11/iosfwd:
 
@@ -2928,6 +3057,8 @@ CMakeFiles/meu_jogo.dir/src/utils.cpp.o: ../src/utils.cpp \
 /usr/include/asm-generic/errno.h:
 
 /usr/include/x86_64-linux-gnu/bits/types/error_t.h:
+
+/usr/include/SFML/Audio/InputSoundFile.hpp:
 
 /usr/include/c++/11/bits/charconv.h:
 

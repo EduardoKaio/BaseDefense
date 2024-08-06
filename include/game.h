@@ -1,4 +1,5 @@
 #include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
 #include <list>
 #include "player.h"
 #include "inimigo.h"
@@ -27,6 +28,11 @@ class Game {
         float spawnTimer; // Temporizador para o surgimento dos inimigos
         const float spawnInterval;
         bool gameOver;
+        Music backgroundMusic; 
+        SoundBuffer heroShootBuffer;
+        Sound heroShootSound;
+        SoundBuffer enemyShootBuffer;
+        Sound enemyShootSound;
         
     public:
         Game();

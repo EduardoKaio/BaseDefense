@@ -1,5 +1,6 @@
 #include "../include/game.h"
 #include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
 #include <iostream>
 #include <random>
 
@@ -25,8 +26,30 @@ Game::Game()
     player.getShape().setPosition(center);
 
     // Ajuste a posição da base para o centro da tela
-    sf::Vector2f baseCenter(window.getSize().x / 2.0f, window.getSize().y / 2.0f);
-    base.setPosition(baseCenter);
+    sf::Vector2f basePosition(window.getSize().x / 2.0f - base.getShape().getSize().x / 2.0f,
+                            window.getSize().y / 2.0f - base.getShape().getSize().y / 2.0f);
+    base.setPosition(basePosition);
+
+    if (!backgroundMusic.openFromFile("../assets/sounds/boss_battle_#2.WAV")) {
+        std::cerr << "Não foi possível carregar a música de fundo!" << std::endl;
+        // Gerenciar erro, talvez encerrar o jogo
+    }
+
+    // Configurar a música para tocar em loop
+    backgroundMusic.setLoop(true);
+    backgroundMusic.setVolume(40); 
+    backgroundMusic.play();
+
+        // Carregar som do tiro do herói
+    if (!heroShootBuffer.loadFromFile("../assets/sounds/tiro_heroi.wav")) {
+        std::cerr << "Não foi possível carregar o som do tiro do herói!" << std::endl;
+    }
+    heroShootSound.setBuffer(heroShootBuffer);
+
+    std::string enemyShootSoundFile = "../assets/sounds/tiro_inimigo.wav";
+    for (auto& inimigo : inimigos) {
+        inimigo.loadEnemyShootSound(enemyShootSoundFile);
+    }
 }
 
 void Game::run() {
@@ -50,6 +73,9 @@ void Game::processEvents() {
                 sf::Vector2i mousePos = sf::Mouse::getPosition(window);
                 sf::Vector2f mousePosF(static_cast<float>(mousePos.x), static_cast<float>(mousePos.y));
                 player.shoot(mousePosF);
+
+                // Tocar som do tiro do herói
+                heroShootSound.play();
             }
         }
     }
@@ -85,10 +111,12 @@ void Game::update(float deltaTime) {
     }
 
     player.update(deltaTime);
+    
+    base.update(projeteisInimigos, inimigos);
 
     // Verifica se a vida do jogador chegou a 0
-    if (player.getHealth() <= 0) {
-        gameOver = true; // Define o estado do jogo como game over
+    if (player.getHealth() <= 0 || base.getHealth() <= 0) {
+            gameOver = true; // Define o estado do jogo como game over
     }
 
     for (auto it = inimigos.begin(); it != inimigos.end();) {
@@ -131,7 +159,7 @@ void Game::update(float deltaTime) {
     for (auto it = inimigos.begin(); it != inimigos.end();) {
         for (auto projIt = it->getProjeteis().begin(); projIt != it->getProjeteis().end();) {
             projIt->update(deltaTime);
-
+            enemyShootSound.play();
             // Verifica colisões com o jogador
             if (player.isAliveStatus() && projIt->isActive() &&
                 projIt->iscolliding(projIt->getShape().getPosition().x, projIt->getShape().getPosition().y, projIt->getShape().getRadius(),
@@ -139,6 +167,13 @@ void Game::update(float deltaTime) {
                 player.reduceHealth(5);
                 projIt->setActive(false);
                 // O projétil deve ser removido da lista de projéteis do inimigo
+                projIt = it->getProjeteis().erase(projIt);
+            } else if (projIt->isActive() &&
+                       projIt->iscolliding(projIt->getShape().getPosition().x, projIt->getShape().getPosition().y,
+                                           base.getShape().getPosition().x, base.getShape().getPosition().y,
+                                           base.getShape().getSize().x, base.getShape().getSize().y)) {
+                base.reduceHealth(2);
+                projIt->setActive(false);
                 projIt = it->getProjeteis().erase(projIt);
             } else {
                 ++projIt;
@@ -153,6 +188,7 @@ void Game::update(float deltaTime) {
         }
     }
 }
+
 
 void Game::render() {
     sf::Color backgroundColor(200, 200, 200); // Cor de fundo cinza claro
@@ -187,7 +223,8 @@ void Game::render() {
     sf::Text infoText;
     infoText.setFont(font); // Fonte carregada anteriormente
     infoText.setString("Municao: " + std::to_string(player.getProjeteisDisponiveis()) + "\n" +
-                       "Vida: " + std::to_string(player.getHealth()));
+                       "Vida: " + std::to_string(player.getHealth()) + "\n" +
+                       "Vida Base: " + std::to_string(base.getHealth()));
     infoText.setCharacterSize(20); // Tamanho da fonte menor
     infoText.setFillColor(sf::Color::Black);
     infoText.setPosition(window.getSize().x - 150, 20); // Posição do texto na caixa

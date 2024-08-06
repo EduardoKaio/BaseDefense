@@ -2,6 +2,7 @@
 #define INIMIGO_HPP
 
 #include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
 #include "projetil_inimigo.h" 
 
 using namespace std;
@@ -21,6 +22,9 @@ class Inimigo : public Drawable{
         float fireRate; // Tempo entre disparos
         float fireTimer;
         const sf::RenderWindow* window;
+        sf::SoundBuffer enemyShootBuffer; // Buffer para o som
+        sf::Sound enemyShootSound;
+
 
     public:
         Inimigo(const sf::Vector2f& startPosition, const sf::Vector2f& targetPosition, const sf::RenderWindow* window);
@@ -32,9 +36,12 @@ class Inimigo : public Drawable{
 
         std::vector<ProjetilInimigo>& getProjeteis();
         const std::vector<ProjetilInimigo>& getProjeteis() const;
-        CircleShape& getShape();
+        CircleShape getShape() const;
         void reduceHealth();
         bool isAliveStatus() const;
+        void loadEnemyShootSound(const std::string& filepath); 
+        bool iscolliding(float x, float y, float radius) const;
+
 };
 
 #endif

@@ -1,4 +1,5 @@
 #include "../include/inimigo.h"
+#include <SFML/Audio.hpp>
 #include <cmath>
 #include <iostream>
 #include <random>
@@ -19,6 +20,11 @@ Inimigo::Inimigo(const sf::Vector2f& startPosition, const sf::Vector2f& targetPo
     std::uniform_real_distribution<> dist(0.5, 2.5); // Variação da taxa de disparo entre 0.5 e 2.5 segundos
     fireRate = dist(gen);
     fireTimer = 0.0f;
+
+    if (!enemyShootBuffer.loadFromFile("../assets/sounds/tiro_inimigo.wav")) {
+        std::cerr << "Não foi possível carregar o som do tiro do inimigo!" << std::endl;
+    }
+    enemyShootSound.setBuffer(enemyShootBuffer);
 }
 
 void Inimigo::updateDirection(const sf::Vector2f& playerPosition) {
@@ -59,6 +65,18 @@ void Inimigo::fire(const sf::Vector2f& playerPosition) {
     sf::Vector2f projecaoPos = shape.getPosition() + sf::Vector2f(shape.getRadius(), shape.getRadius());
     ProjetilInimigo newProjetil(projecaoPos, playerPosition);
     projeteis.push_back(newProjetil);
+
+    if (enemyShootSound.getStatus() != sf::Sound::Playing) {
+        enemyShootSound.play();
+    }
+
+}
+bool Inimigo::iscolliding(float x, float y, float radius) const {
+    float dx = x - shape.getPosition().x;
+    float dy = y - shape.getPosition().y;
+    float distance = std::sqrt(dx * dx + dy * dy);
+
+    return distance < (radius + shape.getRadius());
 }
 
 bool Inimigo::isOutOfWindow(const sf::RenderWindow& window) const {
@@ -79,13 +97,20 @@ const std::vector<ProjetilInimigo>& Inimigo::getProjeteis() const {
     return projeteis;
 }
 
-CircleShape& Inimigo::getShape() { 
+CircleShape Inimigo::getShape() const { 
     return shape; 
 }
 
 void Inimigo::reduceHealth() {
     health = health - 1;
     if (health <= 0) isAlive = false;
+}
+
+void Inimigo::loadEnemyShootSound(const std::string& filepath) {
+    if (!enemyShootBuffer.loadFromFile(filepath)) {
+        std::cerr << "Não foi possível carregar o som do tiro do inimigo!" << std::endl;
+    }
+    enemyShootSound.setBuffer(enemyShootBuffer);
 }
 
 bool Inimigo::isAliveStatus() const { return isAlive; }
