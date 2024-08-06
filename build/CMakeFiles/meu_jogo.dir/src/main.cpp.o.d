@@ -1,5 +1,5 @@
 CMakeFiles/meu_jogo.dir/src/main.cpp.o: \
- /home/kaio/Documentos/UFRN/lp/BaseDefense/src/main.cpp \
+ /mnt/c/Users/felip/OneDrive/Desktop/BaseDefense/src/main.cpp \
  /usr/include/stdc-predef.h /usr/include/SFML/Graphics.hpp \
  /usr/include/SFML/Window.hpp /usr/include/SFML/System.hpp \
  /usr/include/SFML/Config.hpp /usr/include/SFML/System/Clock.hpp \
@@ -227,16 +227,16 @@ CMakeFiles/meu_jogo.dir/src/main.cpp.o: \
  /usr/include/SFML/Graphics/Sprite.hpp \
  /usr/include/SFML/Graphics/Text.hpp \
  /usr/include/SFML/Graphics/VertexBuffer.hpp \
- /home/kaio/Documentos/UFRN/lp/BaseDefense/src/../include/player.h \
+ /mnt/c/Users/felip/OneDrive/Desktop/BaseDefense/src/../include/player.h \
  /usr/include/c++/11/list /usr/include/c++/11/bits/stl_list.h \
  /usr/include/c++/11/bits/allocated_ptr.h \
  /usr/include/c++/11/bits/list.tcc \
- /home/kaio/Documentos/UFRN/lp/BaseDefense/src/../include/projetil.h \
- /home/kaio/Documentos/UFRN/lp/BaseDefense/src/../include/inimigo.h \
- /home/kaio/Documentos/UFRN/lp/BaseDefense/src/../include/projetil_inimigo.h \
- /home/kaio/Documentos/UFRN/lp/BaseDefense/src/../include/projetil.h \
- /home/kaio/Documentos/UFRN/lp/BaseDefense/src/../include/base.h \
- /home/kaio/Documentos/UFRN/lp/BaseDefense/src/../include/game.h \
- /home/kaio/Documentos/UFRN/lp/BaseDefense/src/../include/player.h \
- /home/kaio/Documentos/UFRN/lp/BaseDefense/src/../include/inimigo.h \
- /home/kaio/Documentos/UFRN/lp/BaseDefense/src/../include/base.h
+ /mnt/c/Users/felip/OneDrive/Desktop/BaseDefense/src/../include/projetil.h \
+ /mnt/c/Users/felip/OneDrive/Desktop/BaseDefense/src/../include/inimigo.h \
+ /mnt/c/Users/felip/OneDrive/Desktop/BaseDefense/src/../include/projetil_inimigo.h \
+ /mnt/c/Users/felip/OneDrive/Desktop/BaseDefense/src/../include/projetil.h \
+ /mnt/c/Users/felip/OneDrive/Desktop/BaseDefense/src/../include/base.h \
+ /mnt/c/Users/felip/OneDrive/Desktop/BaseDefense/src/../include/game.h \
+ /mnt/c/Users/felip/OneDrive/Desktop/BaseDefense/src/../include/player.h \
+ /mnt/c/Users/felip/OneDrive/Desktop/BaseDefense/src/../include/inimigo.h \
+ /mnt/c/Users/felip/OneDrive/Desktop/BaseDefense/src/../include/base.h

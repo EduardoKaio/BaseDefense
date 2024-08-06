@@ -18,6 +18,7 @@ class Player : public Drawable {
         sf::CircleShape shape;
         bool shooting;
         float speed;
+        bool isAlive;
         int health;
         int projeteisDisponiveis;
     
@@ -30,6 +31,7 @@ class Player : public Drawable {
         void reduceHealth(int amount);
         int getProjeteisDisponiveis();
         CircleShape& getShape();
+        bool isAliveStatus() const;
 
 };
 #endif

@@ -1,7 +1,7 @@
 CMakeFiles/meu_jogo.dir/src/inimigo.cpp.o: \
- /home/kaio/Documentos/UFRN/lp/BaseDefense/src/inimigo.cpp \
+ /mnt/c/Users/felip/OneDrive/Desktop/BaseDefense/src/inimigo.cpp \
  /usr/include/stdc-predef.h \
- /home/kaio/Documentos/UFRN/lp/BaseDefense/src/../include/inimigo.h \
+ /mnt/c/Users/felip/OneDrive/Desktop/BaseDefense/src/../include/inimigo.h \
  /usr/include/SFML/Graphics.hpp /usr/include/SFML/Window.hpp \
  /usr/include/SFML/System.hpp /usr/include/SFML/Config.hpp \
  /usr/include/SFML/System/Clock.hpp /usr/include/SFML/System/Export.hpp \
@@ -229,7 +229,7 @@ CMakeFiles/meu_jogo.dir/src/inimigo.cpp.o: \
  /usr/include/SFML/Graphics/Sprite.hpp \
  /usr/include/SFML/Graphics/Text.hpp \
  /usr/include/SFML/Graphics/VertexBuffer.hpp \
- /home/kaio/Documentos/UFRN/lp/BaseDefense/src/../include/projetil_inimigo.h \
+ /mnt/c/Users/felip/OneDrive/Desktop/BaseDefense/src/../include/projetil_inimigo.h \
  /usr/include/c++/11/cmath /usr/include/math.h \
  /usr/include/x86_64-linux-gnu/bits/math-vector.h \
  /usr/include/x86_64-linux-gnu/bits/libm-simd-decl-stubs.h \
@@ -239,4 +239,6 @@ CMakeFiles/meu_jogo.dir/src/inimigo.cpp.o: \
  /usr/include/x86_64-linux-gnu/bits/mathcalls-helper-functions.h \
  /usr/include/x86_64-linux-gnu/bits/mathcalls.h \
  /usr/include/x86_64-linux-gnu/bits/mathcalls-narrow.h \
- /usr/include/x86_64-linux-gnu/bits/iscanonical.h
+ /usr/include/x86_64-linux-gnu/bits/iscanonical.h \
+ /usr/include/c++/11/iostream /usr/include/c++/11/istream \
+ /usr/include/c++/11/bits/istream.tcc

@@ -5,7 +5,6 @@
 cd build
 cmake ..
 cmake --build .
-make
 ```
 
 ## Executar:

@@ -5,7 +5,7 @@ using namespace std;
 using namespace sf;
 
 ProjetilInimigo::ProjetilInimigo(const sf::Vector2f& startPosition, const sf::Vector2f& targetPosition)
-    : position(startPosition), speed(50.0f) {
+    : position(startPosition), speed(50.0f), active(true) {
     shape.setRadius(5);
     shape.setFillColor(sf::Color::Red);
     shape.setPosition(position);
@@ -32,3 +32,21 @@ bool ProjetilInimigo::isOutOfWindow(const sf::RenderWindow& window) const {
 void ProjetilInimigo::draw(sf::RenderTarget& target, sf::RenderStates states) const {
     target.draw(shape, states);
 }
+
+bool ProjetilInimigo::iscolliding(float x1, float y1, float r1, float x2, float y2, float r2){
+    float dx = x2 - x1;
+    float dy = y2 - y1;
+    float distanceSquared = dx * dx + dy * dy;
+    float radiusSum = r1 + r2;
+    return distanceSquared <= radiusSum * radiusSum;
+}
+
+CircleShape& ProjetilInimigo::getShape() { 
+    return shape; 
+}
+
+void ProjetilInimigo::setActive(bool isActive) { 
+    active = isActive; 
+}
+    
+bool ProjetilInimigo::isActive() const { return active; }

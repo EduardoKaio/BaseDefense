@@ -8,12 +8,14 @@ using namespace std;
 using namespace sf;
 
 class Inimigo : public Drawable{
-
+ 
     private:
         virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
         Vector2f position;
         CircleShape shape;
         Vector2f direction;
+        int health;
+        bool isAlive;
         float speed;
         std::vector<ProjetilInimigo> projeteis;
         float fireRate; // Tempo entre disparos
@@ -30,7 +32,9 @@ class Inimigo : public Drawable{
 
         std::vector<ProjetilInimigo>& getProjeteis();
         const std::vector<ProjetilInimigo>& getProjeteis() const;
-
+        CircleShape& getShape();
+        void reduceHealth();
+        bool isAliveStatus() const;
 };
 
 #endif

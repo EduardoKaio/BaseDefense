@@ -4,6 +4,7 @@
 #include "inimigo.h"
 #include "projetil.h"
 #include "base.h"
+#include "projetil_inimigo.h"
 
 
 using namespace std;
@@ -21,6 +22,7 @@ class Game {
         Player player;
         Base base;
         list<Projetil> projeteis;
+        list<ProjetilInimigo> projeteisInimigos;
         std::vector<Inimigo> inimigos;
         float spawnTimer; // Temporizador para o surgimento dos inimigos
         const float spawnInterval;

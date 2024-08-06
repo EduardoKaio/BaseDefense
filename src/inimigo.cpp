@@ -1,11 +1,12 @@
 #include "../include/inimigo.h"
 #include <cmath> // Necessário para std::sqrt
+#include <iostream>
 
 using namespace std;
 using namespace sf;
 
 Inimigo::Inimigo(const sf::Vector2f& startPosition, const sf::Vector2f& targetPosition, const sf::RenderWindow* win)
-: position(startPosition), direction(targetPosition - startPosition), speed(30.0f), fireRate(1.0f), fireTimer(0.0f), window(win) {
+: position(startPosition), direction(targetPosition - startPosition), health(2), isAlive(true), speed(30.0f), fireRate(1.0f), fireTimer(0.0f), window(win) {
     shape.setRadius(10);
     shape.setFillColor(sf::Color::Blue);
     shape.setPosition(startPosition);
@@ -68,3 +69,14 @@ std::vector<ProjetilInimigo>& Inimigo::getProjeteis() {
 const std::vector<ProjetilInimigo>& Inimigo::getProjeteis() const {
     return projeteis;
 }
+
+CircleShape& Inimigo::getShape() { 
+    return shape; 
+}
+
+void Inimigo::reduceHealth() {
+    health = health-1;
+    if (health <= 0) isAlive = false;
+}
+
+bool Inimigo::isAliveStatus() const { return isAlive; }

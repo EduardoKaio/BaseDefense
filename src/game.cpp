@@ -74,12 +74,37 @@ void Game::update(float deltaTime) {
 
     player.update(deltaTime);
 
-    for (auto& inimigo : inimigos) {
-        inimigo.update(deltaTime, player.getShape().getPosition());
+    for (auto it = inimigos.begin(); it != inimigos.end();) {
+        it->update(deltaTime, player.getShape().getPosition());
+
+        if (!it->isAliveStatus()) {
+            it = inimigos.erase(it);
+        } else {
+            it++;
+        }
+        
     }
 
     for (auto it = projeteis.begin(); it != projeteis.end();) {
         it->update(deltaTime);
+
+        for (Inimigo& enemy : inimigos) {  
+            sf::Vector2f projectilePosition = it->getShape().getPosition();            
+            sf::Vector2f enemyPosition = enemy.getShape().getPosition();           
+
+            if (enemy.isAliveStatus() && it->isActive() && it->iscolliding(projectilePosition.x, projectilePosition.y, it->getShape().getRadius(),
+                                                                           enemyPosition.x, enemyPosition.y, enemy.getShape().getRadius())) {
+                enemy.reduceHealth();
+                it->setActive(false);
+            }
+        }
+
+        if (it->isActive()) {
+            ++it;
+        } else {
+            it = projeteis.erase(it);
+        }  
+
         if (it->isOutOfWindow(window)) {
             it = projeteis.erase(it); // Remove projéteis fora da tela
         } else {
@@ -91,6 +116,17 @@ void Game::update(float deltaTime) {
     for (auto it = inimigos.begin(); it != inimigos.end();) {
         for (auto projIt = it->getProjeteis().begin(); projIt != it->getProjeteis().end();) {
             projIt->update(deltaTime);
+            
+            sf::Vector2f projectilePosition = projIt->getShape().getPosition();            
+            sf::Vector2f playerPosition = player.getShape().getPosition();           
+
+            if (player.isAliveStatus() && projIt->isActive() && projIt->iscolliding(projectilePosition.x, projectilePosition.y, projIt->getShape().getRadius(),
+                                                                                    playerPosition.x, playerPosition.y, player.getShape().getRadius())) {
+                player.reduceHealth(5);
+                projIt->setActive(false);
+            }
+            
+            
             if (projIt->isOutOfWindow(window)) {
                 projIt = it->getProjeteis().erase(projIt); // Remove projéteis fora da tela
             } else {

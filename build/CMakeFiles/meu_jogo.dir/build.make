@@ -53,10 +53,10 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/kaio/Documentos/UFRN/lp/BaseDefense
+CMAKE_SOURCE_DIR = /mnt/c/Users/felip/OneDrive/Desktop/BaseDefense
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/kaio/Documentos/UFRN/lp/BaseDefense/build
+CMAKE_BINARY_DIR = /mnt/c/Users/felip/OneDrive/Desktop/BaseDefense/build
 
 # Include any dependencies generated for this target.
 include CMakeFiles/meu_jogo.dir/depend.make
@@ -72,142 +72,142 @@ include CMakeFiles/meu_jogo.dir/flags.make
 CMakeFiles/meu_jogo.dir/src/base.cpp.o: CMakeFiles/meu_jogo.dir/flags.make
 CMakeFiles/meu_jogo.dir/src/base.cpp.o: ../src/base.cpp
 CMakeFiles/meu_jogo.dir/src/base.cpp.o: CMakeFiles/meu_jogo.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/kaio/Documentos/UFRN/lp/BaseDefense/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/meu_jogo.dir/src/base.cpp.o"
-	/usr/bin/g++-11 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/meu_jogo.dir/src/base.cpp.o -MF CMakeFiles/meu_jogo.dir/src/base.cpp.o.d -o CMakeFiles/meu_jogo.dir/src/base.cpp.o -c /home/kaio/Documentos/UFRN/lp/BaseDefense/src/base.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/mnt/c/Users/felip/OneDrive/Desktop/BaseDefense/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/meu_jogo.dir/src/base.cpp.o"
+	/usr/bin/g++-11 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/meu_jogo.dir/src/base.cpp.o -MF CMakeFiles/meu_jogo.dir/src/base.cpp.o.d -o CMakeFiles/meu_jogo.dir/src/base.cpp.o -c /mnt/c/Users/felip/OneDrive/Desktop/BaseDefense/src/base.cpp
 
 CMakeFiles/meu_jogo.dir/src/base.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/meu_jogo.dir/src/base.cpp.i"
-	/usr/bin/g++-11 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/kaio/Documentos/UFRN/lp/BaseDefense/src/base.cpp > CMakeFiles/meu_jogo.dir/src/base.cpp.i
+	/usr/bin/g++-11 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /mnt/c/Users/felip/OneDrive/Desktop/BaseDefense/src/base.cpp > CMakeFiles/meu_jogo.dir/src/base.cpp.i
 
 CMakeFiles/meu_jogo.dir/src/base.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/meu_jogo.dir/src/base.cpp.s"
-	/usr/bin/g++-11 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/kaio/Documentos/UFRN/lp/BaseDefense/src/base.cpp -o CMakeFiles/meu_jogo.dir/src/base.cpp.s
+	/usr/bin/g++-11 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /mnt/c/Users/felip/OneDrive/Desktop/BaseDefense/src/base.cpp -o CMakeFiles/meu_jogo.dir/src/base.cpp.s
 
 CMakeFiles/meu_jogo.dir/src/config.cpp.o: CMakeFiles/meu_jogo.dir/flags.make
 CMakeFiles/meu_jogo.dir/src/config.cpp.o: ../src/config.cpp
 CMakeFiles/meu_jogo.dir/src/config.cpp.o: CMakeFiles/meu_jogo.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/kaio/Documentos/UFRN/lp/BaseDefense/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/meu_jogo.dir/src/config.cpp.o"
-	/usr/bin/g++-11 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/meu_jogo.dir/src/config.cpp.o -MF CMakeFiles/meu_jogo.dir/src/config.cpp.o.d -o CMakeFiles/meu_jogo.dir/src/config.cpp.o -c /home/kaio/Documentos/UFRN/lp/BaseDefense/src/config.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/mnt/c/Users/felip/OneDrive/Desktop/BaseDefense/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/meu_jogo.dir/src/config.cpp.o"
+	/usr/bin/g++-11 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/meu_jogo.dir/src/config.cpp.o -MF CMakeFiles/meu_jogo.dir/src/config.cpp.o.d -o CMakeFiles/meu_jogo.dir/src/config.cpp.o -c /mnt/c/Users/felip/OneDrive/Desktop/BaseDefense/src/config.cpp
 
 CMakeFiles/meu_jogo.dir/src/config.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/meu_jogo.dir/src/config.cpp.i"
-	/usr/bin/g++-11 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/kaio/Documentos/UFRN/lp/BaseDefense/src/config.cpp > CMakeFiles/meu_jogo.dir/src/config.cpp.i
+	/usr/bin/g++-11 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /mnt/c/Users/felip/OneDrive/Desktop/BaseDefense/src/config.cpp > CMakeFiles/meu_jogo.dir/src/config.cpp.i
 
 CMakeFiles/meu_jogo.dir/src/config.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/meu_jogo.dir/src/config.cpp.s"
-	/usr/bin/g++-11 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/kaio/Documentos/UFRN/lp/BaseDefense/src/config.cpp -o CMakeFiles/meu_jogo.dir/src/config.cpp.s
+	/usr/bin/g++-11 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /mnt/c/Users/felip/OneDrive/Desktop/BaseDefense/src/config.cpp -o CMakeFiles/meu_jogo.dir/src/config.cpp.s
 
 CMakeFiles/meu_jogo.dir/src/game.cpp.o: CMakeFiles/meu_jogo.dir/flags.make
 CMakeFiles/meu_jogo.dir/src/game.cpp.o: ../src/game.cpp
 CMakeFiles/meu_jogo.dir/src/game.cpp.o: CMakeFiles/meu_jogo.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/kaio/Documentos/UFRN/lp/BaseDefense/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/meu_jogo.dir/src/game.cpp.o"
-	/usr/bin/g++-11 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/meu_jogo.dir/src/game.cpp.o -MF CMakeFiles/meu_jogo.dir/src/game.cpp.o.d -o CMakeFiles/meu_jogo.dir/src/game.cpp.o -c /home/kaio/Documentos/UFRN/lp/BaseDefense/src/game.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/mnt/c/Users/felip/OneDrive/Desktop/BaseDefense/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/meu_jogo.dir/src/game.cpp.o"
+	/usr/bin/g++-11 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/meu_jogo.dir/src/game.cpp.o -MF CMakeFiles/meu_jogo.dir/src/game.cpp.o.d -o CMakeFiles/meu_jogo.dir/src/game.cpp.o -c /mnt/c/Users/felip/OneDrive/Desktop/BaseDefense/src/game.cpp
 
 CMakeFiles/meu_jogo.dir/src/game.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/meu_jogo.dir/src/game.cpp.i"
-	/usr/bin/g++-11 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/kaio/Documentos/UFRN/lp/BaseDefense/src/game.cpp > CMakeFiles/meu_jogo.dir/src/game.cpp.i
+	/usr/bin/g++-11 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /mnt/c/Users/felip/OneDrive/Desktop/BaseDefense/src/game.cpp > CMakeFiles/meu_jogo.dir/src/game.cpp.i
 
 CMakeFiles/meu_jogo.dir/src/game.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/meu_jogo.dir/src/game.cpp.s"
-	/usr/bin/g++-11 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/kaio/Documentos/UFRN/lp/BaseDefense/src/game.cpp -o CMakeFiles/meu_jogo.dir/src/game.cpp.s
+	/usr/bin/g++-11 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /mnt/c/Users/felip/OneDrive/Desktop/BaseDefense/src/game.cpp -o CMakeFiles/meu_jogo.dir/src/game.cpp.s
 
 CMakeFiles/meu_jogo.dir/src/inimigo.cpp.o: CMakeFiles/meu_jogo.dir/flags.make
 CMakeFiles/meu_jogo.dir/src/inimigo.cpp.o: ../src/inimigo.cpp
 CMakeFiles/meu_jogo.dir/src/inimigo.cpp.o: CMakeFiles/meu_jogo.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/kaio/Documentos/UFRN/lp/BaseDefense/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/meu_jogo.dir/src/inimigo.cpp.o"
-	/usr/bin/g++-11 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/meu_jogo.dir/src/inimigo.cpp.o -MF CMakeFiles/meu_jogo.dir/src/inimigo.cpp.o.d -o CMakeFiles/meu_jogo.dir/src/inimigo.cpp.o -c /home/kaio/Documentos/UFRN/lp/BaseDefense/src/inimigo.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/mnt/c/Users/felip/OneDrive/Desktop/BaseDefense/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/meu_jogo.dir/src/inimigo.cpp.o"
+	/usr/bin/g++-11 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/meu_jogo.dir/src/inimigo.cpp.o -MF CMakeFiles/meu_jogo.dir/src/inimigo.cpp.o.d -o CMakeFiles/meu_jogo.dir/src/inimigo.cpp.o -c /mnt/c/Users/felip/OneDrive/Desktop/BaseDefense/src/inimigo.cpp
 
 CMakeFiles/meu_jogo.dir/src/inimigo.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/meu_jogo.dir/src/inimigo.cpp.i"
-	/usr/bin/g++-11 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/kaio/Documentos/UFRN/lp/BaseDefense/src/inimigo.cpp > CMakeFiles/meu_jogo.dir/src/inimigo.cpp.i
+	/usr/bin/g++-11 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /mnt/c/Users/felip/OneDrive/Desktop/BaseDefense/src/inimigo.cpp > CMakeFiles/meu_jogo.dir/src/inimigo.cpp.i
 
 CMakeFiles/meu_jogo.dir/src/inimigo.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/meu_jogo.dir/src/inimigo.cpp.s"
-	/usr/bin/g++-11 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/kaio/Documentos/UFRN/lp/BaseDefense/src/inimigo.cpp -o CMakeFiles/meu_jogo.dir/src/inimigo.cpp.s
+	/usr/bin/g++-11 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /mnt/c/Users/felip/OneDrive/Desktop/BaseDefense/src/inimigo.cpp -o CMakeFiles/meu_jogo.dir/src/inimigo.cpp.s
 
 CMakeFiles/meu_jogo.dir/src/main.cpp.o: CMakeFiles/meu_jogo.dir/flags.make
 CMakeFiles/meu_jogo.dir/src/main.cpp.o: ../src/main.cpp
 CMakeFiles/meu_jogo.dir/src/main.cpp.o: CMakeFiles/meu_jogo.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/kaio/Documentos/UFRN/lp/BaseDefense/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/meu_jogo.dir/src/main.cpp.o"
-	/usr/bin/g++-11 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/meu_jogo.dir/src/main.cpp.o -MF CMakeFiles/meu_jogo.dir/src/main.cpp.o.d -o CMakeFiles/meu_jogo.dir/src/main.cpp.o -c /home/kaio/Documentos/UFRN/lp/BaseDefense/src/main.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/mnt/c/Users/felip/OneDrive/Desktop/BaseDefense/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/meu_jogo.dir/src/main.cpp.o"
+	/usr/bin/g++-11 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/meu_jogo.dir/src/main.cpp.o -MF CMakeFiles/meu_jogo.dir/src/main.cpp.o.d -o CMakeFiles/meu_jogo.dir/src/main.cpp.o -c /mnt/c/Users/felip/OneDrive/Desktop/BaseDefense/src/main.cpp
 
 CMakeFiles/meu_jogo.dir/src/main.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/meu_jogo.dir/src/main.cpp.i"
-	/usr/bin/g++-11 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/kaio/Documentos/UFRN/lp/BaseDefense/src/main.cpp > CMakeFiles/meu_jogo.dir/src/main.cpp.i
+	/usr/bin/g++-11 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /mnt/c/Users/felip/OneDrive/Desktop/BaseDefense/src/main.cpp > CMakeFiles/meu_jogo.dir/src/main.cpp.i
 
 CMakeFiles/meu_jogo.dir/src/main.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/meu_jogo.dir/src/main.cpp.s"
-	/usr/bin/g++-11 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/kaio/Documentos/UFRN/lp/BaseDefense/src/main.cpp -o CMakeFiles/meu_jogo.dir/src/main.cpp.s
+	/usr/bin/g++-11 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /mnt/c/Users/felip/OneDrive/Desktop/BaseDefense/src/main.cpp -o CMakeFiles/meu_jogo.dir/src/main.cpp.s
 
 CMakeFiles/meu_jogo.dir/src/municao.cpp.o: CMakeFiles/meu_jogo.dir/flags.make
 CMakeFiles/meu_jogo.dir/src/municao.cpp.o: ../src/municao.cpp
 CMakeFiles/meu_jogo.dir/src/municao.cpp.o: CMakeFiles/meu_jogo.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/kaio/Documentos/UFRN/lp/BaseDefense/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/meu_jogo.dir/src/municao.cpp.o"
-	/usr/bin/g++-11 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/meu_jogo.dir/src/municao.cpp.o -MF CMakeFiles/meu_jogo.dir/src/municao.cpp.o.d -o CMakeFiles/meu_jogo.dir/src/municao.cpp.o -c /home/kaio/Documentos/UFRN/lp/BaseDefense/src/municao.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/mnt/c/Users/felip/OneDrive/Desktop/BaseDefense/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/meu_jogo.dir/src/municao.cpp.o"
+	/usr/bin/g++-11 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/meu_jogo.dir/src/municao.cpp.o -MF CMakeFiles/meu_jogo.dir/src/municao.cpp.o.d -o CMakeFiles/meu_jogo.dir/src/municao.cpp.o -c /mnt/c/Users/felip/OneDrive/Desktop/BaseDefense/src/municao.cpp
 
 CMakeFiles/meu_jogo.dir/src/municao.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/meu_jogo.dir/src/municao.cpp.i"
-	/usr/bin/g++-11 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/kaio/Documentos/UFRN/lp/BaseDefense/src/municao.cpp > CMakeFiles/meu_jogo.dir/src/municao.cpp.i
+	/usr/bin/g++-11 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /mnt/c/Users/felip/OneDrive/Desktop/BaseDefense/src/municao.cpp > CMakeFiles/meu_jogo.dir/src/municao.cpp.i
 
 CMakeFiles/meu_jogo.dir/src/municao.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/meu_jogo.dir/src/municao.cpp.s"
-	/usr/bin/g++-11 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/kaio/Documentos/UFRN/lp/BaseDefense/src/municao.cpp -o CMakeFiles/meu_jogo.dir/src/municao.cpp.s
+	/usr/bin/g++-11 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /mnt/c/Users/felip/OneDrive/Desktop/BaseDefense/src/municao.cpp -o CMakeFiles/meu_jogo.dir/src/municao.cpp.s
 
 CMakeFiles/meu_jogo.dir/src/player.cpp.o: CMakeFiles/meu_jogo.dir/flags.make
 CMakeFiles/meu_jogo.dir/src/player.cpp.o: ../src/player.cpp
 CMakeFiles/meu_jogo.dir/src/player.cpp.o: CMakeFiles/meu_jogo.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/kaio/Documentos/UFRN/lp/BaseDefense/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/meu_jogo.dir/src/player.cpp.o"
-	/usr/bin/g++-11 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/meu_jogo.dir/src/player.cpp.o -MF CMakeFiles/meu_jogo.dir/src/player.cpp.o.d -o CMakeFiles/meu_jogo.dir/src/player.cpp.o -c /home/kaio/Documentos/UFRN/lp/BaseDefense/src/player.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/mnt/c/Users/felip/OneDrive/Desktop/BaseDefense/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/meu_jogo.dir/src/player.cpp.o"
+	/usr/bin/g++-11 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/meu_jogo.dir/src/player.cpp.o -MF CMakeFiles/meu_jogo.dir/src/player.cpp.o.d -o CMakeFiles/meu_jogo.dir/src/player.cpp.o -c /mnt/c/Users/felip/OneDrive/Desktop/BaseDefense/src/player.cpp
 
 CMakeFiles/meu_jogo.dir/src/player.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/meu_jogo.dir/src/player.cpp.i"
-	/usr/bin/g++-11 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/kaio/Documentos/UFRN/lp/BaseDefense/src/player.cpp > CMakeFiles/meu_jogo.dir/src/player.cpp.i
+	/usr/bin/g++-11 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /mnt/c/Users/felip/OneDrive/Desktop/BaseDefense/src/player.cpp > CMakeFiles/meu_jogo.dir/src/player.cpp.i
 
 CMakeFiles/meu_jogo.dir/src/player.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/meu_jogo.dir/src/player.cpp.s"
-	/usr/bin/g++-11 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/kaio/Documentos/UFRN/lp/BaseDefense/src/player.cpp -o CMakeFiles/meu_jogo.dir/src/player.cpp.s
+	/usr/bin/g++-11 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /mnt/c/Users/felip/OneDrive/Desktop/BaseDefense/src/player.cpp -o CMakeFiles/meu_jogo.dir/src/player.cpp.s
 
 CMakeFiles/meu_jogo.dir/src/projetil.cpp.o: CMakeFiles/meu_jogo.dir/flags.make
 CMakeFiles/meu_jogo.dir/src/projetil.cpp.o: ../src/projetil.cpp
 CMakeFiles/meu_jogo.dir/src/projetil.cpp.o: CMakeFiles/meu_jogo.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/kaio/Documentos/UFRN/lp/BaseDefense/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/meu_jogo.dir/src/projetil.cpp.o"
-	/usr/bin/g++-11 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/meu_jogo.dir/src/projetil.cpp.o -MF CMakeFiles/meu_jogo.dir/src/projetil.cpp.o.d -o CMakeFiles/meu_jogo.dir/src/projetil.cpp.o -c /home/kaio/Documentos/UFRN/lp/BaseDefense/src/projetil.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/mnt/c/Users/felip/OneDrive/Desktop/BaseDefense/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/meu_jogo.dir/src/projetil.cpp.o"
+	/usr/bin/g++-11 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/meu_jogo.dir/src/projetil.cpp.o -MF CMakeFiles/meu_jogo.dir/src/projetil.cpp.o.d -o CMakeFiles/meu_jogo.dir/src/projetil.cpp.o -c /mnt/c/Users/felip/OneDrive/Desktop/BaseDefense/src/projetil.cpp
 
 CMakeFiles/meu_jogo.dir/src/projetil.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/meu_jogo.dir/src/projetil.cpp.i"
-	/usr/bin/g++-11 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/kaio/Documentos/UFRN/lp/BaseDefense/src/projetil.cpp > CMakeFiles/meu_jogo.dir/src/projetil.cpp.i
+	/usr/bin/g++-11 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /mnt/c/Users/felip/OneDrive/Desktop/BaseDefense/src/projetil.cpp > CMakeFiles/meu_jogo.dir/src/projetil.cpp.i
 
 CMakeFiles/meu_jogo.dir/src/projetil.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/meu_jogo.dir/src/projetil.cpp.s"
-	/usr/bin/g++-11 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/kaio/Documentos/UFRN/lp/BaseDefense/src/projetil.cpp -o CMakeFiles/meu_jogo.dir/src/projetil.cpp.s
+	/usr/bin/g++-11 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /mnt/c/Users/felip/OneDrive/Desktop/BaseDefense/src/projetil.cpp -o CMakeFiles/meu_jogo.dir/src/projetil.cpp.s
 
 CMakeFiles/meu_jogo.dir/src/projetil_inimigo.cpp.o: CMakeFiles/meu_jogo.dir/flags.make
 CMakeFiles/meu_jogo.dir/src/projetil_inimigo.cpp.o: ../src/projetil_inimigo.cpp
 CMakeFiles/meu_jogo.dir/src/projetil_inimigo.cpp.o: CMakeFiles/meu_jogo.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/kaio/Documentos/UFRN/lp/BaseDefense/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/meu_jogo.dir/src/projetil_inimigo.cpp.o"
-	/usr/bin/g++-11 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/meu_jogo.dir/src/projetil_inimigo.cpp.o -MF CMakeFiles/meu_jogo.dir/src/projetil_inimigo.cpp.o.d -o CMakeFiles/meu_jogo.dir/src/projetil_inimigo.cpp.o -c /home/kaio/Documentos/UFRN/lp/BaseDefense/src/projetil_inimigo.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/mnt/c/Users/felip/OneDrive/Desktop/BaseDefense/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/meu_jogo.dir/src/projetil_inimigo.cpp.o"
+	/usr/bin/g++-11 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/meu_jogo.dir/src/projetil_inimigo.cpp.o -MF CMakeFiles/meu_jogo.dir/src/projetil_inimigo.cpp.o.d -o CMakeFiles/meu_jogo.dir/src/projetil_inimigo.cpp.o -c /mnt/c/Users/felip/OneDrive/Desktop/BaseDefense/src/projetil_inimigo.cpp
 
 CMakeFiles/meu_jogo.dir/src/projetil_inimigo.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/meu_jogo.dir/src/projetil_inimigo.cpp.i"
-	/usr/bin/g++-11 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/kaio/Documentos/UFRN/lp/BaseDefense/src/projetil_inimigo.cpp > CMakeFiles/meu_jogo.dir/src/projetil_inimigo.cpp.i
+	/usr/bin/g++-11 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /mnt/c/Users/felip/OneDrive/Desktop/BaseDefense/src/projetil_inimigo.cpp > CMakeFiles/meu_jogo.dir/src/projetil_inimigo.cpp.i
 
 CMakeFiles/meu_jogo.dir/src/projetil_inimigo.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/meu_jogo.dir/src/projetil_inimigo.cpp.s"
-	/usr/bin/g++-11 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/kaio/Documentos/UFRN/lp/BaseDefense/src/projetil_inimigo.cpp -o CMakeFiles/meu_jogo.dir/src/projetil_inimigo.cpp.s
+	/usr/bin/g++-11 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /mnt/c/Users/felip/OneDrive/Desktop/BaseDefense/src/projetil_inimigo.cpp -o CMakeFiles/meu_jogo.dir/src/projetil_inimigo.cpp.s
 
 CMakeFiles/meu_jogo.dir/src/utils.cpp.o: CMakeFiles/meu_jogo.dir/flags.make
 CMakeFiles/meu_jogo.dir/src/utils.cpp.o: ../src/utils.cpp
 CMakeFiles/meu_jogo.dir/src/utils.cpp.o: CMakeFiles/meu_jogo.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/kaio/Documentos/UFRN/lp/BaseDefense/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object CMakeFiles/meu_jogo.dir/src/utils.cpp.o"
-	/usr/bin/g++-11 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/meu_jogo.dir/src/utils.cpp.o -MF CMakeFiles/meu_jogo.dir/src/utils.cpp.o.d -o CMakeFiles/meu_jogo.dir/src/utils.cpp.o -c /home/kaio/Documentos/UFRN/lp/BaseDefense/src/utils.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/mnt/c/Users/felip/OneDrive/Desktop/BaseDefense/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object CMakeFiles/meu_jogo.dir/src/utils.cpp.o"
+	/usr/bin/g++-11 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/meu_jogo.dir/src/utils.cpp.o -MF CMakeFiles/meu_jogo.dir/src/utils.cpp.o.d -o CMakeFiles/meu_jogo.dir/src/utils.cpp.o -c /mnt/c/Users/felip/OneDrive/Desktop/BaseDefense/src/utils.cpp
 
 CMakeFiles/meu_jogo.dir/src/utils.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/meu_jogo.dir/src/utils.cpp.i"
-	/usr/bin/g++-11 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/kaio/Documentos/UFRN/lp/BaseDefense/src/utils.cpp > CMakeFiles/meu_jogo.dir/src/utils.cpp.i
+	/usr/bin/g++-11 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /mnt/c/Users/felip/OneDrive/Desktop/BaseDefense/src/utils.cpp > CMakeFiles/meu_jogo.dir/src/utils.cpp.i
 
 CMakeFiles/meu_jogo.dir/src/utils.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/meu_jogo.dir/src/utils.cpp.s"
-	/usr/bin/g++-11 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/kaio/Documentos/UFRN/lp/BaseDefense/src/utils.cpp -o CMakeFiles/meu_jogo.dir/src/utils.cpp.s
+	/usr/bin/g++-11 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /mnt/c/Users/felip/OneDrive/Desktop/BaseDefense/src/utils.cpp -o CMakeFiles/meu_jogo.dir/src/utils.cpp.s
 
 # Object files for target meu_jogo
 meu_jogo_OBJECTS = \
@@ -240,7 +240,7 @@ meu_jogo: /usr/lib/x86_64-linux-gnu/libsfml-graphics.so.2.5.1
 meu_jogo: /usr/lib/x86_64-linux-gnu/libsfml-window.so.2.5.1
 meu_jogo: /usr/lib/x86_64-linux-gnu/libsfml-system.so.2.5.1
 meu_jogo: CMakeFiles/meu_jogo.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/kaio/Documentos/UFRN/lp/BaseDefense/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Linking CXX executable meu_jogo"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/mnt/c/Users/felip/OneDrive/Desktop/BaseDefense/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Linking CXX executable meu_jogo"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/meu_jogo.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -252,6 +252,6 @@ CMakeFiles/meu_jogo.dir/clean:
 .PHONY : CMakeFiles/meu_jogo.dir/clean
 
 CMakeFiles/meu_jogo.dir/depend:
-	cd /home/kaio/Documentos/UFRN/lp/BaseDefense/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/kaio/Documentos/UFRN/lp/BaseDefense /home/kaio/Documentos/UFRN/lp/BaseDefense /home/kaio/Documentos/UFRN/lp/BaseDefense/build /home/kaio/Documentos/UFRN/lp/BaseDefense/build /home/kaio/Documentos/UFRN/lp/BaseDefense/build/CMakeFiles/meu_jogo.dir/DependInfo.cmake --color=$(COLOR)
+	cd /mnt/c/Users/felip/OneDrive/Desktop/BaseDefense/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /mnt/c/Users/felip/OneDrive/Desktop/BaseDefense /mnt/c/Users/felip/OneDrive/Desktop/BaseDefense /mnt/c/Users/felip/OneDrive/Desktop/BaseDefense/build /mnt/c/Users/felip/OneDrive/Desktop/BaseDefense/build /mnt/c/Users/felip/OneDrive/Desktop/BaseDefense/build/CMakeFiles/meu_jogo.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/meu_jogo.dir/depend
 

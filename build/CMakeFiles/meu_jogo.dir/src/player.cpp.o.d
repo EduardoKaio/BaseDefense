@@ -1,7 +1,7 @@
 CMakeFiles/meu_jogo.dir/src/player.cpp.o: \
- /home/kaio/Documentos/UFRN/lp/BaseDefense/src/player.cpp \
+ /mnt/c/Users/felip/OneDrive/Desktop/BaseDefense/src/player.cpp \
  /usr/include/stdc-predef.h \
- /home/kaio/Documentos/UFRN/lp/BaseDefense/src/../include/player.h \
+ /mnt/c/Users/felip/OneDrive/Desktop/BaseDefense/src/../include/player.h \
  /usr/include/SFML/Graphics.hpp /usr/include/SFML/Window.hpp \
  /usr/include/SFML/System.hpp /usr/include/SFML/Config.hpp \
  /usr/include/SFML/System/Clock.hpp /usr/include/SFML/System/Export.hpp \
@@ -232,8 +232,8 @@ CMakeFiles/meu_jogo.dir/src/player.cpp.o: \
  /usr/include/c++/11/bits/stl_list.h \
  /usr/include/c++/11/bits/allocated_ptr.h \
  /usr/include/c++/11/bits/list.tcc \
- /home/kaio/Documentos/UFRN/lp/BaseDefense/src/../include/projetil.h \
- /home/kaio/Documentos/UFRN/lp/BaseDefense/src/../include/utils.h \
+ /mnt/c/Users/felip/OneDrive/Desktop/BaseDefense/src/../include/projetil.h \
+ /mnt/c/Users/felip/OneDrive/Desktop/BaseDefense/src/../include/utils.h \
  /usr/include/c++/11/cmath /usr/include/math.h \
  /usr/include/x86_64-linux-gnu/bits/math-vector.h \
  /usr/include/x86_64-linux-gnu/bits/libm-simd-decl-stubs.h \
@@ -243,4 +243,6 @@ CMakeFiles/meu_jogo.dir/src/player.cpp.o: \
  /usr/include/x86_64-linux-gnu/bits/mathcalls-helper-functions.h \
  /usr/include/x86_64-linux-gnu/bits/mathcalls.h \
  /usr/include/x86_64-linux-gnu/bits/mathcalls-narrow.h \
- /usr/include/x86_64-linux-gnu/bits/iscanonical.h
+ /usr/include/x86_64-linux-gnu/bits/iscanonical.h \
+ /usr/include/c++/11/iostream /usr/include/c++/11/istream \
+ /usr/include/c++/11/bits/istream.tcc

@@ -3,9 +3,10 @@
 #include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
 #include <cmath>
+#include <iostream>
 
 Player::Player(std::list<Projetil>& projeteis) 
-    : projeteis(projeteis), shooting(false), speed(300.0f), health(100), projeteisDisponiveis(100) {
+    : projeteis(projeteis), shooting(false), speed(300.0f), isAlive(true), health(100), projeteisDisponiveis(100) {
 
     shape.setRadius(15);
     shape.setFillColor(sf::Color::Red);
@@ -79,9 +80,15 @@ int Player::getProjeteisDisponiveis(){
 
 void Player::reduceHealth(int amount) {
     health -= amount;
-    if (health < 0) health = 0;
+    cout << health << endl;
+    if (health <= 0) {
+        isAlive = false;
+        cout << "O player morreu" << endl;
+    };
 }
 
 CircleShape& Player::getShape() { 
     return shape; 
 }
+
+bool Player::isAliveStatus() const { return isAlive; }

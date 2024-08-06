@@ -4,7 +4,7 @@
 # compile CXX with /usr/bin/g++-11
 CXX_DEFINES = 
 
-CXX_INCLUDES = -I/home/kaio/Documentos/UFRN/lp/BaseDefense/include
+CXX_INCLUDES = -I/mnt/c/Users/felip/OneDrive/Desktop/BaseDefense/include
 
 CXX_FLAGS = -std=gnu++14
 
