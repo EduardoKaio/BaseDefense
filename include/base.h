@@ -23,6 +23,7 @@ class Base : public sf::Drawable {
         int reduceHealth(int reduce);
         void setPosition(const sf::Vector2f &position);
         sf::RectangleShape getShape() const;
+        void reset();
 
 };
 

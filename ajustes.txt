@@ -6,6 +6,7 @@ Feitos:
 - Mudança de paleta de cores (Feito)
 - Adicionar vida e a logica da base (Feito)
 - Adicionar todos os sons (Feito)
+- O heroi perde ou quando sua vida acaba ou quando a base é destruida (feito)
 
 O que falta:
 - adicionar as naves do inimigo e heroi
@@ -13,7 +14,7 @@ O que falta:
 - quando as balas do heroi acabam, se continuar clicando com bt esquerdo ainda sai barulho do tiro
 - O heroi ganhar quando se passarem x quantidade de tempo
 - Adicionar dificuldade, surgimento de mais inimigos com o decorrer do tempo
-- O heroi perde ou quando sua vida acaba ou quando a base é destruida  
+
 - Adicionar start para iniciar e restart quando tiver sido um Game Over
 - quando o inimigo morre, os tiros que ele soltou antes de morrer estao sumindo
 - Adicionar os drops deixados ao matar um inimigo (vida ou munição)

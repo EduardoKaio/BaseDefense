@@ -36,7 +36,7 @@ void Inimigo::updateDirection(const sf::Vector2f& playerPosition) {
     direction = newDirection;
 }
 
-void Inimigo::update(float deltaTime, const sf::Vector2f& playerPosition) {
+void Inimigo::update(float deltaTime, const sf::Vector2f& playerPosition, bool audioEnabled) {
     // Atualiza a direção e move o inimigo
     updateDirection(playerPosition);
     shape.move(direction * speed * deltaTime);
@@ -45,7 +45,7 @@ void Inimigo::update(float deltaTime, const sf::Vector2f& playerPosition) {
     fireTimer += deltaTime;
     if (fireTimer >= fireRate) {
         fireTimer = 0.0f; // Reseta o temporizador
-        fire(playerPosition); // Dispara um projétil
+        fire(playerPosition, audioEnabled); // Dispara um projétil
     }
 
     // Atualiza projéteis
@@ -60,13 +60,13 @@ void Inimigo::update(float deltaTime, const sf::Vector2f& playerPosition) {
         }), projeteis.end());
 }
 
-void Inimigo::fire(const sf::Vector2f& playerPosition) {
+void Inimigo::fire(const sf::Vector2f& playerPosition, bool audioEnabled) {
     // Calcula a posição do projétil a partir da posição do inimigo
     sf::Vector2f projecaoPos = shape.getPosition() + sf::Vector2f(shape.getRadius(), shape.getRadius());
     ProjetilInimigo newProjetil(projecaoPos, playerPosition);
     projeteis.push_back(newProjetil);
 
-    if (enemyShootSound.getStatus() != sf::Sound::Playing) {
+    if (audioEnabled && enemyShootSound.getStatus() != sf::Sound::Playing) {
         enemyShootSound.play();
     }
 

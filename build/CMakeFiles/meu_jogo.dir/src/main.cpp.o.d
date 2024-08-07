@@ -256,4 +256,7 @@ CMakeFiles/meu_jogo.dir/src/main.cpp.o: \
  /home/kaio/Documentos/UFRN/lp/BaseDefense/src/../include/inimigo.h \
  /home/kaio/Documentos/UFRN/lp/BaseDefense/src/../include/game.h \
  /home/kaio/Documentos/UFRN/lp/BaseDefense/src/../include/player.h \
- /home/kaio/Documentos/UFRN/lp/BaseDefense/src/../include/base.h
+ /home/kaio/Documentos/UFRN/lp/BaseDefense/src/../include/base.h \
+ /usr/include/c++/11/sstream /usr/include/c++/11/istream \
+ /usr/include/c++/11/bits/istream.tcc \
+ /usr/include/c++/11/bits/sstream.tcc

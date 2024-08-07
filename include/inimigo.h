@@ -29,8 +29,8 @@ class Inimigo : public Drawable{
     public:
         Inimigo(const sf::Vector2f& startPosition, const sf::Vector2f& targetPosition, const sf::RenderWindow* window);
 
-        void update(float deltaTime, const Vector2f& playerPosition);
-        void fire(const sf::Vector2f& playerPosition);
+        void update(float deltaTime, const Vector2f& playerPosition, bool audioEnabled);
+        void fire(const sf::Vector2f& playerPosition, bool audioEnabled);
         bool isOutOfWindow(const sf::RenderWindow& window) const;
         void updateDirection(const sf::Vector2f& playerPosition);
 
@@ -41,7 +41,7 @@ class Inimigo : public Drawable{
         bool isAliveStatus() const;
         void loadEnemyShootSound(const std::string& filepath); 
         bool iscolliding(float x, float y, float radius) const;
-
+    
 };
 
 #endif

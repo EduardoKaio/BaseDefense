@@ -254,9 +254,11 @@ CMakeFiles/meu_jogo.dir/src/game.cpp.o: \
  /home/kaio/Documentos/UFRN/lp/BaseDefense/src/../include/inimigo.h \
  /home/kaio/Documentos/UFRN/lp/BaseDefense/src/../include/projetil_inimigo.h \
  /home/kaio/Documentos/UFRN/lp/BaseDefense/src/../include/base.h \
- /usr/include/c++/11/iostream /usr/include/c++/11/istream \
- /usr/include/c++/11/bits/istream.tcc /usr/include/c++/11/random \
- /usr/include/c++/11/cmath /usr/include/math.h \
+ /usr/include/c++/11/sstream /usr/include/c++/11/istream \
+ /usr/include/c++/11/bits/istream.tcc \
+ /usr/include/c++/11/bits/sstream.tcc /usr/include/c++/11/iostream \
+ /usr/include/c++/11/iomanip /usr/include/c++/11/bits/quoted_string.h \
+ /usr/include/c++/11/random /usr/include/c++/11/cmath /usr/include/math.h \
  /usr/include/x86_64-linux-gnu/bits/math-vector.h \
  /usr/include/x86_64-linux-gnu/bits/libm-simd-decl-stubs.h \
  /usr/include/x86_64-linux-gnu/bits/flt-eval-method.h \

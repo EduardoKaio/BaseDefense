@@ -114,3 +114,9 @@ bool Base::isAliveStatus() const {
 void Base::draw(sf::RenderTarget& target, sf::RenderStates states) const {
     target.draw(shape, states);
 }
+void Base::reset() {
+    // Redefine a saúde e posição da base
+    health = 100; // Defina o valor inicial de saúde
+    // Posicione a base na posição inicial
+    
+}

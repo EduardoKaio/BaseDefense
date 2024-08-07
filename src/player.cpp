@@ -91,4 +91,12 @@ CircleShape& Player::getShape() {
     return shape; 
 }
 
+void Player::reset() {
+    // Redefine a saúde, posição e projéteis do jogador
+    health = 100; // Defina o valor inicial de saúde
+    // Posicione o jogador na posição inicial
+    shape.setPosition(400, 300);
+    // Limpe os projéteis ou defina o número inicial
+    projeteisDisponiveis = 100; // Exemplo
+}
 bool Player::isAliveStatus() const { return isAlive; }

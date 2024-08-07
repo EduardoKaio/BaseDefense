@@ -633,9 +633,13 @@ CMakeFiles/meu_jogo.dir/src/game.cpp.o: ../src/game.cpp \
   ../include/inimigo.h \
   ../include/projetil_inimigo.h \
   ../include/base.h \
-  /usr/include/c++/11/iostream \
+  /usr/include/c++/11/sstream \
   /usr/include/c++/11/istream \
   /usr/include/c++/11/bits/istream.tcc \
+  /usr/include/c++/11/bits/sstream.tcc \
+  /usr/include/c++/11/iostream \
+  /usr/include/c++/11/iomanip \
+  /usr/include/c++/11/bits/quoted_string.h \
   /usr/include/c++/11/random \
   /usr/include/c++/11/cmath \
   /usr/include/math.h \
@@ -1300,7 +1304,11 @@ CMakeFiles/meu_jogo.dir/src/main.cpp.o: ../src/main.cpp \
   ../include/inimigo.h \
   ../include/game.h \
   ../include/player.h \
-  ../include/base.h
+  ../include/base.h \
+  /usr/include/c++/11/sstream \
+  /usr/include/c++/11/istream \
+  /usr/include/c++/11/bits/istream.tcc \
+  /usr/include/c++/11/bits/sstream.tcc
 
 CMakeFiles/meu_jogo.dir/src/municao.cpp.o: ../src/municao.cpp \
   /usr/include/stdc-predef.h
@@ -2524,6 +2532,10 @@ CMakeFiles/meu_jogo.dir/src/utils.cpp.o: ../src/utils.cpp \
 
 /usr/include/c++/11/random:
 
+/usr/include/c++/11/bits/quoted_string.h:
+
+/usr/include/c++/11/sstream:
+
 ../include/projetil.h:
 
 ../include/player.h:
@@ -2692,6 +2704,8 @@ CMakeFiles/meu_jogo.dir/src/utils.cpp.o: ../src/utils.cpp \
 
 /usr/include/x86_64-linux-gnu/sys/select.h:
 
+/usr/include/c++/11/iomanip:
+
 /usr/include/SFML/Audio/SoundFileFactory.hpp:
 
 /usr/include/c++/11/cctype:
@@ -2721,6 +2735,8 @@ CMakeFiles/meu_jogo.dir/src/utils.cpp.o: ../src/utils.cpp \
 /usr/include/c++/11/bits/ostream.tcc:
 
 /usr/include/SFML/System/Thread.hpp:
+
+/usr/include/c++/11/bits/sstream.tcc:
 
 /usr/include/c++/11/new:
 

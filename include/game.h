@@ -6,6 +6,7 @@
 #include "projetil.h"
 #include "base.h"
 #include "projetil_inimigo.h"
+#include <sstream> 
 
 
 using namespace std;
@@ -33,6 +34,24 @@ class Game {
         Sound heroShootSound;
         SoundBuffer enemyShootBuffer;
         Sound enemyShootSound;
+        bool gameStarted;
+        void setupButton(sf::RectangleShape& button, sf::Text& buttonText, const std::string& text, const sf::Vector2f& position);
+        void resetGame();
+        void toggleAudio(bool enable);
+
+        sf::RectangleShape startButton;
+        sf::Text startButtonText;
+        sf::RectangleShape restartButton;
+        sf::Text restartButtonText;
+        sf::Font font;
+        std::vector<sf::RectangleShape> buttons;
+        std::vector<sf::Text> buttonTexts;
+        bool audioEnabled;
+        bool victory; 
+        float totalTime; // Tempo total em segundos
+        float remainingTime; // Tempo restante em segundos
+        sf::Text timerText;
+        void resetTimer();
         
     public:
         Game();

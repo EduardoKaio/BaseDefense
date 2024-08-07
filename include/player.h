@@ -32,6 +32,7 @@ class Player : public Drawable {
         int getProjeteisDisponiveis();
         CircleShape& getShape();
         bool isAliveStatus() const;
+        void reset();
 
 };
 #endif

@@ -2,6 +2,8 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
 #include <iostream>
+#include <sstream> 
+#include <iomanip>
 #include <random>
 
 Game::Game() 
@@ -10,37 +12,33 @@ Game::Game()
     player(projeteis), 
     base(),
     spawnInterval(3.0f),
-    gameOver(false) {
-
-    // Define o tamanho da janela como fixo
+    gameOver(false),
+    victory(false),
+    gameStarted(false),
+    audioEnabled(true),
+    totalTime(60.0f), // Exemplo: 1 minuto (60 segundos)
+    remainingTime(totalTime) { // Adicione a variável gameStarted
+    
+    // Configura a janela e outros elementos iniciais
     window.setSize(sf::Vector2u(800, 600));
-
-    // Define o modo de redimensionamento como fixo
-    window.setPosition(sf::Vector2i(100, 100));  // Posição inicial da janela
-
-    // Evento para garantir que a janela não seja redimensionada
+    window.setPosition(sf::Vector2i(100, 100));
     window.setVerticalSyncEnabled(true);
 
-    // Ajuste a posição do jogador para o centro da tela
+    // Ajuste a posição do jogador e base
     sf::Vector2f center(window.getSize().x / 2.0f, window.getSize().y / 2.0f);
     player.getShape().setPosition(center);
-
-    // Ajuste a posição da base para o centro da tela
     sf::Vector2f basePosition(window.getSize().x / 2.0f - base.getShape().getSize().x / 2.0f,
                             window.getSize().y / 2.0f - base.getShape().getSize().y / 2.0f);
     base.setPosition(basePosition);
 
+    // Carregar recursos de áudio
     if (!backgroundMusic.openFromFile("../assets/sounds/boss_battle_#2.WAV")) {
         std::cerr << "Não foi possível carregar a música de fundo!" << std::endl;
-        // Gerenciar erro, talvez encerrar o jogo
     }
-
-    // Configurar a música para tocar em loop
     backgroundMusic.setLoop(true);
     backgroundMusic.setVolume(40); 
     backgroundMusic.play();
 
-        // Carregar som do tiro do herói
     if (!heroShootBuffer.loadFromFile("../assets/sounds/tiro_heroi.wav")) {
         std::cerr << "Não foi possível carregar o som do tiro do herói!" << std::endl;
     }
@@ -50,14 +48,43 @@ Game::Game()
     for (auto& inimigo : inimigos) {
         inimigo.loadEnemyShootSound(enemyShootSoundFile);
     }
-}
 
+    // Configura os botões
+    if (!font.loadFromFile("../assets/fonts/pixel.ttf")) {
+        std::cerr << "Não foi possível carregar a fonte!" << std::endl;
+    }
+
+    setupButton(startButton, startButtonText, "START", sf::Vector2f(window.getSize().x / 2.0f - 75, window.getSize().y / 2.0f - 25));
+    setupButton(restartButton, restartButtonText, "HOME", sf::Vector2f(window.getSize().x / 2.0f - 75, window.getSize().y / 2.0f - 25));
+
+    timerText.setFont(font);
+    timerText.setCharacterSize(30);
+    timerText.setFillColor(sf::Color::Black);
+    timerText.setPosition(10, 10);
+}
+void Game::setupButton(sf::RectangleShape& button, sf::Text& buttonText, const std::string& text, const sf::Vector2f& position) {
+    button.setSize(sf::Vector2f(150, 50));
+    button.setFillColor(sf::Color::Blue);
+    button.setPosition(position);
+
+    buttonText.setFont(font);
+    buttonText.setString(text);
+    buttonText.setCharacterSize(24);
+    buttonText.setFillColor(sf::Color::White);
+
+    // Centraliza o texto dentro do botão
+    sf::FloatRect textRect = buttonText.getLocalBounds();
+    buttonText.setOrigin(textRect.left + textRect.width / 2.0f, textRect.top + textRect.height / 2.0f);
+    buttonText.setPosition(position.x + button.getSize().x / 2.0f, position.y + button.getSize().y / 2.0f);
+}
 void Game::run() {
-    sf::Clock clock; // Mova o relógio para fora do loop
+    sf::Clock clock; 
     while (window.isOpen()) {
-        sf::Time deltaTime = clock.restart(); // Calcula o deltaTime
+        sf::Time deltaTime = clock.restart();
         processEvents();
-        update(deltaTime.asSeconds());
+        if (gameStarted && !gameOver) {
+            update(deltaTime.asSeconds());
+        }
         render();
     }
 }
@@ -68,21 +95,46 @@ void Game::processEvents() {
         if (event.type == sf::Event::Closed)
             window.close();
 
+        if (event.type == sf::Event::KeyPressed) {
+            if (event.key.code == sf::Keyboard::M) {
+                toggleAudio(!audioEnabled);
+            }
+        }
+
         if (event.type == sf::Event::MouseButtonPressed) {
-            if (event.mouseButton.button == sf::Mouse::Left && !gameOver) {
+            if (event.mouseButton.button == sf::Mouse::Left) {
                 sf::Vector2i mousePos = sf::Mouse::getPosition(window);
                 sf::Vector2f mousePosF(static_cast<float>(mousePos.x), static_cast<float>(mousePos.y));
-                player.shoot(mousePosF);
 
-                // Tocar som do tiro do herói
-                heroShootSound.play();
+                if (!gameStarted) {
+                    if (startButton.getGlobalBounds().contains(mousePosF)) {
+                        gameStarted = true;
+                    }
+                } else if (gameOver || victory) {
+                    if (restartButton.getGlobalBounds().contains(mousePosF)) {
+                        resetGame();
+                    }
+                } else {
+                    player.shoot(mousePosF);
+                    if (audioEnabled) {
+                        heroShootSound.play();
+                    }
+                }
             }
         }
     }
 }
 
 void Game::update(float deltaTime) {
-    if (gameOver) return; // Não atualiza o jogo se estiver em game over
+     if (gameOver || victory) return; // Não atualiza o jogo se estiver em game over ou vitória
+
+    if (remainingTime > 0) {
+        remainingTime -= deltaTime;
+        if (remainingTime < 0) {
+            remainingTime = 0;
+            victory = true; // O jogador vence quando o tempo acaba
+        }
+    }
 
     spawnTimer += deltaTime;
 
@@ -120,7 +172,7 @@ void Game::update(float deltaTime) {
     }
 
     for (auto it = inimigos.begin(); it != inimigos.end();) {
-        it->update(deltaTime, player.getShape().getPosition());
+        it->update(deltaTime, player.getShape().getPosition(), audioEnabled);
 
         if (!it->isAliveStatus()) {
             it = inimigos.erase(it);
@@ -156,7 +208,7 @@ void Game::update(float deltaTime) {
     for (auto it = inimigos.begin(); it != inimigos.end();) {
         for (auto projIt = it->getProjeteis().begin(); projIt != it->getProjeteis().end();) {
             projIt->update(deltaTime);
-            enemyShootSound.play();
+
             // Verifica colisões com o jogador
             if (player.isAliveStatus() && projIt->isActive() &&
                 projIt->iscolliding(projIt->getShape().getPosition().x, projIt->getShape().getPosition().y, projIt->getShape().getRadius(),
@@ -185,67 +237,121 @@ void Game::update(float deltaTime) {
             ++it;
         }
     }
+    std::ostringstream timeStream;
+    int minutes = static_cast<int>(remainingTime) / 60;
+    int seconds = static_cast<int>(remainingTime) % 60;
+    timeStream << std::setw(2) << std::setfill('0') << minutes << ":" << std::setw(2) << std::setfill('0') << seconds;
+    timerText.setString(timeStream.str());
 }
 
 
 void Game::render() {
-    sf::Color backgroundColor(200, 200, 200); // Cor de fundo cinza claro
+    sf::Color backgroundColor(200, 200, 200); 
     window.clear(backgroundColor);
 
-    // Desenha a base e o player
-    window.draw(base); 
-    window.draw(player);
-
-    for (const auto& projetil : projeteis) {
-        window.draw(projetil); // Desenha os projéteis
-    }
-
-    for (const auto& inimigo : inimigos) {
-        window.draw(inimigo); // Desenha os inimigos
-        for (const auto& projetil : inimigo.getProjeteis()) {
-            window.draw(projetil); // Desenha projéteis dos inimigos
-        }
-    }
-
-    sf::Font font;
-    if (!font.loadFromFile("../assets/fonts/pixel.ttf")) { // Certifique-se de fornecer um caminho para a fonte
-        std::cerr << "Não foi possível carregar a fonte!" << std::endl;
-    }
-    
-    sf::RectangleShape infoBox(sf::Vector2f(150, 80)); // Tamanho da caixa ajustado
-    infoBox.setFillColor(sf::Color::White); // Cor da caixa
-    infoBox.setOutlineColor(sf::Color::Black); // Cor da borda
-    infoBox.setOutlineThickness(2); // Espessura da borda
-    infoBox.setPosition(window.getSize().x - 160, 10); // Posição no canto superior direito
-
-    sf::Text infoText;
-    infoText.setFont(font); // Fonte carregada anteriormente
-    infoText.setString("Municao: " + std::to_string(player.getProjeteisDisponiveis()) + "\n" +
-                       "Vida: " + std::to_string(player.getHealth()) + "\n" +
-                       "Vida Base: " + std::to_string(base.getHealth()));
-    infoText.setCharacterSize(20); // Tamanho da fonte menor
-    infoText.setFillColor(sf::Color::Black);
-    infoText.setPosition(window.getSize().x - 150, 20); // Posição do texto na caixa
-    
-    // Desenha a caixa e o texto
-    window.draw(infoBox); // Desenha a caixa de informações
-    window.draw(infoText); // Desenha o texto com munição e vida
-
-    // Desenha a mensagem de Game Over se o jogo estiver terminado
-   if (gameOver) {
+    if (gameOver) {
         sf::RectangleShape darkOverlay(sf::Vector2f(window.getSize().x, window.getSize().y));
-        darkOverlay.setFillColor(sf::Color(75, 75, 75, 150)); // Cinza escuro com opacidade
+        darkOverlay.setFillColor(sf::Color(75, 75, 75, 150)); 
         window.draw(darkOverlay);
 
         sf::Text gameOverText;
         gameOverText.setFont(font);
         gameOverText.setString("GAME OVER");
         gameOverText.setCharacterSize(50);
-        gameOverText.setFillColor(sf::Color::White);
-        gameOverText.setPosition((window.getSize().x - gameOverText.getLocalBounds().width) / 2,
-                                 (window.getSize().y - gameOverText.getLocalBounds().height) / 2);
+        gameOverText.setFillColor(sf::Color::Red);
+        gameOverText.setPosition((window.getSize().x - gameOverText.getLocalBounds().width) / 2, 150);
         window.draw(gameOverText);
+
+        window.draw(restartButton);
+        window.draw(restartButtonText); // Certifique-se de desenhar o texto do botão
+
+    } else if (victory) {
+        sf::RectangleShape darkOverlay(sf::Vector2f(window.getSize().x, window.getSize().y));
+        darkOverlay.setFillColor(sf::Color(75, 75, 75, 150)); 
+        window.draw(darkOverlay);
+
+        sf::Text victoryText;
+        victoryText.setFont(font);
+        victoryText.setString("YOU WIN!");
+        victoryText.setCharacterSize(50);
+        victoryText.setFillColor(sf::Color::Green);
+        victoryText.setPosition((window.getSize().x - victoryText.getLocalBounds().width) / 2, 150);
+        window.draw(victoryText);
+
+        window.draw(restartButton);
+        window.draw(restartButtonText); // Certifique-se de desenhar o texto do botão
+
+    } else if (!gameStarted) {
+        window.draw(startButton);
+        window.draw(startButtonText); // Certifique-se de desenhar o texto do botão
+
+    } else {
+        window.draw(base); 
+        window.draw(player);
+
+        for (const auto& projetil : projeteis) {
+            window.draw(projetil);
+        }
+
+        for (const auto& inimigo : inimigos) {
+            window.draw(inimigo);
+            for (const auto& projetil : inimigo.getProjeteis()) {
+                window.draw(projetil);
+            }
+        }
+
+        sf::RectangleShape infoBox(sf::Vector2f(150, 80));
+        infoBox.setFillColor(sf::Color::White);
+        infoBox.setOutlineColor(sf::Color::Black);
+        infoBox.setOutlineThickness(2);
+        infoBox.setPosition(window.getSize().x - 160, 10);
+
+        sf::Text infoText;
+        infoText.setFont(font);
+        infoText.setString("Municao: " + std::to_string(player.getProjeteisDisponiveis()) + "\n" +
+                           "Vida: " + std::to_string(player.getHealth()) + "\n" +
+                           "Vida Base: " + std::to_string(base.getHealth()));
+        infoText.setCharacterSize(20);
+        infoText.setFillColor(sf::Color::Black);
+        infoText.setPosition(window.getSize().x - 150, 20);
+        
+        window.draw(infoBox);
+        window.draw(infoText);
+        window.draw(timerText);
     }
 
     window.display();
+}
+
+
+void Game::resetGame() {
+    // Resetar estado do jogo
+    resetTimer();
+    gameOver = false;
+    victory = false; // Resetar o estado de vitória
+    gameStarted = false;
+
+    player.reset();
+    base.reset();
+    projeteis.clear();
+    inimigos.clear();
+}
+
+void Game::toggleAudio(bool enable) {
+    audioEnabled = enable;
+    backgroundMusic.setVolume(audioEnabled ? 100 : 0);
+    if (audioEnabled) {
+        backgroundMusic.play();
+    } else {
+        backgroundMusic.pause();
+    }
+    
+    // Ajuste o volume dos sons de tiro
+    heroShootSound.setVolume(audioEnabled ? 100 : 0);
+    enemyShootSound.setVolume(audioEnabled ? 100 : 0);
+
+    // Atualize o estado de áudio dos inimigos
+}
+void Game::resetTimer() {
+    remainingTime = totalTime;
 }
