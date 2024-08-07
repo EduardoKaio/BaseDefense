@@ -102,6 +102,7 @@ int Base::getHealth() const {
 int Base::reduceHealth(int reduce) {
     health = health-reduce;
 }
+
 sf::RectangleShape Base::getShape() const {
     return shape;
 }

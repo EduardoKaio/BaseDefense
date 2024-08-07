@@ -20,7 +20,8 @@ public:
     
     void update(float deltaTime);
     bool isOutOfWindow(const sf::RenderWindow& window) const;
-    bool iscolliding(float projX, float projY, float projRadius, float baseX, float baseY, float baseRadius) const;
+    bool iscollidingBase(float projX, float projY, float projRadius, float baseX, float baseY, float baseRadius) const;
+    bool iscolliding(float x1, float y1, float r1, float x2, float y2, float r2);
     CircleShape getShape() const;
     void setActive(bool isActive);
     bool isActive() const;

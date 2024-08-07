@@ -133,8 +133,6 @@ void Game::update(float deltaTime) {
     for (auto it = projeteis.begin(); it != projeteis.end();) {
         it->update(deltaTime);
 
-        bool removed = false;
-
         // Verifica colisões com inimigos
         for (auto enemyIt = inimigos.begin(); enemyIt != inimigos.end(); ++enemyIt) {
             if (enemyIt->isAliveStatus() && it->isActive() &&
@@ -142,13 +140,12 @@ void Game::update(float deltaTime) {
                                 enemyIt->getShape().getPosition().x, enemyIt->getShape().getPosition().y, enemyIt->getShape().getRadius())) {
                 enemyIt->reduceHealth();
                 it->setActive(false);
-                removed = true;
                 break; // Só precisa verificar a colisão com um inimigo
             }
         }
 
         // Remove projéteis que saíram da tela
-        if (it->isOutOfWindow(window) || removed) {
+        if (it->isOutOfWindow(window) || !it->isActive()) {
             it = projeteis.erase(it); // Remove projéteis fora da tela ou se colidiram com algo
         } else {
             ++it;
@@ -168,8 +165,9 @@ void Game::update(float deltaTime) {
                 projIt->setActive(false);
                 // O projétil deve ser removido da lista de projéteis do inimigo
                 projIt = it->getProjeteis().erase(projIt);
+            
             } else if (projIt->isActive() &&
-                       projIt->iscolliding(projIt->getShape().getPosition().x, projIt->getShape().getPosition().y,
+                       projIt->iscollidingBase(projIt->getShape().getPosition().x, projIt->getShape().getPosition().y,
                                            base.getShape().getPosition().x, base.getShape().getPosition().y,
                                            base.getShape().getSize().x, base.getShape().getSize().y)) {
                 base.reduceHealth(2);

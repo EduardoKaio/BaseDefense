@@ -37,7 +37,15 @@ void ProjetilInimigo::draw(sf::RenderTarget& target, sf::RenderStates states) co
     target.draw(shape, states);
 }
 
-bool ProjetilInimigo::iscolliding(float projX, float projY, float baseX, float baseY, float baseWidth, float baseHeight) const {
+bool ProjetilInimigo::iscolliding(float x1, float y1, float r1, float x2, float y2, float r2){
+    float dx = x2 - x1;
+    float dy = y2 - y1;
+    float distanceSquared = dx * dx + dy * dy;
+    float radiusSum = r1 + r2;
+    return distanceSquared <= radiusSum * radiusSum;
+}
+
+bool ProjetilInimigo::iscollidingBase(float projX, float projY, float baseX, float baseY, float baseWidth, float baseHeight) const {
     // Calcula o ponto mais próximo no retângulo
     float closestX = clampe(projX, baseX, baseX + baseWidth);
     float closestY = clampe(projY, baseY, baseY + baseHeight);
