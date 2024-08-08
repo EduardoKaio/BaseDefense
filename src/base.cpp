@@ -18,14 +18,16 @@ T clampe(T value, T min, T max) {
 
 bool isCircleCollidingWithRectangle(float circleX, float circleY, float circleRadius,
                                      float rectX, float rectY, float rectWidth, float rectHeight) {
+    // Encontra o ponto mais próximo no retângulo ao centro do círculo
     float closestX = std::max(rectX, std::min(circleX, rectX + rectWidth));
     float closestY = std::max(rectY, std::min(circleY, rectY + rectHeight));
 
-    float distanceX = circleX - closestX;
-    float distanceY = circleY - closestY;
-    float distanceSquared = distanceX * distanceX + distanceY * distanceY;
+    // Calcula a distância entre o ponto mais próximo e o centro do círculo
+    float dx = circleX - closestX;
+    float dy = circleY - closestY;
+    float distanceSquared = dx * dx + dy * dy;
 
-    return distanceSquared < (circleRadius * circleRadius);
+    return distanceSquared <= circleRadius * circleRadius;
 }
 
 void Base::update(std::list<ProjetilInimigo>& projeteis, std::vector<Inimigo>& inimigos) {
@@ -46,8 +48,8 @@ void Base::update(std::list<ProjetilInimigo>& projeteis, std::vector<Inimigo>& i
                     projRadius,
                     shape.getPosition().x,
                     shape.getPosition().y,
-                    shape.getSize().x,
-                    shape.getSize().y)) {
+                    shape.getGlobalBounds().width,
+                    shape.getGlobalBounds().height)) {
                 std::cout << "Colidiu com a base!\n";
                 health -= 2; // Reduz a vida da base
                 it = projeteis.erase(it); // Remove o projétil
@@ -62,19 +64,21 @@ void Base::update(std::list<ProjetilInimigo>& projeteis, std::vector<Inimigo>& i
     // Verificar colisões com inimigos
     for (auto it = inimigos.begin(); it != inimigos.end();) {
         if (it->isAliveStatus()) {
-            auto inimigoShape = it->getShape();
-            float inimigoX = inimigoShape.getPosition().x;
-            float inimigoY = inimigoShape.getPosition().y;
-            float inimigoRadius = inimigoShape.getRadius();
+            auto inimigoSprite = it->getSprite();
+            float inimigoX = inimigoSprite.getPosition().x;
+            float inimigoY = inimigoSprite.getPosition().y;
+            float inimigoWidth = inimigoSprite.getGlobalBounds().width;
+            float inimigoHeight = inimigoSprite.getGlobalBounds().height;
+            float inimigoRadius = std::min(inimigoWidth, inimigoHeight) / 2;
 
             if (isCircleCollidingWithRectangle(
-                    inimigoX,
-                    inimigoY,
+                    inimigoX + inimigoRadius,
+                    inimigoY + inimigoRadius,
                     inimigoRadius,
                     shape.getPosition().x,
                     shape.getPosition().y,
-                    shape.getSize().x,
-                    shape.getSize().y)) {
+                    shape.getGlobalBounds().width,
+                    shape.getGlobalBounds().height)) {
                 health -= 5; // Reduz a vida da base
                 it = inimigos.erase(it); // Remove o inimigo da lista
             } else {

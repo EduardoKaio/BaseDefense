@@ -52,6 +52,9 @@ class Game {
         float remainingTime; // Tempo restante em segundos
         sf::Text timerText;
         void resetTimer();
+        sf::Texture backgroundTexture;
+        sf::Sprite backgroundSprite;
+        bool isShooting;
         
     public:
         Game();

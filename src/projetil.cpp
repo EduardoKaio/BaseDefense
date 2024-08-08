@@ -45,5 +45,8 @@ CircleShape& Projetil::getShape() {
 void Projetil::setActive(bool isActive) { 
     active = isActive; 
 }
+sf::FloatRect Projetil::getGlobalBounds() const {
+    return shape.getGlobalBounds();
+}
     
 bool Projetil::isActive() const { return active; }

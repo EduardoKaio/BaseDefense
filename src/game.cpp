@@ -16,7 +16,8 @@ Game::Game()
     victory(false),
     gameStarted(false),
     audioEnabled(true),
-    totalTime(60.0f), // Exemplo: 1 minuto (60 segundos)
+    totalTime(60.0f),
+    isShooting(false), // Exemplo: 1 minuto (60 segundos)
     remainingTime(totalTime) { // Adicione a variável gameStarted
     
     // Configura a janela e outros elementos iniciais
@@ -26,31 +27,37 @@ Game::Game()
 
     // Ajuste a posição do jogador e base
     sf::Vector2f center(window.getSize().x / 2.0f, window.getSize().y / 2.0f);
-    player.getShape().setPosition(center);
+    player.getSprite().setPosition(center);
     sf::Vector2f basePosition(window.getSize().x / 2.0f - base.getShape().getSize().x / 2.0f,
                             window.getSize().y / 2.0f - base.getShape().getSize().y / 2.0f);
     base.setPosition(basePosition);
+
+    if (!backgroundTexture.loadFromFile("../assets/images/black.png")) {
+        std::cerr << "Não foi possível carregar background" << std::endl;
+    }
+    
+    backgroundSprite.setTexture(backgroundTexture);
 
     // Carregar recursos de áudio
     if (!backgroundMusic.openFromFile("../assets/sounds/boss_battle_#2.WAV")) {
         std::cerr << "Não foi possível carregar a música de fundo!" << std::endl;
     }
     backgroundMusic.setLoop(true);
-    backgroundMusic.setVolume(40); 
+    backgroundMusic.setVolume(10); 
     backgroundMusic.play();
 
-    if (!heroShootBuffer.loadFromFile("../assets/sounds/tiro_heroi.wav")) {
+    if (!heroShootBuffer.loadFromFile("../assets/sounds/sfx_laser1.ogg")) {
         std::cerr << "Não foi possível carregar o som do tiro do herói!" << std::endl;
     }
     heroShootSound.setBuffer(heroShootBuffer);
 
-    std::string enemyShootSoundFile = "../assets/sounds/tiro_inimigo.wav";
+    std::string enemyShootSoundFile = "../awindow.draw(heroSprite);ssets/sounds/sfx_laser2.ogg";
     for (auto& inimigo : inimigos) {
         inimigo.loadEnemyShootSound(enemyShootSoundFile);
     }
 
     // Configura os botões
-    if (!font.loadFromFile("../assets/fonts/pixel.ttf")) {
+    if (!font.loadFromFile("../assets/fonts/oficial.ttf")) {
         std::cerr << "Não foi possível carregar a fonte!" << std::endl;
     }
 
@@ -59,8 +66,9 @@ Game::Game()
 
     timerText.setFont(font);
     timerText.setCharacterSize(30);
-    timerText.setFillColor(sf::Color::Black);
+    timerText.setFillColor(sf::Color::White);
     timerText.setPosition(10, 10);
+    timerText.setCharacterSize(15);
 }
 void Game::setupButton(sf::RectangleShape& button, sf::Text& buttonText, const std::string& text, const sf::Vector2f& position) {
     button.setSize(sf::Vector2f(150, 50));
@@ -115,18 +123,28 @@ void Game::processEvents() {
                         resetGame();
                     }
                 } else {
-                    player.shoot(mousePosF);
-                    if (audioEnabled) {
-                        heroShootSound.play();
+                    if (!isShooting) {
+                        player.shoot(mousePosF);
+                        if (audioEnabled) {
+                            heroShootSound.play();
+                        }
+                        isShooting = true;
                     }
                 }
+            }
+        }
+
+        if (event.type == sf::Event::MouseButtonReleased) {
+            if (event.mouseButton.button == sf::Mouse::Left) {
+                isShooting = false; // Permite que o jogador atire novamente após soltar o botão
             }
         }
     }
 }
 
+
 void Game::update(float deltaTime) {
-     if (gameOver || victory) return; // Não atualiza o jogo se estiver em game over ou vitória
+    if (gameOver || victory) return; // Não atualiza o jogo se estiver em game over ou vitória
 
     if (remainingTime > 0) {
         remainingTime -= deltaTime;
@@ -147,7 +165,7 @@ void Game::update(float deltaTime) {
         std::uniform_int_distribution<> dist(0, 1);
 
         sf::Vector2f startPosition;
-        sf::Vector2f playerPosition = player.getShape().getPosition() + sf::Vector2f(player.getShape().getRadius(), player.getShape().getRadius());
+        sf::Vector2f playerPosition = player.getSprite().getPosition() + sf::Vector2f(player.getSprite().getLocalBounds().width / 2, player.getSprite().getLocalBounds().height / 2);
 
         if (dist(gen) == 0) {
             // Em uma borda vertical
@@ -163,16 +181,15 @@ void Game::update(float deltaTime) {
     }
 
     player.update(deltaTime);
-    
     base.update(projeteisInimigos, inimigos);
 
     // Verifica se a vida do jogador chegou a 0
     if (player.getHealth() <= 0 || base.getHealth() <= 0) {
-            gameOver = true; // Define o estado do jogo como game over
+        gameOver = true; // Define o estado do jogo como game over
     }
 
     for (auto it = inimigos.begin(); it != inimigos.end();) {
-        it->update(deltaTime, player.getShape().getPosition(), audioEnabled);
+        it->update(deltaTime, player.getSprite().getPosition(), audioEnabled);
 
         if (!it->isAliveStatus()) {
             it = inimigos.erase(it);
@@ -189,7 +206,7 @@ void Game::update(float deltaTime) {
         for (auto enemyIt = inimigos.begin(); enemyIt != inimigos.end(); ++enemyIt) {
             if (enemyIt->isAliveStatus() && it->isActive() &&
                 it->iscolliding(it->getShape().getPosition().x, it->getShape().getPosition().y, it->getShape().getRadius(),
-                                enemyIt->getShape().getPosition().x, enemyIt->getShape().getPosition().y, enemyIt->getShape().getRadius())) {
+                                enemyIt->getSprite().getPosition().x, enemyIt->getSprite().getPosition().y, enemyIt->getSprite().getLocalBounds().width / 2)) {
                 enemyIt->reduceHealth();
                 it->setActive(false);
                 break; // Só precisa verificar a colisão com um inimigo
@@ -212,12 +229,11 @@ void Game::update(float deltaTime) {
             // Verifica colisões com o jogador
             if (player.isAliveStatus() && projIt->isActive() &&
                 projIt->iscolliding(projIt->getShape().getPosition().x, projIt->getShape().getPosition().y, projIt->getShape().getRadius(),
-                                    player.getShape().getPosition().x, player.getShape().getPosition().y, player.getShape().getRadius())) {
+                                    player.getSprite().getPosition().x, player.getSprite().getPosition().y, player.getSprite().getLocalBounds().width / 2)) {
                 player.reduceHealth(5);
                 projIt->setActive(false);
                 // O projétil deve ser removido da lista de projéteis do inimigo
                 projIt = it->getProjeteis().erase(projIt);
-            
             } else if (projIt->isActive() &&
                        projIt->iscollidingBase(projIt->getShape().getPosition().x, projIt->getShape().getPosition().y,
                                            base.getShape().getPosition().x, base.getShape().getPosition().y,
@@ -237,6 +253,7 @@ void Game::update(float deltaTime) {
             ++it;
         }
     }
+
     std::ostringstream timeStream;
     int minutes = static_cast<int>(remainingTime) / 60;
     int seconds = static_cast<int>(remainingTime) % 60;
@@ -244,10 +261,20 @@ void Game::update(float deltaTime) {
     timerText.setString(timeStream.str());
 }
 
-
 void Game::render() {
-    sf::Color backgroundColor(200, 200, 200); 
-    window.clear(backgroundColor);
+    // Obtenha o tamanho da janela
+    sf::Vector2u windowSize = window.getSize();
+
+    // Ajuste o tamanho do sprite de fundo para cobrir toda a janela
+    sf::Vector2u textureSize = backgroundTexture.getSize();
+    float scaleX = static_cast<float>(windowSize.x) / textureSize.x;
+    float scaleY = static_cast<float>(windowSize.y) / textureSize.y;
+    backgroundSprite.setScale(scaleX, scaleY);
+
+    window.clear(); // Limpa a janela com a cor padrão
+
+    // Desenhe o fundo
+    window.draw(backgroundSprite);
 
     if (gameOver) {
         sf::RectangleShape darkOverlay(sf::Vector2f(window.getSize().x, window.getSize().y));
@@ -287,12 +314,13 @@ void Game::render() {
 
     } else {
         window.draw(base); 
-        window.draw(player);
+        window.draw(player.getSprite());
+        player.setSize(0.5f, 0.5f);
 
         for (const auto& projetil : projeteis) {
             window.draw(projetil);
         }
-
+        
         for (const auto& inimigo : inimigos) {
             window.draw(inimigo);
             for (const auto& projetil : inimigo.getProjeteis()) {
@@ -300,22 +328,22 @@ void Game::render() {
             }
         }
 
-        sf::RectangleShape infoBox(sf::Vector2f(150, 80));
-        infoBox.setFillColor(sf::Color::White);
-        infoBox.setOutlineColor(sf::Color::Black);
-        infoBox.setOutlineThickness(2);
-        infoBox.setPosition(window.getSize().x - 160, 10);
+        // sf::RectangleShape infoBox(sf::Vector2f(150, 80));
+        // infoBox.setFillColor(sf::Color::White);
+        // infoBox.setOutlineColor(sf::Color::Black);
+        // infoBox.setOutlineThickness(2);
+        // infoBox.setPosition(window.getSize().x - 160, 10);
 
         sf::Text infoText;
         infoText.setFont(font);
         infoText.setString("Municao: " + std::to_string(player.getProjeteisDisponiveis()) + "\n" +
                            "Vida: " + std::to_string(player.getHealth()) + "\n" +
                            "Vida Base: " + std::to_string(base.getHealth()));
-        infoText.setCharacterSize(20);
-        infoText.setFillColor(sf::Color::Black);
+        infoText.setCharacterSize(15);
+        infoText.setFillColor(sf::Color::White);
         infoText.setPosition(window.getSize().x - 150, 20);
         
-        window.draw(infoBox);
+        // window.draw(infoBox);
         window.draw(infoText);
         window.draw(timerText);
     }
@@ -332,7 +360,7 @@ void Game::resetGame() {
     gameStarted = false;
 
     player.reset();
-    base.reset();
+    base.reset();window.draw(player.getSprite());
     projeteis.clear();
     inimigos.clear();
 }

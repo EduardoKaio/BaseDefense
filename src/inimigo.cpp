@@ -9,10 +9,6 @@ using namespace sf;
 
 Inimigo::Inimigo(const sf::Vector2f& startPosition, const sf::Vector2f& targetPosition, const sf::RenderWindow* win)
 : position(startPosition), direction(targetPosition - startPosition), health(2), isAlive(true), speed(30.0f), window(win) {
-    shape.setRadius(10);
-    shape.setFillColor(sf::Color(255, 111, 0));
-    shape.setPosition(startPosition);
-    shape.setOrigin(shape.getRadius(), shape.getRadius());
 
     // Inicializa fireRate com uma variação aleatória
     std::random_device rd;
@@ -20,8 +16,17 @@ Inimigo::Inimigo(const sf::Vector2f& startPosition, const sf::Vector2f& targetPo
     std::uniform_real_distribution<> dist(0.5, 2.5); // Variação da taxa de disparo entre 0.5 e 2.5 segundos
     fireRate = dist(gen);
     fireTimer = 0.0f;
+    
+    
+    if (!texture.loadFromFile("../assets/images/enemyBlack1.png")) {
+        std::cerr << "Erro ao carregar a textura do inimigo!" << std::endl;
+    } else {
+        sprite.setTexture(texture);
+        sprite.setPosition(startPosition);
+        sprite.setScale(0.5f, 0.5f);
+    }
 
-    if (!enemyShootBuffer.loadFromFile("../assets/sounds/tiro_inimigo.wav")) {
+    if (!enemyShootBuffer.loadFromFile("../assets/sounds/sfx_laser2.ogg")) {
         std::cerr << "Não foi possível carregar o som do tiro do inimigo!" << std::endl;
     }
     enemyShootSound.setBuffer(enemyShootBuffer);
@@ -39,7 +44,7 @@ void Inimigo::updateDirection(const sf::Vector2f& playerPosition) {
 void Inimigo::update(float deltaTime, const sf::Vector2f& playerPosition, bool audioEnabled) {
     // Atualiza a direção e move o inimigo
     updateDirection(playerPosition);
-    shape.move(direction * speed * deltaTime);
+    sprite.move(direction * speed * deltaTime);
     
     // Atualiza o temporizador de disparo
     fireTimer += deltaTime;
@@ -62,31 +67,36 @@ void Inimigo::update(float deltaTime, const sf::Vector2f& playerPosition, bool a
 
 void Inimigo::fire(const sf::Vector2f& playerPosition, bool audioEnabled) {
     // Calcula a posição do projétil a partir da posição do inimigo
-    sf::Vector2f projecaoPos = shape.getPosition() + sf::Vector2f(shape.getRadius(), shape.getRadius());
+    sf::Vector2f projecaoPos = sprite.getPosition() + sf::Vector2f(sprite.getGlobalBounds().width / 2, sprite.getGlobalBounds().height / 2);
     ProjetilInimigo newProjetil(projecaoPos, playerPosition);
     projeteis.push_back(newProjetil);
 
     if (audioEnabled && enemyShootSound.getStatus() != sf::Sound::Playing) {
         enemyShootSound.play();
     }
-
 }
-bool Inimigo::iscolliding(float x, float y, float radius) const {
-    float dx = x - shape.getPosition().x;
-    float dy = y - shape.getPosition().y;
-    float distance = std::sqrt(dx * dx + dy * dy);
 
-    return distance < (radius + shape.getRadius());
+bool Inimigo::iscolliding(float x, float y, float radius) const {
+    sf::FloatRect bounds = sprite.getGlobalBounds();
+    float centerX = bounds.left + bounds.width / 2;
+    float centerY = bounds.top + bounds.height / 2;
+
+    float dx = x - centerX;
+    float dy = y - centerY;
+    float distanceSquared = dx * dx + dy * dy;
+    float radiusSum = radius + std::min(bounds.width / 2, bounds.height / 2);
+
+    return distanceSquared <= radiusSum * radiusSum;
 }
 
 bool Inimigo::isOutOfWindow(const sf::RenderWindow& window) const {
-    sf::FloatRect bounds = shape.getGlobalBounds();
+    sf::FloatRect bounds = sprite.getGlobalBounds();
     sf::FloatRect viewport(window.getViewport(window.getView()));
     return !viewport.intersects(bounds);
 }
 
 void Inimigo::draw(sf::RenderTarget& target, sf::RenderStates states) const {
-    target.draw(shape, states);
+    target.draw(sprite, states);
 }
 
 std::vector<ProjetilInimigo>& Inimigo::getProjeteis() {
@@ -95,10 +105,6 @@ std::vector<ProjetilInimigo>& Inimigo::getProjeteis() {
 
 const std::vector<ProjetilInimigo>& Inimigo::getProjeteis() const {
     return projeteis;
-}
-
-CircleShape Inimigo::getShape() const { 
-    return shape; 
 }
 
 void Inimigo::reduceHealth() {
@@ -111,6 +117,16 @@ void Inimigo::loadEnemyShootSound(const std::string& filepath) {
         std::cerr << "Não foi possível carregar o som do tiro do inimigo!" << std::endl;
     }
     enemyShootSound.setBuffer(enemyShootBuffer);
+}
+sf::FloatRect Inimigo::getGlobalBounds() const {
+    return sprite.getGlobalBounds();
+}
+
+sf::Sprite& Inimigo::getSprite() { 
+    return sprite; // Mudança aqui
+}
+void Inimigo::setSize(float scaleX, float scaleY) {
+    sprite.setScale(scaleX, scaleY);
 }
 
 bool Inimigo::isAliveStatus() const { return isAlive; }

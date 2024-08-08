@@ -24,6 +24,7 @@ class Projetil : public Drawable{
         CircleShape& getShape();
         void setActive(bool isActive);
         bool isActive() const;
+        FloatRect getGlobalBounds() const;
 };
 
 #endif

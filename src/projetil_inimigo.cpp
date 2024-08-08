@@ -66,5 +66,7 @@ CircleShape ProjetilInimigo::getShape() const {
 void ProjetilInimigo::setActive(bool isActive) { 
     active = isActive; 
 }
-    
+sf::FloatRect ProjetilInimigo::getGlobalBounds() const {
+    return shape.getGlobalBounds();
+}
 bool ProjetilInimigo::isActive() const { return active; }

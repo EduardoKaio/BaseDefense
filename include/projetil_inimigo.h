@@ -25,6 +25,7 @@ public:
     CircleShape getShape() const;
     void setActive(bool isActive);
     bool isActive() const;
+    FloatRect getGlobalBounds() const;
 };
 
 #endif // PROJETIL_INIMIGO_HPP

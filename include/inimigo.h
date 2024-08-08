@@ -13,7 +13,9 @@ class Inimigo : public Drawable{
     private:
         virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
         Vector2f position;
-        CircleShape shape;
+
+        sf::Texture texture;
+        sf::Sprite sprite;
         Vector2f direction;
         int health;
         bool isAlive;
@@ -36,11 +38,13 @@ class Inimigo : public Drawable{
 
         std::vector<ProjetilInimigo>& getProjeteis();
         const std::vector<ProjetilInimigo>& getProjeteis() const;
-        CircleShape getShape() const;
         void reduceHealth();
         bool isAliveStatus() const;
         void loadEnemyShootSound(const std::string& filepath); 
         bool iscolliding(float x, float y, float radius) const;
+        FloatRect getGlobalBounds() const;
+        void setSize(float scaleX, float scaleY);
+        sf::Sprite& getSprite();
     
 };
 

@@ -13,26 +13,29 @@ class Player : public Drawable {
     private:
         void handleInput(float deltaTime);
         virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
-
+        sf::Texture texture;
+        sf::Sprite sprite;
         std::list<Projetil>& projeteis;
-        sf::CircleShape shape;
         bool shooting;
         float speed;
         bool isAlive;
         int health;
         int projeteisDisponiveis;
+        
     
     public:
         Player(list<Projetil>& projeteis);
-
+        sf::Sprite& getSprite();
         void update(float deltaTime);
         void shoot(sf::Vector2f target);
         int getHealth() const;
         void reduceHealth(int amount);
         int getProjeteisDisponiveis();
-        CircleShape& getShape();
+
         bool isAliveStatus() const;
         void reset();
+        FloatRect getGlobalBounds() const;
+        void setSize(float scaleX, float scaleY);
 
 };
 #endif
