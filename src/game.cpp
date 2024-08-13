@@ -76,7 +76,7 @@ Game::Game()
     titleText.setFont(font);
     titleText.setString("Base Defense");
     titleText.setCharacterSize(50);
-    titleText.setFillColor(sf::Color::Cyan);
+    titleText.setFillColor(sf::Color::White);
     titleText.setPosition((window.getSize().x - titleText.getLocalBounds().width) / 2, 150);
 }
 
@@ -452,7 +452,7 @@ void Game::render() {
             // Adiciona estrelas ou efeitos de nebulosa
             sf::CircleShape star(0.5);
             star.setFillColor(sf::Color::White);
-            for (int i = 0; i < 10; ++i) {
+            for (int i = 0; i < 5; ++i) {
                 star.setPosition(rand() % windowSize.x, rand() % windowSize.y);
                 window.draw(star);
             }
