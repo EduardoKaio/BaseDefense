@@ -25,7 +25,7 @@ class Game {
         Base base;
         list<Projetil> projeteis;
         list<ProjetilInimigo> projeteisInimigos;
-        std::vector<Inimigo> inimigos;
+        list<Inimigo> inimigos;
         float spawnTimer; // Temporizador para o surgimento dos inimigos
         const float spawnInterval;
         bool gameOver;
@@ -43,6 +43,11 @@ class Game {
         sf::Text startButtonText;
         sf::RectangleShape restartButton;
         sf::Text restartButtonText;
+        sf::RectangleShape backButton;
+        sf::Text backButtonText;
+
+        RectangleShape infoButton;
+        Text infoButtonText;
         sf::Font font;
         std::vector<sf::RectangleShape> buttons;
         std::vector<sf::Text> buttonTexts;
@@ -55,6 +60,8 @@ class Game {
         sf::Texture backgroundTexture;
         sf::Sprite backgroundSprite;
         bool isShooting;
+        Text titleText;
+        bool infoScreenActive;
         
     public:
         Game();

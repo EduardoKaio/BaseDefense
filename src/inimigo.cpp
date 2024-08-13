@@ -1,4 +1,7 @@
 #include "../include/inimigo.h"
+
+#include <SFML/Graphics.hpp>
+#include <SFML/Window.hpp>
 #include <SFML/Audio.hpp>
 #include <cmath>
 #include <iostream>

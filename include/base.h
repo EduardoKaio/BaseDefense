@@ -17,7 +17,7 @@ class Base : public sf::Drawable {
     public:
         Base();
 
-        void update(std::list<ProjetilInimigo>& projeteis, std::vector<Inimigo>& inimigos);
+        void update(list<ProjetilInimigo>& projeteis, list<Inimigo>& inimigos);
         int getHealth() const;
         bool isAliveStatus() const;
         int reduceHealth(int reduce);

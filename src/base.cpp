@@ -30,7 +30,7 @@ bool isCircleCollidingWithRectangle(float circleX, float circleY, float circleRa
     return distanceSquared <= circleRadius * circleRadius;
 }
 
-void Base::update(std::list<ProjetilInimigo>& projeteis, std::vector<Inimigo>& inimigos) {
+void Base::update(std::list<ProjetilInimigo>& projeteis, std::list<Inimigo>& inimigos) {
     // Verificar colisões com projéteis
     for (auto it = projeteis.begin(); it != projeteis.end();) {
         if (it->isActive()) {
