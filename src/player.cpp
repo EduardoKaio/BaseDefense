@@ -85,7 +85,6 @@ int Player::getProjeteisDisponiveis(){
 
 void Player::reduceHealth(int amount) {
     health -= amount;
-    cout << health << endl;
     if (health <= 0) {
         isAlive = false;
         cout << "O player morreu" << endl;
@@ -108,3 +107,11 @@ sf::FloatRect Player::getGlobalBounds() const {
 }
 
 bool Player::isAliveStatus() const { return isAlive; }
+
+void Player::increaseHealth(int amount) {
+    health += amount;
+}
+
+void Player::increaseAmmo(int amount) {
+    projeteisDisponiveis += amount;
+}

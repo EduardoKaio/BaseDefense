@@ -230,6 +230,9 @@ void Game::update(float deltaTime) {
         it->update(deltaTime, player.getSprite().getPosition(), audioEnabled);
 
         if (!it->isAliveStatus()) {
+            if (rand() % 2 == 0) {
+                activeDrops.push_back(it->dropItem());
+            }
             it = inimigos.erase(it);
         } else {
             ++it;
@@ -274,8 +277,8 @@ void Game::update(float deltaTime) {
                 projIt = it->getProjeteis().erase(projIt);
             } else if (projIt->isActive() &&
                        projIt->iscollidingBase(projIt->getShape().getPosition().x, projIt->getShape().getPosition().y,
-                                           base.getShape().getPosition().x, base.getShape().getPosition().y,
-                                           base.getShape().getSize().x, base.getShape().getSize().y)) {
+                                               base.getShape().getPosition().x, base.getShape().getPosition().y,
+                                               base.getShape().getSize().x, base.getShape().getSize().y)) {
                 base.reduceHealth(2);
                 projIt->setActive(false);
                 projIt = it->getProjeteis().erase(projIt);
@@ -292,6 +295,19 @@ void Game::update(float deltaTime) {
         }
     }
 
+    for (auto it = activeDrops.begin(); it != activeDrops.end();) {
+        if (it->isActive() && it->iscolliding(it->getShape().getPosition().x, it->getShape().getPosition().y, it->getShape().getRadius(),
+                                              player.getSprite().getPosition().x, player.getSprite().getPosition().y, player.getSprite().getLocalBounds().width / 2)) {
+            it->applyEffect(player);
+
+            it->setActive(false);
+            it = activeDrops.erase(it);
+            break;
+        }
+        
+        ++it;
+    }
+    
     std::ostringstream timeStream;
     int minutes = static_cast<int>(remainingTime) / 60;
     int seconds = static_cast<int>(remainingTime) % 60;
@@ -469,6 +485,11 @@ void Game::render() {
                 for (const auto& projetil : inimigo.getProjeteis()) {
                     window.draw(projetil);
                 }
+            }
+
+            // Desenhar os itens dropados
+            for (auto& drop : activeDrops) {
+                window.draw(drop);
             }
 
             sf::Text infoText;

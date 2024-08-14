@@ -3,7 +3,8 @@
 
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
-#include "projetil_inimigo.h" 
+#include "projetil_inimigo.h"
+#include "drops.h"
 
 using namespace std;
 using namespace sf;
@@ -21,6 +22,7 @@ class Inimigo : public Drawable{
         bool isAlive;
         float speed;
         std::vector<ProjetilInimigo> projeteis;
+        std::vector<Drops> possibleDrops;
         float fireRate; // Tempo entre disparos
         float fireTimer;
         const sf::RenderWindow* window;
@@ -45,7 +47,7 @@ class Inimigo : public Drawable{
         FloatRect getGlobalBounds() const;
         void setSize(float scaleX, float scaleY);
         sf::Sprite& getSprite();
-    
+        Drops dropItem();
 };
 
 #endif

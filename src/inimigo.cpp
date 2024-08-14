@@ -33,6 +33,10 @@ Inimigo::Inimigo(const sf::Vector2f& startPosition, const sf::Vector2f& targetPo
         std::cerr << "Não foi possível carregar o som do tiro do inimigo!" << std::endl;
     }
     enemyShootSound.setBuffer(enemyShootBuffer);
+
+    // Inicialização de possíveis drops
+    possibleDrops.push_back(Drops(Drops::DropsType::Health, position));
+    possibleDrops.push_back(Drops(Drops::DropsType::Ammo, position));
 }
 
 void Inimigo::updateDirection(const sf::Vector2f& playerPosition) {
@@ -112,7 +116,9 @@ const std::vector<ProjetilInimigo>& Inimigo::getProjeteis() const {
 
 void Inimigo::reduceHealth() {
     health = health - 1;
-    if (health <= 0) isAlive = false;
+    if (health <= 0) {
+        isAlive = false;
+    }
 }
 
 void Inimigo::loadEnemyShootSound(const std::string& filepath) {
@@ -133,3 +139,15 @@ void Inimigo::setSize(float scaleX, float scaleY) {
 }
 
 bool Inimigo::isAliveStatus() const { return isAlive; }
+
+Drops Inimigo::dropItem() {
+    std::random_device rd;
+    std::mt19937 gen(rd());
+    std::uniform_int_distribution<> dist(0, possibleDrops.size() - 1);
+
+    int dropIndex = dist(gen);
+    Drops drop = possibleDrops[dropIndex];
+    drop.setPosition(sprite.getPosition()); // Posicione o item onde o inimigo morreu
+    
+    return drop;
+}

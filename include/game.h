@@ -6,6 +6,7 @@
 #include "projetil.h"
 #include "base.h"
 #include "projetil_inimigo.h"
+#include "drops.h"
 #include <sstream> 
 
 
@@ -26,6 +27,7 @@ class Game {
         list<Projetil> projeteis;
         list<ProjetilInimigo> projeteisInimigos;
         list<Inimigo> inimigos;
+        list<Drops> activeDrops;
         float spawnTimer; // Temporizador para o surgimento dos inimigos
         const float spawnInterval;
         bool gameOver;

@@ -22,7 +22,6 @@ class Player : public Drawable {
         int health;
         int projeteisDisponiveis;
         
-    
     public:
         Player(list<Projetil>& projeteis);
         sf::Sprite& getSprite();
@@ -36,6 +35,7 @@ class Player : public Drawable {
         void reset();
         FloatRect getGlobalBounds() const;
         void setSize(float scaleX, float scaleY);
-
+        void increaseHealth(int amount);
+        void increaseAmmo(int amount);
 };
 #endif
