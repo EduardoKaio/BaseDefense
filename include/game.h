@@ -6,6 +6,7 @@
 #include "projetil.h"
 #include "base.h"
 #include "projetil_inimigo.h"
+#include "texture_manager.h" 
 #include "drops.h"
 #include <sstream> 
 
@@ -64,6 +65,10 @@ class Game {
         bool isShooting;
         Text titleText;
         bool infoScreenActive;
+        int killCount;
+        TextureManager textureManager;
+        float deltaTime;
+        bool isPaused = false; 
         
     public:
         Game();

@@ -3,6 +3,7 @@
 
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
+#include "texture_manager.h"
 #include "player.h"
 
 using namespace std;
@@ -20,14 +21,14 @@ class Drops : public Drawable {
         virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
         
         sf::Sprite sprite;
-        sf::Texture texture;
+        sf::Texture* texture;
         DropsType type;
         sf::Vector2f position;
-        sf::CircleShape circle;
+        // sf::CircleShape circle;
         bool active;
 
     public:
-        Drops(DropsType type, const sf::Vector2f& position);
+        Drops(DropsType type, const sf::Vector2f& position, TextureManager& textureManager);
         DropsType getType() const;
         void setPosition(const sf::Vector2f& newPosition);
         sf::Vector2f getPosition() const;
@@ -36,9 +37,11 @@ class Drops : public Drawable {
         bool loadTexture(const std::string& filepath);
         bool iscolliding(float x1, float y1, float r1, float x2, float y2, float r2);
         void applyEffect(Player& player);
-        CircleShape getShape() const;
+        // CircleShape getShape() const;
         void setActive(bool isActive);
         bool isActive() const;
+        sf::Sprite getSprite() const;
+        bool loadTexture(TextureManager& textureManager);
 };
 
 #endif

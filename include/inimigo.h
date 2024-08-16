@@ -5,6 +5,7 @@
 #include <SFML/Audio.hpp>
 #include "projetil_inimigo.h"
 #include "drops.h"
+#include "texture_manager.h"
 
 using namespace std;
 using namespace sf;
@@ -21,25 +22,26 @@ class Inimigo : public Drawable{
         int health;
         bool isAlive;
         float speed;
-        std::vector<ProjetilInimigo> projeteis;
-        std::vector<Drops> possibleDrops;
+        list<ProjetilInimigo> projeteis;
+        list<Drops> possibleDrops;
         float fireRate; // Tempo entre disparos
         float fireTimer;
         const sf::RenderWindow* window;
         sf::SoundBuffer enemyShootBuffer; // Buffer para o som
         sf::Sound enemyShootSound;
+        TextureManager& textureManager; 
 
 
     public:
-        Inimigo(const sf::Vector2f& startPosition, const sf::Vector2f& targetPosition, const sf::RenderWindow* window);
+        Inimigo(const sf::Vector2f& startPosition, const sf::Vector2f& targetPosition, const sf::RenderWindow* window, TextureManager& textureManager);
 
         void update(float deltaTime, const Vector2f& playerPosition, bool audioEnabled);
         void fire(const sf::Vector2f& playerPosition, bool audioEnabled);
         bool isOutOfWindow(const sf::RenderWindow& window) const;
         void updateDirection(const sf::Vector2f& playerPosition);
 
-        std::vector<ProjetilInimigo>& getProjeteis();
-        const std::vector<ProjetilInimigo>& getProjeteis() const;
+        list<ProjetilInimigo>& getProjeteis();
+        const list<ProjetilInimigo>& getProjeteis() const;
         void reduceHealth();
         bool isAliveStatus() const;
         void loadEnemyShootSound(const std::string& filepath); 

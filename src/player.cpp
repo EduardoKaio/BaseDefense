@@ -5,18 +5,36 @@
 #include <cmath>
 #include <iostream>
 
-Player::Player(std::list<Projetil>& projeteis) 
-    : projeteis(projeteis), shooting(false), speed(300.0f), isAlive(true), health(100), projeteisDisponiveis(100) {
+Player::Player(std::list<Projetil>& projeteis, TextureManager& textureManager) 
+    : projeteis(projeteis), shooting(false), speed(300.0f), isAlive(true), health(100), projeteisDisponiveis(100), maxHealth(100),
+    maxAmmo(100), textureManager(textureManager) {
 
-        if (!texture.loadFromFile("../assets/images/playerShip1_blue.png")) {
+    if (!texture.loadFromFile("../assets/images/playerShip1_blue.png")) {
     // Erro ao carregar a textura
-    std::cerr << "Erro ao carregar a textura do herói!" << std::endl;
+        std::cerr << "Erro ao carregar a textura do herói!" << std::endl;
     } else {
         sprite.setTexture(texture);
         // Ajuste o tamanho e a posição inicial do sprite, se necessário
         sprite.setPosition(400, 300); 
         // Ajuste a posição inicial do herói
     }
+    // float playerWidth = sprite.getGlobalBounds().width;
+    // lifeBar.setSize(sf::Vector2f(playerWidth - 6, 5)); // Diminuir a largura da barra de vida em 6 pixels
+    // lifeBar.setFillColor(sf::Color::Green); // Cor inicial
+    // lifeBar.setPosition(sprite.getPosition().x + 3, sprite.getPosition().y + 20);
+    if (!font.loadFromFile("../assets/fonts/oficial.ttf")) { // Substitua o caminho pela localização da sua fonte
+        std::cerr << "Erro ao carregar a fonte!" << std::endl;
+    }
+    lifeEffectText.setFont(font);
+    lifeEffectText.setString("+5");
+    lifeEffectText.setCharacterSize(16); // Tamanho do texto
+    lifeEffectText.setFillColor(sf::Color::Green); // Cor do texto
+   
+
+    ammoBonusText.setFont(font); // Certifique-se de que o font está carregado
+    ammoBonusText.setString("+3");
+    ammoBonusText.setCharacterSize(15);
+    ammoBonusText.setFillColor(sf::Color::Yellow);
 }
 
 void Player::handleInput(float deltaTime) {
@@ -45,6 +63,7 @@ void Player::handleInput(float deltaTime) {
 
     // Atualizar a posição do jogador
     sprite.setPosition(position); // Mudança aqui
+    lifeBar.setPosition(position.x + 3, position.y -10);
 
     // if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
     //     if (!shooting && projeteisDisponiveis > 0) {
@@ -61,7 +80,7 @@ void Player::shoot(sf::Vector2f target) {
     if (projeteisDisponiveis > 0) {
         // Obter a posição central do shape do jogador
         sf::Vector2f startPosition = sprite.getPosition() + sf::Vector2f(sprite.getLocalBounds().width / 2, sprite.getLocalBounds().height / 2);
-        Projetil newProjetil(startPosition, target);
+        Projetil newProjetil(startPosition, target, textureManager); // Passe o TextureManager para Projetil
         projeteis.push_back(newProjetil);
         projeteisDisponiveis--; // Decrementar o número de projéteis disponíveis
     }
@@ -69,14 +88,44 @@ void Player::shoot(sf::Vector2f target) {
 
 void Player::update(float deltaTime) {
     handleInput(deltaTime);
+    float maxHealth = 100.0f;
+    float barWidth = (health / maxHealth) * (sprite.getGlobalBounds().width - 6); // Largura proporcional
+    lifeBar.setSize(sf::Vector2f(barWidth, 2.5f)); // Atualiza a largura da barra
+
+    // Atualiza a cor da barra de vida com base na vida
+    if (health > 75) {
+        lifeBar.setFillColor(sf::Color::Green);
+    } else if (health > 50) {
+        lifeBar.setFillColor(sf::Color::Yellow);
+    } else if (health > 25) {
+        lifeBar.setFillColor(sf::Color(255, 165, 0)); // Laranja
+    } else {
+        lifeBar.setFillColor(sf::Color::Red);
+    }
+    if (showLifeEffect) {
+        lifeEffectTimer += deltaTime;
+        if (lifeEffectTimer > 1.0f) { // O efeito dura 1 segundo
+            showLifeEffect = false;
+            lifeEffectTimer = 0;
+        }
+    }
+    lifeEffectText.setPosition(sprite.getPosition().x + 10, sprite.getPosition().y + 40);
+    // ammoEffectText.setPosition(sprite.getPosition().x + 10, sprite.getPosition().y - 20);
 }
 
 void Player::draw(sf::RenderTarget& target, sf::RenderStates states) const {
     target.draw(sprite, states);
+    target.draw(lifeBar, states);   
+    if (showLifeEffect) {
+        target.draw(lifeEffectText, states);
+    }
 }
 
 int Player::getHealth() const {
     return health;
+}
+int Player::getMaxHealth(){
+    return maxHealth;
 }
 
 int Player::getProjeteisDisponiveis(){
@@ -109,9 +158,27 @@ sf::FloatRect Player::getGlobalBounds() const {
 bool Player::isAliveStatus() const { return isAlive; }
 
 void Player::increaseHealth(int amount) {
-    health += amount;
+ if (health < maxHealth) {
+        health += amount;
+        showLifeEffect = true; // Ativa o efeito visual
+        lifeEffectTimer = 0; // Reinicia o temporizador
+    }
 }
 
 void Player::increaseAmmo(int amount) {
-    projeteisDisponiveis += amount;
+    if (projeteisDisponiveis < maxAmmo) {
+        projeteisDisponiveis += amount;
+        ammoBonusVisible = true;     // Ativa o efeito visual
+    // Reinicia o temporizador
+    }
+}
+
+int Player::getMaxAmmo(){
+    return maxAmmo;
+}
+void Player::hideAmmoBonus() {
+    ammoBonusVisible = false;
+}
+bool Player::getAmmoBonusVisible(){
+    return ammoBonusVisible;
 }

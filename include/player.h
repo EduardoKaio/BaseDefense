@@ -4,6 +4,7 @@
 #include <SFML/Graphics.hpp>
 #include <list>
 #include "projetil.h"
+#include "texture_manager.h"
 
 using namespace std;
 using namespace sf;
@@ -21,9 +22,21 @@ class Player : public Drawable {
         bool isAlive;
         int health;
         int projeteisDisponiveis;
+        int kill;
+        int maxHealth;
+        int maxAmmo;
+        TextureManager& textureManager;
+        sf::RectangleShape lifeBar; 
+        sf::Text lifeEffectText; // Texto para o efeito visual de vida
+        sf::Font font; // Fonte para o texto
+        bool showLifeEffect; // Flag para mostrar o efeito
+        float lifeEffectTimer;
+        sf::Text ammoEffectText; // Texto para o efeito visual de munição
+        bool ammoBonusVisible;  // Adicione essa linha
         
     public:
-        Player(list<Projetil>& projeteis);
+        sf::Text ammoBonusText;
+        Player(list<Projetil>& projeteis, TextureManager& textureManager);
         sf::Sprite& getSprite();
         void update(float deltaTime);
         void shoot(sf::Vector2f target);
@@ -37,5 +50,10 @@ class Player : public Drawable {
         void setSize(float scaleX, float scaleY);
         void increaseHealth(int amount);
         void increaseAmmo(int amount);
+        int getMaxHealth();
+        int getMaxAmmo();
+        void hideAmmoBonus();
+        bool getAmmoBonusVisible();
+
 };
 #endif

@@ -10,8 +10,10 @@
 using namespace std;
 using namespace sf;
 
-Inimigo::Inimigo(const sf::Vector2f& startPosition, const sf::Vector2f& targetPosition, const sf::RenderWindow* win)
-: position(startPosition), direction(targetPosition - startPosition), health(2), isAlive(true), speed(30.0f), window(win) {
+Inimigo::Inimigo(const sf::Vector2f& startPosition, const sf::Vector2f& targetPosition, const sf::RenderWindow* win, TextureManager& textureManager)
+: position(startPosition), direction(targetPosition - startPosition), 
+health(2), isAlive(true), speed(30.0f), window(win), 
+textureManager(textureManager) {
 
     // Inicializa fireRate com uma variação aleatória
     std::random_device rd;
@@ -19,6 +21,7 @@ Inimigo::Inimigo(const sf::Vector2f& startPosition, const sf::Vector2f& targetPo
     std::uniform_real_distribution<> dist(0.5, 2.5); // Variação da taxa de disparo entre 0.5 e 2.5 segundos
     fireRate = dist(gen);
     fireTimer = 0.0f;
+    
     
     
     if (!texture.loadFromFile("../assets/images/enemyBlack1.png")) {
@@ -35,8 +38,9 @@ Inimigo::Inimigo(const sf::Vector2f& startPosition, const sf::Vector2f& targetPo
     enemyShootSound.setBuffer(enemyShootBuffer);
 
     // Inicialização de possíveis drops
-    possibleDrops.push_back(Drops(Drops::DropsType::Health, position));
-    possibleDrops.push_back(Drops(Drops::DropsType::Ammo, position));
+    possibleDrops.push_back(Drops(Drops::DropsType::Health, position, textureManager));
+    possibleDrops.push_back(Drops(Drops::DropsType::Ammo, position, textureManager));
+    
 }
 
 void Inimigo::updateDirection(const sf::Vector2f& playerPosition) {
@@ -65,17 +69,18 @@ void Inimigo::update(float deltaTime, const sf::Vector2f& playerPosition, bool a
         projetil.update(deltaTime);
     }
     
-    // Remove projéteis fora da tela
-    projeteis.erase(std::remove_if(projeteis.begin(), projeteis.end(),
-        [&](const ProjetilInimigo& projetil) {
-            return projetil.isOutOfWindow(*window);
-        }), projeteis.end());
+    // // Remove projéteis fora da tela
+    // projeteis.erase(std::remove_if(projeteis.begin(), projeteis.end(),
+    //     [&](const ProjetilInimigo& projetil) {
+    //         return projetil.isOutOfWindow(*window);
+    //     }), projeteis.end());
 }
 
 void Inimigo::fire(const sf::Vector2f& playerPosition, bool audioEnabled) {
     // Calcula a posição do projétil a partir da posição do inimigo
     sf::Vector2f projecaoPos = sprite.getPosition() + sf::Vector2f(sprite.getGlobalBounds().width / 2, sprite.getGlobalBounds().height / 2);
-    ProjetilInimigo newProjetil(projecaoPos, playerPosition);
+    
+    ProjetilInimigo newProjetil(projecaoPos, playerPosition, textureManager);
     projeteis.push_back(newProjetil);
 
     if (audioEnabled && enemyShootSound.getStatus() != sf::Sound::Playing) {
@@ -106,11 +111,10 @@ void Inimigo::draw(sf::RenderTarget& target, sf::RenderStates states) const {
     target.draw(sprite, states);
 }
 
-std::vector<ProjetilInimigo>& Inimigo::getProjeteis() {
+list<ProjetilInimigo>& Inimigo::getProjeteis() {
     return projeteis;
 }
-
-const std::vector<ProjetilInimigo>& Inimigo::getProjeteis() const {
+const list<ProjetilInimigo>& Inimigo::getProjeteis() const {
     return projeteis;
 }
 
@@ -145,9 +149,13 @@ Drops Inimigo::dropItem() {
     std::mt19937 gen(rd());
     std::uniform_int_distribution<> dist(0, possibleDrops.size() - 1);
 
-    int dropIndex = dist(gen);
-    Drops drop = possibleDrops[dropIndex];
+    // Cria um iterador para acessar o elemento na lista
+    auto it = possibleDrops.begin();
+    std::advance(it, dist(gen));
+
+    // Usa o iterador para acessar o elemento
+    Drops drop = *it;
     drop.setPosition(sprite.getPosition()); // Posicione o item onde o inimigo morreu
-    
+
     return drop;
 }

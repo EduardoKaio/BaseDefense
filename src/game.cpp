@@ -9,7 +9,7 @@
 Game::Game() 
     : window(sf::VideoMode(800, 600), "Base Defense", sf::Style::Titlebar | sf::Style::Close), 
     projeteis(),
-    player(projeteis), 
+    player(projeteis, textureManager), 
     base(),
     spawnInterval(3.0f),
     gameOver(false),
@@ -19,25 +19,37 @@ Game::Game()
     totalTime(60.0f),
     isShooting(false), // Exemplo: 1 minuto (60 segundos)
     remainingTime(totalTime),
-    infoScreenActive(false) { // Adicione a variável gameStarted
+    infoScreenActive(false),
+    killCount(0),
+    textureManager() { // Adicione a variável gameStarted
     
     // Configura a janela e outros elementos iniciais
     window.setSize(sf::Vector2u(800, 600));
     window.setPosition(sf::Vector2i(100, 100));
     window.setVerticalSyncEnabled(true);
 
+    textureManager.loadTexture("health", "../assets/images/life.png");
+    textureManager.loadTexture("ammo", "../assets/images/bullet.png");
+    textureManager.loadTexture("projectile_inimigo", "../assets/images/laserRed16.png");
+    if (!textureManager.loadTexture("projectile", "../assets/images/laserBlue16.png")) {
+        std::cerr << "Erro ao carregar a textura do projétil!" << std::endl;
+    }
+    
+
     // Ajuste a posição do jogador e base
     sf::Vector2f center(window.getSize().x / 2.0f, window.getSize().y / 2.0f);
     player.getSprite().setPosition(center);
-    sf::Vector2f basePosition(window.getSize().x / 2.0f - base.getShape().getSize().x / 2.0f,
-                            window.getSize().y / 2.0f - base.getShape().getSize().y / 2.0f);
-    base.setPosition(basePosition);
-
-    // if (!backgroundTexture.loadFromFile("../assets/images/black.png")) {
-    //     std::cerr << "Não foi possível carregar background" << std::endl;
-    // }
     
-    // backgroundSprite.setTexture(backgroundTexture);
+    sf::FloatRect baseBounds = base.getSprite().getGlobalBounds();
+    sf::Vector2f basePosition(window.getSize().x / 2.0f - baseBounds.width / 2.0f,
+                            window.getSize().y / 2.0f - baseBounds.height / 2.0f);
+    base.getSprite().setPosition(basePosition);
+
+    if (!backgroundTexture.loadFromFile("../assets/images/black.png")) {
+        std::cerr << "Não foi possível carregar background" << std::endl;
+    }
+    backgroundSprite.setTexture(backgroundTexture);
+   
 
     // Carregar recursos de áudio
     if (!backgroundMusic.openFromFile("../assets/sounds/boss_battle_#2.WAV")) {
@@ -52,7 +64,7 @@ Game::Game()
     }
     heroShootSound.setBuffer(heroShootBuffer);
 
-    std::string enemyShootSoundFile = "../awindow.draw(heroSprite);ssets/sounds/sfx_laser2.ogg";
+    std::string enemyShootSoundFile = "../assets/sounds/sfx_laser2.ogg";
     for (auto& inimigo : inimigos) {
         inimigo.loadEnemyShootSound(enemyShootSoundFile);
     }
@@ -119,10 +131,8 @@ void Game::processEvents() {
             if (event.key.code == sf::Keyboard::M) {
                 toggleAudio(!audioEnabled);
             } else if (event.key.code == sf::Keyboard::P) {
-                if (gameStarted && !gameOver && !victory) {
-                    gameStarted = false; // Pausa o jogo
-                } else if (!gameStarted && !gameOver && !victory) {
-                    gameStarted = true; // Retoma o jogo
+               if (gameStarted && !gameOver) {
+                    isPaused = !isPaused; // Alterna o estado de pausa
                 }
             }
         }
@@ -154,7 +164,7 @@ void Game::processEvents() {
                     if (backButton.getGlobalBounds().contains(mousePosF)) {
                         infoScreenActive = false; // Volta para a tela inicial
                     }
-                } else if (!isShooting && gameStarted) {
+                } else if (!isShooting && gameStarted && !isPaused) {
                     player.shoot(mousePosF);
                     if (audioEnabled && player.getProjeteisDisponiveis()>0) {
                         heroShootSound.play();
@@ -175,14 +185,12 @@ void Game::processEvents() {
 
 void Game::update(float deltaTime) {
      // Não atualize o jogo se a tela de "informações estiver ativa"
+    this->deltaTime = deltaTime;
     
-    if (gameOver || victory) return; // Não atualiza o jogo se estiver em game over ou vitória
-    
-    if (infoScreenActive) {
-        // Atualização da tela de informações se necessário
-        // Adicione qualquer lógica específica para a tela de informações aqui
-        return;
+    if (isPaused || gameOver || victory || infoScreenActive) {
+        return; // Se estiver pausado ou em game over/vitória,tela de info não atualize a lógica do jogo
     }
+
     if (remainingTime > 0) {
         remainingTime -= deltaTime;
         if (remainingTime < 0) {
@@ -214,7 +222,7 @@ void Game::update(float deltaTime) {
             startPosition.y = (dist(gen) == 0) ? 0 : window.getSize().y;
         }
 
-        inimigos.emplace_back(startPosition, playerPosition, &window);
+        inimigos.emplace_back(startPosition, playerPosition, &window, textureManager);
     }
 
     player.update(deltaTime);
@@ -234,6 +242,7 @@ void Game::update(float deltaTime) {
                 activeDrops.push_back(it->dropItem());
             }
             it = inimigos.erase(it);
+            killCount++;
         } else {
             ++it;
         }
@@ -246,8 +255,7 @@ void Game::update(float deltaTime) {
         // Verifica colisões com inimigos
         for (auto enemyIt = inimigos.begin(); enemyIt != inimigos.end(); ++enemyIt) {
             if (enemyIt->isAliveStatus() && it->isActive() &&
-                it->iscolliding(it->getShape().getPosition().x, it->getShape().getPosition().y, it->getShape().getRadius(),
-                                enemyIt->getSprite().getPosition().x, enemyIt->getSprite().getPosition().y, enemyIt->getSprite().getLocalBounds().width / 2)) {
+                it->getSprite().getGlobalBounds().intersects(enemyIt->getSprite().getGlobalBounds())) {
                 enemyIt->reduceHealth();
                 it->setActive(false);
                 break; // Só precisa verificar a colisão com um inimigo
@@ -269,16 +277,16 @@ void Game::update(float deltaTime) {
 
             // Verifica colisões com o jogador
             if (player.isAliveStatus() && projIt->isActive() &&
-                projIt->iscolliding(projIt->getShape().getPosition().x, projIt->getShape().getPosition().y, projIt->getShape().getRadius(),
+                projIt->iscolliding(projIt->getSprite().getPosition().x, projIt->getSprite().getPosition().y, projIt->getSprite().getLocalBounds().width / 2,
                                     player.getSprite().getPosition().x, player.getSprite().getPosition().y, player.getSprite().getLocalBounds().width / 2)) {
                 player.reduceHealth(5);
                 projIt->setActive(false);
                 // O projétil deve ser removido da lista de projéteis do inimigo
                 projIt = it->getProjeteis().erase(projIt);
             } else if (projIt->isActive() &&
-                       projIt->iscollidingBase(projIt->getShape().getPosition().x, projIt->getShape().getPosition().y,
-                                               base.getShape().getPosition().x, base.getShape().getPosition().y,
-                                               base.getShape().getSize().x, base.getShape().getSize().y)) {
+                       projIt->iscollidingBase(projIt->getSprite().getPosition().x, projIt->getSprite().getPosition().y,
+                                               base.getGlobalBounds().left, base.getGlobalBounds().top,
+                                               base.getGlobalBounds().width, base.getGlobalBounds().height)) {
                 base.reduceHealth(2);
                 projIt->setActive(false);
                 projIt = it->getProjeteis().erase(projIt);
@@ -296,7 +304,7 @@ void Game::update(float deltaTime) {
     }
 
     for (auto it = activeDrops.begin(); it != activeDrops.end();) {
-        if (it->isActive() && it->iscolliding(it->getShape().getPosition().x, it->getShape().getPosition().y, it->getShape().getRadius(),
+        if (it->isActive() && it->iscolliding(it->getSprite().getPosition().x, it->getSprite().getPosition().y, it->getSprite().getGlobalBounds().width/2,
                                               player.getSprite().getPosition().x, player.getSprite().getPosition().y, player.getSprite().getLocalBounds().width / 2)) {
             it->applyEffect(player);
 
@@ -313,6 +321,7 @@ void Game::update(float deltaTime) {
     int seconds = static_cast<int>(remainingTime) % 60;
     timeStream << std::setw(2) << std::setfill('0') << minutes << ":" << std::setw(2) << std::setfill('0') << seconds;
     timerText.setString(timeStream.str());
+
 }
 
 
@@ -337,15 +346,36 @@ void Game::render() {
             star.setPosition(rand() % windowSize.x, rand() % windowSize.y);
             window.draw(star);
         }
+    if (isPaused) {
+        // Apenas desenha o texto de pausa e a sobreposição sobre o fundo do jogo
+        // sf::RectangleShape overlay(sf::Vector2f(window.getSize().x, window.getSize().y));
+        // overlay.setFillColor(sf::Color(0, 0, 0, 100)); // Semi-transparente
+        // window.draw(overlay);
 
-    if (infoScreenActive) { // Verifica se a tela de informações está ativa
+        // sf::Text pauseText;
+        // pauseText.setFont(font);
+        // pauseText.setString("PAUSE");
+        // pauseText.setCharacterSize(60);
+        // pauseText.setFillColor(sf::Color::White);
+        // pauseText.setStyle(sf::Text::Bold);
+
+        // // Centraliza o texto
+        // sf::FloatRect textRect = pauseText.getLocalBounds();
+        // pauseText.setOrigin(textRect.left + textRect.width / 2.0f, textRect.top + textRect.height / 2.0f);
+        // pauseText.setPosition(window.getSize().x / 2.0f, window.getSize().y / 2.0f);
+        // window.draw(pauseText);
+
+        // Não chame window.clear() aqui
+        // window.display();
+        return; // Não renderize mais nada se o jogo estiver pausado
+    } else if (infoScreenActive) { // Verifica se a tela de informações está ativa
         window.clear(); // Limpa a janela com a cor padrão
         sf::RectangleShape galaxyBackground(sf::Vector2f(window.getSize().x, window.getSize().y));
             galaxyBackground.setFillColor(sf::Color::Black);
             window.draw(galaxyBackground);
 
             // Adiciona estrelas ou efeitos de nebulosa
-            sf::CircleShape star(0.5);
+            sf::CircleShape star(1);
             star.setFillColor(sf::Color::White);
             for (int i = 0; i < 5; ++i) {
                 star.setPosition(rand() % windowSize.x, rand() % windowSize.y);
@@ -364,13 +394,13 @@ void Game::render() {
         titleInfoText.setPosition(window.getSize().x / 2.0f - 160, window.getSize().y / 2.0f - 260);
 
         infoText.setString("Objetivo do Jogo\n\n"
-                           "Seu objetivo é proteger a base do ataque dos inimigos durante 1 minuto.\n"
-                            "O jogo termina quando o herói é derrotado ou a base é destruída.\n\n"
+                           "Seu objetivo e proteger a base do ataque dos inimigos durante 1 minuto.\n"
+                            "O jogo termina quando o heroi e derrotado ou a base é destruída.\n\n"
                            "Como Jogar\n\n"
-                           "Movimentação:\n"
-                           "Use as teclas 'W', 'A', 'S' e 'D' para mover o herói para cima, esquerda, baixo\ne direita.\n\n"
+                           "Movimentacao:\n"
+                           "Use as teclas 'W', 'A', 'S' e 'D' para mover o heroi para cima, esquerda, baixo\ne direita.\n\n"
                            "Atirar:\n"
-                           "Clique com o botão esquerdo do mouse para disparar projéteis contra\nos inimigos.\n\n"
+                           "Clique com o botao esquerdo do mouse para disparar projeteis contra\nos inimigos.\n\n"
                            "Controle de Áudio:\n"
                            "Pressione a tecla 'M' para ativar ou desativar os sons do jogo.\n\n"
                            "Pausar o Jogo:\n"
@@ -449,7 +479,7 @@ void Game::render() {
             window.draw(galaxyBackground);
 
             // Adiciona estrelas ou efeitos de nebulosa
-            sf::CircleShape star(0.5);
+            sf::CircleShape star(1);
             star.setFillColor(sf::Color::White);
             for (int i = 0; i < 5; ++i) {
                 star.setPosition(rand() % windowSize.x, rand() % windowSize.y);
@@ -461,19 +491,26 @@ void Game::render() {
             window.draw(infoButton);
             window.draw(infoButtonText);
         } else {
+            //  sf::Vector2u textureSize = backgroundTexture.getSize();
+            // float scaleX = static_cast<float>(windowSize.x) / textureSize.x;
+            // float scaleY = static_cast<float>(windowSize.y) / textureSize.y;
+            // backgroundSprite.setScale(scaleX, scaleY);
+            // window.clear();
+            // window.draw(backgroundSprite);
+            
             sf::RectangleShape galaxyBackground(sf::Vector2f(window.getSize().x, window.getSize().y));
             galaxyBackground.setFillColor(sf::Color::Black);
             window.draw(galaxyBackground);
-
+            
             // Adiciona estrelas ou efeitos de nebulosa
-            sf::CircleShape star(0.5);
+            sf::CircleShape star(2);
             star.setFillColor(sf::Color::White);
-            for (int i = 0; i < 5; ++i) {
+            for (int i = 0; i < 4; ++i) {
                 star.setPosition(rand() % windowSize.x, rand() % windowSize.y);
                 window.draw(star);
             }
             window.draw(base); 
-            window.draw(player.getSprite());
+            window.draw(player);
             player.setSize(0.5f, 0.5f);
 
             for (const auto& projetil : projeteis) {
@@ -494,13 +531,35 @@ void Game::render() {
 
             sf::Text infoText;
             infoText.setFont(font);
-            infoText.setString("Municao: " + std::to_string(player.getProjeteisDisponiveis()) + "\n" +
-                            "Vida: " + std::to_string(player.getHealth()) + "\n" +
-                            "Vida Base: " + std::to_string(base.getHealth()));
+            infoText.setString("Kills: " + std::to_string(killCount) + "\n" +
+                            "Ammo: " + std::to_string(player.getProjeteisDisponiveis()) + "\n");
+                            // "Vida: " + std::to_string(player.getHealth()) + "/" + std::to_string(player.getMaxHealth()) +"\n" +
+                            // "Base: " + std::to_string(base.getHealth()));
             infoText.setCharacterSize(15);
             infoText.setFillColor(sf::Color::White);
-            infoText.setPosition(window.getSize().x - 150, 20);
+            infoText.setPosition(window.getSize().x - 110, 20);
             
+            if (player.getAmmoBonusVisible()) {
+                // Obter a largura do texto de munição
+                sf::FloatRect ammoBounds = infoText.getLocalBounds();
+                float ammoTextWidth = ammoBounds.width;
+
+                // Posicionar o texto "+5" ao lado da quantidade de munição
+                player.ammoBonusText.setPosition(infoText.getPosition().x -30, infoText.getPosition().y + 17); // Ajuste o +5 conforme necessário
+
+                // Desenhar o texto "+5"
+                window.draw(player.ammoBonusText);
+                
+            static float bonusTimer = 1.5f; // Duração do texto de bônus em segundos
+                if (bonusTimer > 0) {
+                    bonusTimer -= deltaTime; // Reduz o temporizador
+                    if (bonusTimer <= 0) {
+                        player.hideAmmoBonus(); // Oculta o texto de bônus
+                        bonusTimer = 1.5f; // Resetar o temporizador, se necessário
+                    }
+                }
+            }
+
             window.draw(infoText);
             window.draw(timerText);
         }
@@ -522,6 +581,7 @@ void Game::resetGame() {
     window.draw(player.getSprite());
     projeteis.clear();
     inimigos.clear();
+    activeDrops.clear();
 }
 
 void Game::toggleAudio(bool enable) {

@@ -11,21 +11,12 @@
 using namespace std;
 using namespace sf;
 
-Drops::Drops(DropsType type, const sf::Vector2f& position)
-    : type(type), position(position), active(true) {  
-    // Configurando o círculo que representa o item
-    circle.setRadius(15.0f); // Define o raio do círculo
-    circle.setPosition(position); // Define a posição do item na tela
-    circle.setOrigin(circle.getRadius(), circle.getRadius());
-    // Carregar a textura apropriada para o tipo de item
-    switch (type) {
-        case DropsType::Health:
-            circle.setFillColor(sf::Color::Green);
-            break;
-        case DropsType::Ammo:
-            circle.setFillColor(sf::Color::Red);
-            break;
-    }
+Drops::Drops(DropsType type, const sf::Vector2f& position, TextureManager& textureManager)
+    : type(type), position(position), active(true), texture(nullptr) {
+    // Configurar o sprite e a textura do item
+    loadTexture(textureManager);
+    sprite.setPosition(position);
+    sprite.setOrigin(sprite.getLocalBounds().width / 2, sprite.getLocalBounds().height / 2);
 }
 
 Drops::DropsType Drops::getType() const {
@@ -34,24 +25,43 @@ Drops::DropsType Drops::getType() const {
 
 void Drops::setPosition(const sf::Vector2f& newPosition) {
     position = newPosition;
-    circle.setPosition(position);
+    sprite.setPosition(position);
+    // circle.setPosition(position);
 }
 
 sf::Vector2f Drops::getPosition() const {
     return position;
 }
 
-bool Drops::loadTexture(const std::string& filepath) {
-    if (!texture.loadFromFile(filepath)) {
-        std::cerr << "Erro ao carregar a textura do item: " << filepath << std::endl;
-        return false;
+bool Drops::loadTexture(TextureManager& textureManager) {
+    switch (type) {
+        case DropsType::Health:
+            texture = textureManager.getTexture("health");
+            sprite.setScale(0.06f, 0.06f);
+
+            if (!texture) {
+                std::cerr << "Falha ao obter a textura de saúde" << std::endl;
+                return false;
+            }
+            break;
+        case DropsType::Ammo:
+            texture = textureManager.getTexture("ammo");
+            sprite.setScale(0.1f, 0.1f);
+
+            if (!texture) {
+                std::cerr << "Falha ao obter a textura de munição" << std::endl;
+                return false;
+            }
+            break;
     }
-    sprite.setTexture(texture);
+    sprite.setTexture(*texture);
     return true;
 }
 
 void Drops::draw(sf::RenderTarget& target, sf::RenderStates states) const {
-    target.draw(circle, states);
+    if (active) {
+        target.draw(sprite, states);
+    }
 }
 
 bool Drops::iscolliding(float x1, float y1, float r1, float x2, float y2, float r2){
@@ -74,12 +84,15 @@ void Drops::applyEffect(Player& player) {
     }
 }
 
-CircleShape Drops::getShape() const{
-    return circle;
-}
+// CircleShape Drops::getShape() const{
+//     return circle;
+// }
 
 bool Drops::isActive() const { return active; }
 
 void Drops::setActive(bool isActive) { 
     this->active = isActive;
+}
+sf::Sprite Drops::getSprite() const{
+    return sprite;
 }
