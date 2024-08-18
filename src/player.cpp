@@ -6,8 +6,8 @@
 #include <iostream>
 
 Player::Player(std::list<Projetil>& projeteis, TextureManager& textureManager) 
-    : projeteis(projeteis), shooting(false), speed(300.0f), isAlive(true), health(100), projeteisDisponiveis(100), maxHealth(100),
-    maxAmmo(100), textureManager(textureManager) {
+    : projeteis(projeteis), shooting(false), speed(300.0f), isAlive(true), health(100), projeteisDisponiveis(50), maxHealth(100),
+    maxAmmo(50), textureManager(textureManager) {
 
     if (!texture.loadFromFile("../assets/images/playerShip1_blue.png")) {
     // Erro ao carregar a textura
@@ -58,8 +58,8 @@ void Player::handleInput(float deltaTime) {
     // Verificar e ajustar os limites da tela
     if (position.x < 0) position.x = 0;
     if (position.y < 0) position.y = 0;
-    if (position.x + size.x > 800) position.x = 800 - size.x;
-    if (position.y + size.y > 600) position.y = 600 - size.y;
+    if (position.x + (size.x)/2 > 800) position.x = 800 - (size.x)/2;
+    if (position.y + (size.y)/2 > 600) position.y = 600 - (size.y)/2;
 
     // Atualizar a posição do jogador
     sprite.setPosition(position); // Mudança aqui
