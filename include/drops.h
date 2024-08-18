@@ -26,9 +26,10 @@ class Drops : public Drawable {
         sf::Vector2f position;
         // sf::CircleShape circle;
         bool active;
+        float lifetime;
 
     public:
-        Drops(DropsType type, const sf::Vector2f& position, TextureManager& textureManager);
+        Drops(DropsType type, const sf::Vector2f& position, TextureManager& textureManager, float lifetime);
         DropsType getType() const;
         void setPosition(const sf::Vector2f& newPosition);
         sf::Vector2f getPosition() const;
@@ -42,6 +43,7 @@ class Drops : public Drawable {
         bool isActive() const;
         sf::Sprite getSprite() const;
         bool loadTexture(TextureManager& textureManager);
+        void updadeDrops(float deltaTime);
 };
 
 #endif

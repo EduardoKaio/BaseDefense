@@ -30,7 +30,7 @@ class Game {
         list<Inimigo> inimigos;
         list<Drops> activeDrops;
         float spawnTimer; // Temporizador para o surgimento dos inimigos
-        const float spawnInterval;
+        float spawnInterval;
         bool gameOver;
         Music backgroundMusic; 
         SoundBuffer heroShootBuffer;
@@ -68,7 +68,8 @@ class Game {
         int killCount;
         TextureManager textureManager;
         float deltaTime;
-        bool isPaused = false; 
+        bool isPaused = false;
+        sf::Clock clock;
         
     public:
         Game();

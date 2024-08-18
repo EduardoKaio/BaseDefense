@@ -11,8 +11,8 @@
 using namespace std;
 using namespace sf;
 
-Drops::Drops(DropsType type, const sf::Vector2f& position, TextureManager& textureManager)
-    : type(type), position(position), active(true), texture(nullptr) {
+Drops::Drops(DropsType type, const sf::Vector2f& position, TextureManager& textureManager, float lifetime)
+    : type(type), position(position), active(true), texture(nullptr), lifetime(lifetime) {
     // Configurar o sprite e a textura do item
     loadTexture(textureManager);
     sprite.setPosition(position);
@@ -95,4 +95,12 @@ void Drops::setActive(bool isActive) {
 }
 sf::Sprite Drops::getSprite() const{
     return sprite;
+}
+
+void Drops::updadeDrops(float deltaTime) {
+    lifetime = lifetime - 0.01f;
+
+    if (lifetime <= 0.0f) {
+        setActive(false);
+    }
 }

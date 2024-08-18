@@ -38,8 +38,8 @@ textureManager(textureManager) {
     enemyShootSound.setBuffer(enemyShootBuffer);
 
     // Inicialização de possíveis drops
-    possibleDrops.push_back(Drops(Drops::DropsType::Health, position, textureManager));
-    possibleDrops.push_back(Drops(Drops::DropsType::Ammo, position, textureManager));
+    possibleDrops.push_back(Drops(Drops::DropsType::Health, position, textureManager, 15.0f));
+    possibleDrops.push_back(Drops(Drops::DropsType::Ammo, position, textureManager, 15.0f));
     
 }
 

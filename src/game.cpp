@@ -185,7 +185,7 @@ void Game::processEvents() {
 
 void Game::update(float deltaTime) {
      // Não atualize o jogo se a tela de "informações estiver ativa"
-    this->deltaTime = deltaTime;
+    deltaTime = clock.restart().asSeconds();
     
     if (isPaused || gameOver || victory || infoScreenActive) {
         return; // Se estiver pausado ou em game over/vitória,tela de info não atualize a lógica do jogo
@@ -223,6 +223,8 @@ void Game::update(float deltaTime) {
         }
 
         inimigos.emplace_back(startPosition, playerPosition, &window, textureManager);
+        base.regenHealth();
+        spawnInterval = spawnInterval - 0.075f;
     }
 
     player.update(deltaTime);
@@ -304,16 +306,20 @@ void Game::update(float deltaTime) {
     }
 
     for (auto it = activeDrops.begin(); it != activeDrops.end();) {
+        it->updadeDrops(deltaTime);
+        
         if (it->isActive() && it->iscolliding(it->getSprite().getPosition().x, it->getSprite().getPosition().y, it->getSprite().getGlobalBounds().width/2,
                                               player.getSprite().getPosition().x, player.getSprite().getPosition().y, player.getSprite().getLocalBounds().width / 2)) {
             it->applyEffect(player);
-
             it->setActive(false);
-            it = activeDrops.erase(it);
             break;
         }
         
-        ++it;
+        if (!it->isActive()) {
+            it = activeDrops.erase(it);
+        } else {
+            ++it;
+        }
     }
     
     std::ostringstream timeStream;
