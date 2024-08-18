@@ -192,5 +192,12 @@ void Base::reset() {
     // Redefine a saúde e posição da base
     health = 100; // Defina o valor inicial de saúde
     // Posicione a base na posição inicial
-    
+}
+
+void Base::regenHealth() {
+    // Recupera vida ao longo do tempo
+    health++;
+    if (health > 100) {
+        health = 100;
+    }
 }

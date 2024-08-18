@@ -33,7 +33,7 @@ class Base : public sf::Drawable {
         sf::Sprite& getSprite(); 
         void reset();
         sf::FloatRect getGlobalBounds() const;
-
+        void regenHealth();
 };
 
 #endif // BASE_H
