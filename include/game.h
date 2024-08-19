@@ -19,10 +19,11 @@ class Game {
         void processEvents();
         void update(float deltaTime);
         void render();
-        // void spawnInimigos();
-        // void handleCollisions();
+        void setupButton(RectangleShape& button, Text& buttonText, const string& text, const Vector2f& position);
+        void resetGame();
+        void toggleAudio(bool enable);
 
-        sf::RenderWindow window;
+        RenderWindow window;
         Player player;
         Base base;
         list<Projetil> projeteis;
@@ -38,30 +39,25 @@ class Game {
         SoundBuffer enemyShootBuffer;
         Sound enemyShootSound;
         bool gameStarted;
-        void setupButton(sf::RectangleShape& button, sf::Text& buttonText, const std::string& text, const sf::Vector2f& position);
-        void resetGame();
-        void toggleAudio(bool enable);
-
-        sf::RectangleShape startButton;
-        sf::Text startButtonText;
-        sf::RectangleShape restartButton;
-        sf::Text restartButtonText;
-        sf::RectangleShape backButton;
-        sf::Text backButtonText;
-
+        RectangleShape startButton;
+        Text startButtonText;
+        RectangleShape restartButton;
+        Text restartButtonText;
+        RectangleShape backButton;
+        Text backButtonText;
         RectangleShape infoButton;
         Text infoButtonText;
-        sf::Font font;
-        std::vector<sf::RectangleShape> buttons;
-        std::vector<sf::Text> buttonTexts;
+        Font font;
+        vector<RectangleShape> buttons;
+        vector<Text> buttonTexts;
         bool audioEnabled;
         bool victory; 
         float totalTime; // Tempo total em segundos
         float remainingTime; // Tempo restante em segundos
-        sf::Text timerText;
+        Text timerText;
         void resetTimer();
-        sf::Texture backgroundTexture;
-        sf::Sprite backgroundSprite;
+        Texture backgroundTexture;
+        Sprite backgroundSprite;
         bool isShooting;
         Text titleText;
         bool infoScreenActive;
@@ -69,7 +65,7 @@ class Game {
         TextureManager textureManager;
         float deltaTime;
         bool isPaused = false;
-        sf::Clock clock;
+        Clock clock;
         
     public:
         Game();

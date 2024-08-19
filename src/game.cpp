@@ -142,13 +142,6 @@ void Game::processEvents() {
                 sf::Vector2i mousePos = sf::Mouse::getPosition(window);
                 sf::Vector2f mousePosF(static_cast<float>(mousePos.x), static_cast<float>(mousePos.y));
 
-                // Adicione mensagens de debug para verificar as coordenadas
-                // std::cout << "Mouse Position: " << mousePosF.x << ", " << mousePosF.y << std::endl;
-                // std::cout << "Start Button Bounds: " << startButton.getGlobalBounds().left << ", " << startButton.getGlobalBounds().top << std::endl;
-                // std::cout << "Info Button Bounds: " << infoButton.getGlobalBounds().left << ", " << infoButton.getGlobalBounds().top << std::endl;
-                // std::cout << "Back Button Bounds: " << backButton.getGlobalBounds().left << ", " << backButton.getGlobalBounds().top << std::endl;
-                // std::cout << "Restart Button Bounds: " << restartButton.getGlobalBounds().left << ", " << restartButton.getGlobalBounds().top << std::endl;
-
                 if (!gameStarted) {
                     if (startButton.getGlobalBounds().contains(mousePosF)) {
                         gameStarted = true;
@@ -330,14 +323,8 @@ void Game::update(float deltaTime) {
 
 }
 
-
-
 void Game::render() {
     sf::Vector2u windowSize = window.getSize();
-    // sf::Vector2u textureSize = backgroundTexture.getSize();
-    // float scaleX = static_cast<float>(windowSize.x) / textureSize.x;
-    // float scaleY = static_cast<float>(windowSize.y) / textureSize.y;
-    // backgroundSprite.setScale(scaleX, scaleY);
 
     window.clear(); // Limpa a janela com a cor padrão
     // window.draw(backgroundSprite); // Desenha o fundo
@@ -353,26 +340,7 @@ void Game::render() {
             window.draw(star);
         }
     if (isPaused) {
-        // Apenas desenha o texto de pausa e a sobreposição sobre o fundo do jogo
-        // sf::RectangleShape overlay(sf::Vector2f(window.getSize().x, window.getSize().y));
-        // overlay.setFillColor(sf::Color(0, 0, 0, 100)); // Semi-transparente
-        // window.draw(overlay);
-
-        // sf::Text pauseText;
-        // pauseText.setFont(font);
-        // pauseText.setString("PAUSE");
-        // pauseText.setCharacterSize(60);
-        // pauseText.setFillColor(sf::Color::White);
-        // pauseText.setStyle(sf::Text::Bold);
-
-        // // Centraliza o texto
-        // sf::FloatRect textRect = pauseText.getLocalBounds();
-        // pauseText.setOrigin(textRect.left + textRect.width / 2.0f, textRect.top + textRect.height / 2.0f);
-        // pauseText.setPosition(window.getSize().x / 2.0f, window.getSize().y / 2.0f);
-        // window.draw(pauseText);
-
-        // Não chame window.clear() aqui
-        // window.display();
+       
         return; // Não renderize mais nada se o jogo estiver pausado
     } else if (infoScreenActive) { // Verifica se a tela de informações está ativa
         window.clear(); // Limpa a janela com a cor padrão
@@ -497,12 +465,6 @@ void Game::render() {
             window.draw(infoButton);
             window.draw(infoButtonText);
         } else {
-            //  sf::Vector2u textureSize = backgroundTexture.getSize();
-            // float scaleX = static_cast<float>(windowSize.x) / textureSize.x;
-            // float scaleY = static_cast<float>(windowSize.y) / textureSize.y;
-            // backgroundSprite.setScale(scaleX, scaleY);
-            // window.clear();
-            // window.draw(backgroundSprite);
             
             sf::RectangleShape galaxyBackground(sf::Vector2f(window.getSize().x, window.getSize().y));
             galaxyBackground.setFillColor(sf::Color::Black);
@@ -539,8 +501,6 @@ void Game::render() {
             infoText.setFont(font);
             infoText.setString("Kills: " + std::to_string(killCount) + "\n" +
                             "Ammo: " + std::to_string(player.getProjeteisDisponiveis()) + "\n");
-                            // "Vida: " + std::to_string(player.getHealth()) + "/" + std::to_string(player.getMaxHealth()) +"\n" +
-                            // "Base: " + std::to_string(base.getHealth()));
             infoText.setCharacterSize(15);
             infoText.setFillColor(sf::Color::White);
             infoText.setPosition(window.getSize().x - 110, 20);

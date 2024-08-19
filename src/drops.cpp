@@ -26,7 +26,7 @@ Drops::DropsType Drops::getType() const {
 void Drops::setPosition(const sf::Vector2f& newPosition) {
     position = newPosition;
     sprite.setPosition(position);
-    // circle.setPosition(position);
+    
 }
 
 sf::Vector2f Drops::getPosition() const {
@@ -83,10 +83,6 @@ void Drops::applyEffect(Player& player) {
             break;
     }
 }
-
-// CircleShape Drops::getShape() const{
-//     return circle;
-// }
 
 bool Drops::isActive() const { return active; }
 

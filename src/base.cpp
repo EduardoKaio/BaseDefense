@@ -5,10 +5,6 @@
 #include <iostream>
 
 Base::Base() : health(100) {
-    // shape.setSize(sf::Vector2f(300, 150)); // Define o tamanho da base
-    // shape.setFillColor(sf::Color::Transparent); // Sem preenchimento
-    // shape.setOutlineColor(sf::Color(34, 139, 34));  // Cor do contorno
-    // shape.setOutlineThickness(5);// Ajuste a posição da base conforme necessário
     if (!texture.loadFromFile("../assets/images/base.png")) {
         std::cerr << "Erro ao carregar a textura da base!" << std::endl;
         // Trate o erro adequadamente, talvez definir uma textura padrão
@@ -16,12 +12,6 @@ Base::Base() : health(100) {
     
     sprite.setTexture(texture);
     sprite.setScale(0.7f, 0.7f); // Ajuste a escala conforme necessário
-
-    // float baseWidth = sprite.getGlobalBounds().width;
-    // float barWidth = baseWidth - 28; // Diminuir a largura da barra de vida em 6 pixels
-    // lifeBar.setSize(sf::Vector2f(barWidth, 7)); // Largura ajustada e altura da barra
-    // lifeBar.setFillColor(sf::Color::Green); 
-    // lifeBar.setPosition(sprite.getPosition().x + 14, sprite.getPosition().y - 20);
     
     if (!font.loadFromFile("../assets/fonts/oficial.ttf")) { // Certifique-se de que o caminho está correto
         std::cerr << "Erro ao carregar a fonte!" << std::endl;
@@ -166,9 +156,6 @@ void Base::reduceHealth(int reduce) {
     health = health-reduce;
 }
 
-// sf::RectangleShape Base::getShape() const {
-//     return shape;
-// }
 sf::Sprite& Base::getSprite() { 
     return sprite; 
 }
@@ -189,9 +176,9 @@ void Base::draw(sf::RenderTarget& target, sf::RenderStates states) const {
     }
 }
 void Base::reset() {
-    // Redefine a saúde e posição da base
-    health = 100; // Defina o valor inicial de saúde
-    // Posicione a base na posição inicial
+
+    health = 100;
+
 }
 
 void Base::regenHealth() {

@@ -18,30 +18,26 @@ class Drops : public Drawable {
         };
 
     private:
-        virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
+        virtual void draw(RenderTarget& target, RenderStates states) const override;
         
-        sf::Sprite sprite;
-        sf::Texture* texture;
+        Sprite sprite;
+        Texture* texture;
         DropsType type;
-        sf::Vector2f position;
-        // sf::CircleShape circle;
+        Vector2f position;
         bool active;
         float lifetime;
 
     public:
-        Drops(DropsType type, const sf::Vector2f& position, TextureManager& textureManager, float lifetime);
+        Drops(DropsType type, const Vector2f& position, TextureManager& textureManager, float lifetime);
         DropsType getType() const;
-        void setPosition(const sf::Vector2f& newPosition);
-        sf::Vector2f getPosition() const;
-
-        // Método para carregar a textura do item
+        void setPosition(const Vector2f& newPosition);
+        Vector2f getPosition() const;
         bool loadTexture(const std::string& filepath);
         bool iscolliding(float x1, float y1, float r1, float x2, float y2, float r2);
         void applyEffect(Player& player);
-        // CircleShape getShape() const;
         void setActive(bool isActive);
         bool isActive() const;
-        sf::Sprite getSprite() const;
+        Sprite getSprite() const;
         bool loadTexture(TextureManager& textureManager);
         void updadeDrops(float deltaTime);
 };

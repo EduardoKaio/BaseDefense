@@ -13,11 +13,11 @@ using namespace sf;
 class Inimigo : public Drawable{
  
     private:
-        virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
+        virtual void draw(RenderTarget& target, RenderStates states) const override;
+        
         Vector2f position;
-
-        sf::Texture texture;
-        sf::Sprite sprite;
+        Texture texture;
+        Sprite sprite;
         Vector2f direction;
         int health;
         bool isAlive;
@@ -26,20 +26,17 @@ class Inimigo : public Drawable{
         list<Drops> possibleDrops;
         float fireRate; // Tempo entre disparos
         float fireTimer;
-        const sf::RenderWindow* window;
-        sf::SoundBuffer enemyShootBuffer; // Buffer para o som
-        sf::Sound enemyShootSound;
+        const RenderWindow* window;
+        SoundBuffer enemyShootBuffer; // Buffer para o som
+        Sound enemyShootSound;
         TextureManager& textureManager; 
 
-
     public:
-        Inimigo(const sf::Vector2f& startPosition, const sf::Vector2f& targetPosition, const sf::RenderWindow* window, TextureManager& textureManager);
-
+        Inimigo(const Vector2f& startPosition, const Vector2f& targetPosition, const RenderWindow* window, TextureManager& textureManager);
         void update(float deltaTime, const Vector2f& playerPosition, bool audioEnabled);
-        void fire(const sf::Vector2f& playerPosition, bool audioEnabled);
-        bool isOutOfWindow(const sf::RenderWindow& window) const;
-        void updateDirection(const sf::Vector2f& playerPosition);
-
+        void fire(const Vector2f& playerPosition, bool audioEnabled);
+        bool isOutOfWindow(const RenderWindow& window) const;
+        void updateDirection(const Vector2f& playerPosition);
         list<ProjetilInimigo>& getProjeteis();
         const list<ProjetilInimigo>& getProjeteis() const;
         void reduceHealth();
@@ -48,7 +45,7 @@ class Inimigo : public Drawable{
         bool iscolliding(float x, float y, float radius) const;
         FloatRect getGlobalBounds() const;
         void setSize(float scaleX, float scaleY);
-        sf::Sprite& getSprite();
+        Sprite& getSprite();
         Drops dropItem();
 };
 

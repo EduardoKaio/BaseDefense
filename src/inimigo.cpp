@@ -68,12 +68,7 @@ void Inimigo::update(float deltaTime, const sf::Vector2f& playerPosition, bool a
     for (auto& projetil : projeteis) {
         projetil.update(deltaTime);
     }
-    
-    // // Remove projéteis fora da tela
-    // projeteis.erase(std::remove_if(projeteis.begin(), projeteis.end(),
-    //     [&](const ProjetilInimigo& projetil) {
-    //         return projetil.isOutOfWindow(*window);
-    //     }), projeteis.end());
+
 }
 
 void Inimigo::fire(const sf::Vector2f& playerPosition, bool audioEnabled) {

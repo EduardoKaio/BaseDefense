@@ -12,8 +12,6 @@ class ProjetilInimigo : public Drawable {
         Vector2f position;
         Vector2f direction;
         float speed;
-        // CircleShape shape;
-        // Texture texture;
         Sprite sprite;
         bool active;
 

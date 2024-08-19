@@ -6,20 +6,22 @@
 #include "projetil_inimigo.h"
 #include "inimigo.h"
 
-class Base : public sf::Drawable {
+using namespace std;
+using namespace sf;
+
+class Base : public Drawable {
 
     private:
         int health;
-        // sf::RectangleShape shape;
-        sf::Sprite sprite; // Mude de RectangleShape para Sprite
-        sf::Texture texture;
-        sf::RectangleShape lifeBar;
-        sf::Font font;
-        sf::Text lossText;
+        Sprite sprite; // Mude de RectangleShape para Sprite
+        Texture texture;
+        RectangleShape lifeBar;
+        Font font;
+        Text lossText;
         bool showLossText;
-        std::string lossString;
-        sf::Clock lossClock; 
-        void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
+        string lossString;
+        Clock lossClock; 
+        void draw(RenderTarget& target, RenderStates states) const override;
     
     public:
         Base();
@@ -28,11 +30,10 @@ class Base : public sf::Drawable {
         int getHealth() const;
         bool isAliveStatus() const;
         void reduceHealth(int reduce);
-        void setPosition(const sf::Vector2f &position);
-        // sf::RectangleShape getShape() const;
-        sf::Sprite& getSprite(); 
+        void setPosition(const Vector2f &position);
+        Sprite& getSprite(); 
         void reset();
-        sf::FloatRect getGlobalBounds() const;
+        FloatRect getGlobalBounds() const;
         void regenHealth();
 };
 

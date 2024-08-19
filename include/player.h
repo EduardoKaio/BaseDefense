@@ -13,10 +13,11 @@ using namespace sf;
 class Player : public Drawable {
     private:
         void handleInput(float deltaTime);
-        virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
-        sf::Texture texture;
-        sf::Sprite sprite;
-        std::list<Projetil>& projeteis;
+        virtual void draw(RenderTarget& target, RenderStates states) const override;
+        
+        Texture texture;
+        Sprite sprite;
+        list<Projetil>& projeteis;
         bool shooting;
         float speed;
         bool isAlive;
@@ -26,24 +27,24 @@ class Player : public Drawable {
         int maxHealth;
         int maxAmmo;
         TextureManager& textureManager;
-        sf::RectangleShape lifeBar; 
-        sf::Text lifeEffectText; // Texto para o efeito visual de vida
-        sf::Font font; // Fonte para o texto
+        RectangleShape lifeBar; 
+        Text lifeEffectText; // Texto para o efeito visual de vida
+        Font font; // Fonte para o texto
         bool showLifeEffect; // Flag para mostrar o efeito
         float lifeEffectTimer;
-        sf::Text ammoEffectText; // Texto para o efeito visual de munição
+        Text ammoEffectText; // Texto para o efeito visual de munição
         bool ammoBonusVisible;  // Adicione essa linha
         
     public:
-        sf::Text ammoBonusText;
+        Text ammoBonusText;
+        
         Player(list<Projetil>& projeteis, TextureManager& textureManager);
-        sf::Sprite& getSprite();
+        Sprite& getSprite();
         void update(float deltaTime);
-        void shoot(sf::Vector2f target);
+        void shoot(Vector2f target);
         int getHealth() const;
         void reduceHealth(int amount);
         int getProjeteisDisponiveis();
-
         bool isAliveStatus() const;
         void reset();
         FloatRect getGlobalBounds() const;

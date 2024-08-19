@@ -18,10 +18,7 @@ Player::Player(std::list<Projetil>& projeteis, TextureManager& textureManager)
         sprite.setPosition(400, 300); 
         // Ajuste a posição inicial do herói
     }
-    // float playerWidth = sprite.getGlobalBounds().width;
-    // lifeBar.setSize(sf::Vector2f(playerWidth - 6, 5)); // Diminuir a largura da barra de vida em 6 pixels
-    // lifeBar.setFillColor(sf::Color::Green); // Cor inicial
-    // lifeBar.setPosition(sprite.getPosition().x + 3, sprite.getPosition().y + 20);
+    
     if (!font.loadFromFile("../assets/fonts/oficial.ttf")) { // Substitua o caminho pela localização da sua fonte
         std::cerr << "Erro ao carregar a fonte!" << std::endl;
     }
@@ -64,16 +61,6 @@ void Player::handleInput(float deltaTime) {
     // Atualizar a posição do jogador
     sprite.setPosition(position); // Mudança aqui
     lifeBar.setPosition(position.x + 3, position.y -10);
-
-    // if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
-    //     if (!shooting && projeteisDisponiveis > 0) {
-    //         sf::Vector2i mousePos = sf::Mouse::getPosition();
-    //         shoot(sf::Vector2f(static_cast<float>(mousePos.x), static_cast<float>(mousePos.y)));
-    //         shooting = true;
-    //     }
-    // } else {
-    //     shooting = false;
-    // }
 }
 
 void Player::shoot(sf::Vector2f target) {
@@ -169,7 +156,7 @@ void Player::increaseAmmo(int amount) {
     if (projeteisDisponiveis < maxAmmo) {
         projeteisDisponiveis += amount;
         ammoBonusVisible = true;     // Ativa o efeito visual
-    // Reinicia o temporizador
+        // Reinicia o temporizador
     }
 }
 
