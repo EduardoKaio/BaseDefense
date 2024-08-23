@@ -2,12 +2,21 @@
 #include "../include/utils.h"
 #include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
+
+#include "config.h"
 #include <cmath>
 #include <iostream>
 
 Player::Player(std::list<Projetil>& projeteis, TextureManager& textureManager) 
-    : projeteis(projeteis), shooting(false), speed(300.0f), isAlive(true), health(100), projeteisDisponiveis(50), maxHealth(100),
-    maxAmmo(50), textureManager(textureManager) {
+    : projeteis(projeteis), 
+    shooting(false), 
+    speed(Config::PLAYER_SPEED), 
+    isAlive(true), 
+    health(Config::PLAYER_HEALTH), 
+    projeteisDisponiveis(Config::PLAYER_PROJETEIS_DISPONIVEIS), 
+    maxHealth(Config::PLAYER_MAX_HEALTH),
+    maxAmmo(Config::PLAYER_MAX_AMMO), 
+    textureManager(textureManager){
 
     if (!texture.loadFromFile("../assets/images/playerShip1_blue.png")) {
     // Erro ao carregar a textura

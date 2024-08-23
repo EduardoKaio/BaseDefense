@@ -7,6 +7,8 @@
 #include "base.h"
 #include "projetil_inimigo.h"
 #include "texture_manager.h" 
+#include "inimigo_tanque.h"
+#include "inimigo_veloz.h"
 #include "drops.h"
 #include <sstream> 
 
@@ -22,6 +24,7 @@ class Game {
         void setupButton(RectangleShape& button, Text& buttonText, const string& text, const Vector2f& position);
         void resetGame();
         void toggleAudio(bool enable);
+        Vector2f getRandomEdgePosition();
 
         RenderWindow window;
         Player player;

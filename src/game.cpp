@@ -5,20 +5,21 @@
 #include <sstream> 
 #include <iomanip>
 #include <random>
+#include "config.h"
 
 Game::Game() 
-    : window(sf::VideoMode(800, 600), "Base Defense", sf::Style::Titlebar | sf::Style::Close), 
-    projeteis(),
+    : window(sf::VideoMode(Config::WINDOW_WIDTH, Config::WINDOW_HEIGHT), Config::WINDOW_TITLE, Config::WINDOW_STYLE),
+     projeteis(),
     player(projeteis, textureManager), 
     base(),
-    spawnInterval(3.0f),
+    spawnInterval(Config::SPAWN_INTERVAL),
     gameOver(false),
     victory(false),
     gameStarted(false),
-    audioEnabled(true),
-    totalTime(60.0f),
-    isShooting(false), // Exemplo: 1 minuto (60 segundos)
-    remainingTime(totalTime),
+    audioEnabled(Config::AUDIO_ENABLED),
+    totalTime(Config::TOTAL_TIME),
+    isShooting(false),
+    remainingTime(Config::TOTAL_TIME),
     infoScreenActive(false),
     killCount(0),
     textureManager() { // Adicione a variável gameStarted
@@ -44,12 +45,6 @@ Game::Game()
     sf::Vector2f basePosition(window.getSize().x / 2.0f - baseBounds.width / 2.0f,
                             window.getSize().y / 2.0f - baseBounds.height / 2.0f);
     base.getSprite().setPosition(basePosition);
-
-    if (!backgroundTexture.loadFromFile("../assets/images/black.png")) {
-        std::cerr << "Não foi possível carregar background" << std::endl;
-    }
-    backgroundSprite.setTexture(backgroundTexture);
-   
 
     // Carregar recursos de áudio
     if (!backgroundMusic.openFromFile("../assets/sounds/boss_battle_#2.WAV")) {
@@ -178,9 +173,9 @@ void Game::processEvents() {
 
 void Game::update(float deltaTime) {
      // Não atualize o jogo se a tela de "informações estiver ativa"
-    deltaTime = clock.restart().asSeconds();
+    this->deltaTime = deltaTime;
     
-    if (isPaused || gameOver || victory || infoScreenActive) {
+    if ( isPaused || gameOver || victory || infoScreenActive) {
         return; // Se estiver pausado ou em game over/vitória,tela de info não atualize a lógica do jogo
     }
 
@@ -205,19 +200,22 @@ void Game::update(float deltaTime) {
         sf::Vector2f startPosition;
         sf::Vector2f playerPosition = player.getSprite().getPosition() + sf::Vector2f(player.getSprite().getLocalBounds().width / 2, player.getSprite().getLocalBounds().height / 2);
 
-        if (dist(gen) == 0) {
-            // Em uma borda vertical
-            startPosition.x = (dist(gen) == 0) ? 0 : window.getSize().x;
-            startPosition.y = std::uniform_real_distribution<>(0, window.getSize().y)(gen);
+        int enemyType = dist(gen);
+        if (enemyType == 0) {
+            // Inimigo do tipo Tanque
+            InimigoTanque newEnemy(textureManager);
+            startPosition = getRandomEdgePosition();
+            newEnemy.getSprite().setPosition(startPosition);
+            newEnemy.setTarget(playerPosition);
+            inimigos.push_back(newEnemy);
         } else {
-            // Em uma borda horizontal
-            startPosition.x = std::uniform_real_distribution<>(0, window.getSize().x)(gen);
-            startPosition.y = (dist(gen) == 0) ? 0 : window.getSize().y;
+            // Inimigo do tipo Base
+            InimigoVeloz newEnemy(textureManager);
+            startPosition = getRandomEdgePosition();
+            newEnemy.getSprite().setPosition(startPosition);
+            newEnemy.setTarget(playerPosition);
+            inimigos.push_back(newEnemy);
         }
-
-        inimigos.emplace_back(startPosition, playerPosition, &window, textureManager);
-        base.regenHealth();
-        spawnInterval = spawnInterval - 0.075f;
     }
 
     player.update(deltaTime);
@@ -322,6 +320,27 @@ void Game::update(float deltaTime) {
     timerText.setString(timeStream.str());
 
 }
+sf::Vector2f Game::getRandomEdgePosition() {
+    std::random_device rd;
+    std::mt19937 gen(rd());
+    std::uniform_int_distribution<> dist(0, 3);
+
+    int edge = dist(gen);
+
+    switch (edge) {
+        case 0: // Top edge
+            return sf::Vector2f(static_cast<float>(rand() % Config::WINDOW_WIDTH), 0);
+        case 1: // Right edge
+            return sf::Vector2f(static_cast<float>(Config::WINDOW_WIDTH), static_cast<float>(rand() % Config::WINDOW_HEIGHT));
+        case 2: // Bottom edge
+            return sf::Vector2f(static_cast<float>(rand() % Config::WINDOW_WIDTH), static_cast<float>(Config::WINDOW_HEIGHT));
+        case 3: // Left edge
+            return sf::Vector2f(0, static_cast<float>(rand() % Config::WINDOW_HEIGHT));
+        default:
+            return sf::Vector2f(0, 0);
+    }
+}
+
 
 void Game::render() {
     sf::Vector2u windowSize = window.getSize();

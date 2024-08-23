@@ -1,13 +1,15 @@
 #include "../include/projetil.h"
 #include <cmath>
 #include <iostream>
+#include "config.h"
 #include "../include/utils.h"
 
 using namespace std;
 using namespace sf;
 
 Projetil::Projetil(sf::Vector2f startPosition, sf::Vector2f targetPosition, TextureManager& textureManager)
-    : speed(500.0f), active(true) {
+    : speed(Config::PROJETIL_SPEED), 
+    active(true) {
 
     sf::Texture* texture = textureManager.getTexture("projectile");
     if (texture) {

@@ -1,10 +1,11 @@
 #include "../include/base.h"
 #include "../include/projetil_inimigo.h"
 #include "../include/inimigo.h"
+#include "../include/config.h"
 #include <algorithm>
 #include <iostream>
 
-Base::Base() : health(100) {
+Base::Base() : health(Config::BASE_HEALTH) {
     if (!texture.loadFromFile("../assets/images/base.png")) {
         std::cerr << "Erro ao carregar a textura da base!" << std::endl;
         // Trate o erro adequadamente, talvez definir uma textura padrão

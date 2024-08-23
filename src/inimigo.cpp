@@ -1,5 +1,5 @@
 #include "../include/inimigo.h"
-
+#include "config.h"
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>
 #include <SFML/Audio.hpp>
@@ -11,8 +11,12 @@ using namespace std;
 using namespace sf;
 
 Inimigo::Inimigo(const sf::Vector2f& startPosition, const sf::Vector2f& targetPosition, const sf::RenderWindow* win, TextureManager& textureManager)
-: position(startPosition), direction(targetPosition - startPosition), 
-health(2), isAlive(true), speed(30.0f), window(win), 
+: position(startPosition), 
+direction(targetPosition - startPosition), 
+health(Config::ENEMY_HEALTH), 
+isAlive(true), 
+speed(Config::ENEMY_SPEED), 
+window(win), 
 textureManager(textureManager) {
 
     // Inicializa fireRate com uma variação aleatória

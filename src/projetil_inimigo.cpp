@@ -1,11 +1,14 @@
 #include "../include/projetil_inimigo.h"
 #include <cmath> // Necessário para std::sqrt
 #include <iostream>
+#include "config.h"
 using namespace std;
 using namespace sf;
 
 ProjetilInimigo::ProjetilInimigo(const sf::Vector2f& startPosition, const sf::Vector2f& targetPosition, TextureManager& textureManager)
-    : position(startPosition), speed(50.0f), active(true) {
+    : position(startPosition), 
+    speed(Config::PROJETIL_INIMIGO_SPEED), 
+    active(true) {
     
     sf::Texture* texture = textureManager.getTexture("projectile_inimigo");
     if (texture) {
