@@ -2,6 +2,7 @@
 
 ## Compilar:
 ```sh
+mkdir build
 cd build
 cmake ..
 cmake --build .
@@ -9,6 +10,6 @@ cmake --build .
 
 ## Executar:
 ```sh
-./meu_jogo
+./BaseDefense
 ```
 

@@ -20,12 +20,12 @@ namespace Config {
     const float PLAYER_SPEED = 300.0f;
     const int PLAYER_HEALTH = 100;
     const int PLAYER_MAX_HEALTH = 100;
-    const int PLAYER_MAX_AMMO = 50;
-    const int PLAYER_PROJETEIS_DISPONIVEIS = 50;
+    const int PLAYER_MAX_AMMO = 70;
+    const int PLAYER_PROJETEIS_DISPONIVEIS = 70;
 
     // Configurações do Inimigo
     const float ENEMY_SPEED = 30.0f;
-    const int ENEMY_HEALTH = 2;
+    const int ENEMY_HEALTH = 3;
 
     // Configurações do Projetil do Inimigo
     const float PROJETIL_INIMIGO_SPEED = 50.0f;
@@ -38,15 +38,7 @@ namespace Config {
     // Configurações da Base
     const int BASE_HEALTH = 100;
 
-    const int ENEMY_TANQUE_HEALTH = 10; // Mais vida para o tanque
-    const float ENEMY_TANQUE_SPEED = 20.0f; // Menos velocidade para o tanque
-
-    // Configurações do Inimigo Veloz
-    const float ENEMY_VELOZ_SPEED = 60.0f;
-
-    const Vector2f BASE_POSITION = {400, 300};
-
-
+    const sf::Vector2f BASE_POSITION = {400, 300};
 
 }
 

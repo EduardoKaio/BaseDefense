@@ -6,9 +6,7 @@
 #include "projetil.h"
 #include "base.h"
 #include "projetil_inimigo.h"
-#include "texture_manager.h" 
-#include "inimigo_tanque.h"
-#include "inimigo_veloz.h"
+#include "texture_manager.h"
 #include "drops.h"
 #include <sstream> 
 

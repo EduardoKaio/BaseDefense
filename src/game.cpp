@@ -36,7 +36,6 @@ Game::Game()
         std::cerr << "Erro ao carregar a textura do projétil!" << std::endl;
     }
     
-
     // Ajuste a posição do jogador e base
     sf::Vector2f center(window.getSize().x / 2.0f, window.getSize().y / 2.0f);
     player.getSprite().setPosition(center);
@@ -136,14 +135,18 @@ void Game::processEvents() {
             if (event.mouseButton.button == sf::Mouse::Left) {
                 sf::Vector2i mousePos = sf::Mouse::getPosition(window);
                 sf::Vector2f mousePosF(static_cast<float>(mousePos.x), static_cast<float>(mousePos.y));
+                isShooting = false; // Permite que o jogador atire novamente após soltar o botão
 
                 if (!gameStarted) {
                     if (startButton.getGlobalBounds().contains(mousePosF)) {
                         gameStarted = true;
+                        isShooting = true;
+                        spawnInterval = Config::SPAWN_INTERVAL;
                     } else if (infoButton.getGlobalBounds().contains(mousePosF)) {
                         infoScreenActive = true;
                     }
-                } 
+                }
+
                 if (gameOver || victory) {
                     if (restartButton.getGlobalBounds().contains(mousePosF)) {
                         resetGame();
@@ -160,12 +163,6 @@ void Game::processEvents() {
                     isShooting = true;
                 }
                 
-            }
-        }
-
-        if (event.type == sf::Event::MouseButtonReleased) {
-            if (event.mouseButton.button == sf::Mouse::Left) {
-                isShooting = false; // Permite que o jogador atire novamente após soltar o botão
             }
         }
     }
@@ -200,22 +197,19 @@ void Game::update(float deltaTime) {
         sf::Vector2f startPosition;
         sf::Vector2f playerPosition = player.getSprite().getPosition() + sf::Vector2f(player.getSprite().getLocalBounds().width / 2, player.getSprite().getLocalBounds().height / 2);
 
-        int enemyType = dist(gen);
-        if (enemyType == 0) {
-            // Inimigo do tipo Tanque
-            InimigoTanque newEnemy(textureManager);
-            startPosition = getRandomEdgePosition();
-            newEnemy.getSprite().setPosition(startPosition);
-            newEnemy.setTarget(playerPosition);
-            inimigos.push_back(newEnemy);
+        if (dist(gen) == 0) {
+            // Em uma borda vertical
+            startPosition.x = (dist(gen) == 0) ? 0 : window.getSize().x;
+            startPosition.y = std::uniform_real_distribution<>(0, window.getSize().y)(gen);
         } else {
-            // Inimigo do tipo Base
-            InimigoVeloz newEnemy(textureManager);
-            startPosition = getRandomEdgePosition();
-            newEnemy.getSprite().setPosition(startPosition);
-            newEnemy.setTarget(playerPosition);
-            inimigos.push_back(newEnemy);
+            // Em uma borda horizontal
+            startPosition.x = std::uniform_real_distribution<>(0, window.getSize().x)(gen);
+            startPosition.y = (dist(gen) == 0) ? 0 : window.getSize().y;
         }
+        inimigos.emplace_back(startPosition, playerPosition, &window, textureManager);
+        base.regenHealth();
+        spawnInterval = spawnInterval - 0.075f;
+        
     }
 
     player.update(deltaTime);
@@ -320,27 +314,27 @@ void Game::update(float deltaTime) {
     timerText.setString(timeStream.str());
 
 }
-sf::Vector2f Game::getRandomEdgePosition() {
-    std::random_device rd;
-    std::mt19937 gen(rd());
-    std::uniform_int_distribution<> dist(0, 3);
 
-    int edge = dist(gen);
+// sf::Vector2f Game::getRandomEdgePosition() {
+//     std::random_device rd;
+//     std::mt19937 gen(rd());
+//     std::uniform_int_distribution<> dist(0, 3);
 
-    switch (edge) {
-        case 0: // Top edge
-            return sf::Vector2f(static_cast<float>(rand() % Config::WINDOW_WIDTH), 0);
-        case 1: // Right edge
-            return sf::Vector2f(static_cast<float>(Config::WINDOW_WIDTH), static_cast<float>(rand() % Config::WINDOW_HEIGHT));
-        case 2: // Bottom edge
-            return sf::Vector2f(static_cast<float>(rand() % Config::WINDOW_WIDTH), static_cast<float>(Config::WINDOW_HEIGHT));
-        case 3: // Left edge
-            return sf::Vector2f(0, static_cast<float>(rand() % Config::WINDOW_HEIGHT));
-        default:
-            return sf::Vector2f(0, 0);
-    }
-}
+//     int edge = dist(gen);
 
+//     switch (edge) {
+//         case 0: // Top edge
+//             return sf::Vector2f(static_cast<float>(rand() % Config::WINDOW_WIDTH), 0);
+//         case 1: // Right edge
+//             return sf::Vector2f(static_cast<float>(Config::WINDOW_WIDTH), static_cast<float>(rand() % Config::WINDOW_HEIGHT));
+//         case 2: // Bottom edge
+//             return sf::Vector2f(static_cast<float>(rand() % Config::WINDOW_WIDTH), static_cast<float>(Config::WINDOW_HEIGHT));
+//         case 3: // Left edge
+//             return sf::Vector2f(0, static_cast<float>(rand() % Config::WINDOW_HEIGHT));
+//         default:
+//             return sf::Vector2f(0, 0);
+//     }
+// }
 
 void Game::render() {
     sf::Vector2u windowSize = window.getSize();
@@ -519,7 +513,7 @@ void Game::render() {
             sf::Text infoText;
             infoText.setFont(font);
             infoText.setString("Kills: " + std::to_string(killCount) + "\n" +
-                            "Ammo: " + std::to_string(player.getProjeteisDisponiveis()) + "\n");
+                               "Ammo: " + std::to_string(player.getProjeteisDisponiveis()) + "\n");
             infoText.setCharacterSize(15);
             infoText.setFillColor(sf::Color::White);
             infoText.setPosition(window.getSize().x - 110, 20);
@@ -560,6 +554,7 @@ void Game::resetGame() {
     gameOver = false;
     victory = false; // Resetar o estado de vitória
     gameStarted = false;
+    killCount = 0;
 
     player.reset();
     base.reset();

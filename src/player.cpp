@@ -143,9 +143,9 @@ void Player::setSize(float scaleX, float scaleY) {
 }
 
 void Player::reset() {
-    health = 100;
+    health = Config::PLAYER_MAX_HEALTH;
     sprite.setPosition(400, 300); // Mudança aqui
-    projeteisDisponiveis = 100;
+    projeteisDisponiveis = Config::PLAYER_MAX_AMMO;
 }
 sf::FloatRect Player::getGlobalBounds() const {
     return sprite.getGlobalBounds();

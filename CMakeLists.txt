@@ -18,7 +18,7 @@ include_directories(include)
 file(GLOB SOURCES src/*.cpp)
 
 # Adiciona o executável
-add_executable(meu_jogo ${SOURCES})
+add_executable(BaseDefense ${SOURCES})
 
 # Define os caminhos para as bibliotecas SFML
 set(SFML_DIR "${CMAKE_SOURCE_DIR}/SFML-linux/lib/cmake/SFML")
@@ -26,4 +26,4 @@ set(SFML_DIR "${CMAKE_SOURCE_DIR}/SFML-linux/lib/cmake/SFML")
 # Encontra e linka as bibliotecas SFML necessárias
 find_package(SFML 2.5 COMPONENTS graphics window system REQUIRED)
 
-target_link_libraries(meu_jogo sfml-graphics sfml-window sfml-system sfml-audio)
+target_link_libraries(BaseDefense sfml-graphics sfml-window sfml-system sfml-audio)

@@ -26,9 +26,7 @@ textureManager(textureManager) {
     fireRate = dist(gen);
     fireTimer = 0.0f;
     
-    
-    
-    if (!texture.loadFromFile("../assets/images/enemyBlack1.png")) {
+    if (!texture.loadFromFile("../assets/images/enemyTank.png")) {
         std::cerr << "Erro ao carregar a textura do inimigo!" << std::endl;
     } else {
         sprite.setTexture(texture);

@@ -76,10 +76,10 @@ void Drops::applyEffect(Player& player) {
     // Aplica o efeito dependendo do tipo de item
     switch (type) {
         case DropsType::Health:
-            player.increaseHealth(5); // Supondo que o Player tenha esse método
+            player.increaseHealth(5);
             break;
         case DropsType::Ammo:
-            player.increaseAmmo(3); // Supondo que o Player tenha esse método
+            player.increaseAmmo(3);
             break;
     }
 }
