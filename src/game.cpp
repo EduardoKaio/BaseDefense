@@ -50,7 +50,7 @@ Game::Game()
         std::cerr << "Não foi possível carregar a música de fundo!" << std::endl;
     }
     backgroundMusic.setLoop(true);
-    backgroundMusic.setVolume(10); 
+    backgroundMusic.setVolume(20); 
     backgroundMusic.play();
 
     if (!heroShootBuffer.loadFromFile("../assets/sounds/sfx_laser1.ogg")) {
@@ -315,27 +315,6 @@ void Game::update(float deltaTime) {
 
 }
 
-// sf::Vector2f Game::getRandomEdgePosition() {
-//     std::random_device rd;
-//     std::mt19937 gen(rd());
-//     std::uniform_int_distribution<> dist(0, 3);
-
-//     int edge = dist(gen);
-
-//     switch (edge) {
-//         case 0: // Top edge
-//             return sf::Vector2f(static_cast<float>(rand() % Config::WINDOW_WIDTH), 0);
-//         case 1: // Right edge
-//             return sf::Vector2f(static_cast<float>(Config::WINDOW_WIDTH), static_cast<float>(rand() % Config::WINDOW_HEIGHT));
-//         case 2: // Bottom edge
-//             return sf::Vector2f(static_cast<float>(rand() % Config::WINDOW_WIDTH), static_cast<float>(Config::WINDOW_HEIGHT));
-//         case 3: // Left edge
-//             return sf::Vector2f(0, static_cast<float>(rand() % Config::WINDOW_HEIGHT));
-//         default:
-//             return sf::Vector2f(0, 0);
-//     }
-// }
-
 void Game::render() {
     sf::Vector2u windowSize = window.getSize();
 
@@ -566,7 +545,7 @@ void Game::resetGame() {
 
 void Game::toggleAudio(bool enable) {
     audioEnabled = enable;
-    backgroundMusic.setVolume(audioEnabled ? 10 : 0);
+    backgroundMusic.setVolume(audioEnabled ? 20 : 0);
     if (audioEnabled) {
         backgroundMusic.play();
     } else {
